@@ -7,6 +7,10 @@ tags:
 - XAMPP
 ---
 
+XAMPP（Apache+MySQL+PHP+PERL）是一个功能强大的建站集成软件包。XAMPP 是一个易于安装且包含 MySQL、PHP 和 Perl 的 Apache 发行版。XAMPP 非常容易安装和使用：只需下载，解压缩，启动即可。
+
+<!-- more -->
+
 # 下载与安装 #
 **先附上中文界面(菜单内部仍为英文)：**
 ![XAMPP 中文版界面](http://wx2.sinaimg.cn/mw690/a6e9cb00ly1fdiwv3as6aj20kp0d9tba.jpg)
