@@ -7,7 +7,7 @@ tags:
 - XAMPP
 ---
 
-## 下载与安装 ##
+# 下载与安装 #
 **先附上中文界面(菜单内部仍为英文)：**
 ![XAMPP 中文版界面](http://wx2.sinaimg.cn/mw690/a6e9cb00ly1fdiwv3as6aj20kp0d9tba.jpg)
 XAMPP 下载地址：[中文版][1] [官网][2]
@@ -38,7 +38,8 @@ linux 下课使用 wget 命令下载
 下面是我将原来目录的 index.php 修改为 index2.php 时访问 localhost 出现的页面:
 ![index.php 错误示例](http://wx2.sinaimg.cn/mw690/a6e9cb00ly1fdix5hsu2aj20e50cx75l.jpg)
 
-## 服务器环境搭建成功后需要做的事 ##
+# 服务器环境搭建成功后需要做的事 #
+
 1. **修改 phpMyAdmin 配置**
 a. 首先打开 D:/XAMPP/phpMyAdmin 文件夹中的 config.inc.php 文件。
 b. 搜索 `$cfg['Servers'][$i]['auth_type'] = 'config';`,将其中的 config（系缺省值）更改为“cookie”保存。
@@ -53,15 +54,15 @@ a. 通过默认主页 http://localhost 左侧的 phpmyadmin 导航栏进入 phpm
 ![用户选项卡](http://wx3.sinaimg.cn/mw690/a6e9cb00ly1fdixbym4g9j20y00hjtbp.jpg)
 ![修改密码](http://wx3.sinaimg.cn/mw690/a6e9cb00ly1fdixcnissej20nt08egm2.jpg)
 
-#### 需要注意 ####
-1. root 等管理员密码无需在 config.inc.php 中更改。
-2. 只有 pma 不设置密码时，XAMPP 主界面的 MySQL database 的状态才会显示为 ACTIVATED 状态！
-3. 不要使用 XAMPP for Windows Version 1.5.2 自带的 mysql 管理软件来设置。如果设置了，会在 C:\windows 目录下产生一个 my.ini 文件。如果要重新安装，则需要将此 my.ini 文件删除，以免影响后续设置。
-4. 必要时请更改默认端口，APACHE 的默认端口是 80，如果你装有 IIS，就会有冲突。所以，要更改一个端口。打开 XAMPP/apache/conf/httpd.conf，把 listen 80 改为其它的端口，如 99, 8080 等。
-5. 您可能会遇到安装了 xampp，在本机通过 localhost 和 ip 都可以访问，但是局域网其他机器不能访问的问题。解决方法是：修改 XAMPP/apache/httpd.conf，把 Listen 80 改成 Listen 192.168.0.188:80, 192.168.0.188 换成您服务器的 ip。
+**需要注意
+>1. root 等管理员密码无需在 config.inc.php 中更改。
+>2. 只有 pma 不设置密码时，XAMPP 主界面的 MySQL database 的状态才会显示为 ACTIVATED 状态！
+>3. 不要使用 XAMPP for Windows Version 1.5.2 自带的 mysql 管理软件来设置。如果设置了，会在 C:\windows >目录下产生一个 my.ini 文件。如果要重新安装，则需要将此 my.ini 文件删除，以免影响后续设置。
+>4. 必要时请更改默认端口，APACHE 的默认端口是 80，如果你装有 IIS，就会有冲突。所以，要更改一个端口。打开 XAMPP/apache/conf/httpd.conf，把 listen 80 改为其它的端口，如 99, 8080 等。
+>5. 您可能会遇到安装了 xampp，在本机通过 localhost 和 ip 都可以访问，但是局域网其他机器不能访问的问题。解决方法是：修改 XAMPP/apache/httpd.conf，把 Listen 80 改成 Listen 192.168.0.188:80, 192.168.0.188 换成您服务器的 ip。
 
-## 我遇到的问题以及解决方法： ##
-### 服务器无响应(或者本地 MySQL 服务器的套接字没有正确配置)的问题 ###
+# 我遇到的问题以及解决方法： #
+## 服务器无响应(或者本地 MySQL 服务器的套接字没有正确配置)的问题 ##
 1. 第一种情况：（深度清理垃圾导致 host.MYD 丢失）
 原因：host.MYD 文件是一个 0 字节文件，即没有任何内容，但在启动 mysql 时会被调用，写入一些临时信息，深度清理垃圾时，我选择扫描空文件和空文件夹，就将 host.MYD 扫描到并删除了，再次启动 wamp，就产生如上问题；
 >解决方案：第一次安装 wamp 时，在安装目录下找到 host.MYD，其路径为 `"C:\wamp\bin\mysql\mysql5.5.20\data\mysql\host.MYD (我默认安装wamp在C盘根目录)"`，你可以选择备份一个 host.MYD，或者新建一个空的“文本文档.txt”将其改为“host.MYD”，放到其正确路径下即           可。
@@ -76,10 +77,10 @@ a. 通过默认主页 http://localhost 左侧的 phpmyadmin 导航栏进入 phpm
 原因：如果未指定主机名或指定了特殊的主机名 localhost，将使用Unix套接字，Unix 套接字默认为 `/tmp/mysql.sock`，而本机并没有配置这样的套接字文件，所以自然是连接失败了。
 >解决方法：找到 phpmyadmin 文件夹,在 `wamp\phpmyadmin` 下（具体视自己安装的路径来查找），找到 `config.inc.php` 文件，用 notepad (记事本)等软件打开找到 `$cfg['Servers'][$i]['host'] = 'localhost';` 这一行，然后将这里的 localhost 修改为 127.0.0.1。有网友建议添加 `$cfg['Servers'][$i]['hide_db'] = ‘information_schema’;` //使用登陆后看不见 information_schema 数据库，这一句其实不加也无所谓。
 
-### phpMyAdmin界面左边出现错误提示 ###
+## phpMyAdmin界面左边出现错误提示 ##
 ![phpMyAdmin 显示错误](http://wx4.sinaimg.cn/mw690/a6e9cb00ly1fdixhm6ecxj205g0b3aam.jpg)
 **解决方法**：（我居然吭哧半天看懂了英文...以防以后在遇到的时候看不懂。。。先记下来= =哈哈）
-#### 方法一： ####
+**方法一：**
 >You have to run the create_tables.sql inside the examples/ folder on phpMyAdmin to create the tables needed for the advanced features. That or disable those features by commenting them on the config file.
 >
 >That's an alternative, yes. For importing the .sql file, you should go to the import tab on phpmyadmin and select that file, and then send the form. Just that.
@@ -96,12 +97,12 @@ Extract it and change pma_ prefix by pma__ or vice versa
 编辑 `create_tables.sql` 文件，将其中所有的的 pma_（单下划线）换成 pma__（双下划线）后再次上传执行即可。
 ![修改 create_tables.sql 文件](http://wx2.sinaimg.cn/mw690/a6e9cb00ly1fdixv68ldsj20ts0ppaeo.jpg)
 
-#### 方法二：（适用于Linux系统） ####
+**方法二：（适用于Linux系统）**
 **直接执行**
 
     sudo dpkg-reconfigure phpmyadmin
 
-### 使用配置文件中定义的控制用户连接失败 ###
+## 使用配置文件中定义的控制用户连接失败 ##
 
 ![控制用户连接失败](http://wx4.sinaimg.cn/mw690/a6e9cb00ly1fdixwrinafj207p01cq2t.jpg)
 
