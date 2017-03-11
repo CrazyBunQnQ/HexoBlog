@@ -2,35 +2,40 @@
 title: XAMPP 安装及遇到的问题
 date: 2016-10-20 16:48
 categories: 触类旁通
-tags: [建站][XAMPP]
+tags: 
+- 建站
+- XAMPP
 ---
 
 ## 下载与安装 ##
 **先附上中文界面(菜单内部仍为英文)：**
 ![XAMPP 中文版界面](http://wx2.sinaimg.cn/mw690/a6e9cb00ly1fdiwv3as6aj20kp0d9tba.jpg)
-XAMPP下载地址：[中文版][1] [官网][2]
+XAMPP 下载地址：[中文版][1] [官网][2]
 
 [1]: http://www.xampps.com
 [2]: http://www.xampp.org
 
-linux下课使用wget命令下载https://www.apachefriends.org/xampp-files/5.6.24/xampp-linux-x64-5.6.24-1-installer.run
+linux 下课使用 wget 命令下载
+    
+    https://www.apachefriends.org/xampp-files/5.6.24/xampp-linux-x64-5.6.24-1-installer.run
 
 下载安装后打开为如下界面：
+
 ![XAMPP 初始界面](http://wx4.sinaimg.cn/mw690/a6e9cb00ly9fdiwz8xrcxj20fa05hjte.jpg)
 
 看起来好像出了很多错误，当然并没有。
 
-**默认Apache组件处于运行中（注意绿色），但没有加载到windows系统中作为服务。先stop停止掉Apache，然后点击左侧红色的X安装apache服务，需要添加Mysql也是同样的操作。**
+**默认 Apache 组件处于运行中（注意绿色），但没有加载到 windows 系统中作为服务。先 stop 停止掉 Apache ，然后点击左侧红色的 X 安装 apache 服务，需要添加 Mysql 也是同样的操作。**
 
-**我们开启Apache服务，X 变为绿色的 √，然后打开浏览器访问localhost(或127.0.0.1本机地址)，看到下面的页面，说明服务器环境搭建成功。**
+**我们开启Apache服务，X 变为绿色的 √，然后打开浏览器访问 localhost (或 127.0.0.1 本机地址)，看到下面的页面，说明服务器环境搭建成功。**
 
 ![PHP 界面](http://wx4.sinaimg.cn/mw690/a6e9cb00ly1fdix261yk9j20go0kptb7.jpg)
 
 #### 那我们自己写的文件该放在哪里才能运行呢？ ####
 
-答案是**在xampp\htdocs目录下，如果存在index.php文件，优先执行该文件，如果不存在，则访问localhost将显示网站目录。**
+答案是**在 `xampp\htdocs` 目录下，如果存在 index.php 文件，优先执行该文件，如果不存在，则访问 localhost 时将显示网站目录。**
 
-下面是我将原来目录的Index.php修改为index2.php时访问localhost出现的页面。
+下面是我将原来目录的 index.php 修改为 index2.php 时访问 localhost 出现的页面:
 ![index.php 错误示例](http://wx2.sinaimg.cn/mw690/a6e9cb00ly1fdix5hsu2aj20e50cx75l.jpg)
 
 ## 服务器环境搭建成功后需要做的事 ##
