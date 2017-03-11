@@ -1,0 +1,28 @@
+---
+title: 关于我
+date: 2017-03-10 14:32:47
+---
+
+<style type="text/css">	strong a {		color: #747474;	}	.player {		text-align: center;		margin: .5em auto 0;		width: 100%;		max-width: 22em;	}	.player br {		display: none;	}	.sign {		text-align: right;		font-style: italic;	}	#ds-recent-visitors {		margin: 0;		padding: 0;	}	#ds-recent-visitors div img {		display: inline-block !important;		width: 56px !important;		height: 56px !important;		border-radius: 50%;		border: 1px solid #ddd;		padding: 2px;		box-shadow: 1px 1px 1px rgba(0,0,0, .15);	}	.article-entry img:first-child {		display: block;	}	.article-entry span {		font-family: Arial;	}	#ds-hot-posts {		display: none;	}</style>
+
+---
+
+&emsp;&emsp;**2017年2月，在我毕业参加工作一年多以后，终于明确了自己真正所热衷的事—— Java 后台工程师。为了能如愿转职，开始利用闲暇时间，努力钻研，希望这一天今早到来！**
+
+<p class="sign"><span>——</span> CrazyBunQnQ, 2017年3月10日</p>
+
+<img src="/img/Mihawk-Wind.gif" title="Mihawk-Wind">
+
+**开博缘由:**
+>通过写博客的方式，加深理解，巩固所学的知识；
+>共享知识，吸引同好，交流进步；
+>将来的某一天，回首能看到自己的足迹。
+
+**学习 Java 后台前的一些个人相关信息和经验：**
+> 1. 计算机专业，理科生，热爱编程，从事过一年多 Android 开发；
+> 1. 英文基础一般，查阅英文资料效率比较低，迫不得已也会配合翻译工具查阅英文资料...；
+> 1. 经常折腾各种系统、软件和手机 APP ；
+> 1. 善于利用搜索解决各类问题；
+> 1. 追求“秩序”，喜欢把各种事物变得井井有条。
+
+**博客主题:**> 博客目前使用的是 [MOxFIVE][1] 改的主题 Yelee，介绍请转主题 [GitHub][2] 页面。[1]: http://moxfive.xyz[2]: https://github.com/MOxFIVE/hexo-theme-yelee**欢迎交流:**> 个人邮件及社交网站等信息见边栏底部；> 有什么留言或问题直接在文末留下评论即可。<!-- div class="player"><iframe scrolling="auto" frameborder="no" border="0" marginwidth="0" marginheight="0" width=100% height=330 src="http://music.163.com/outchain/player?type=0&id=439309854&auto=0&height=430"></iframe></div --><ul class="ds-recent-visitors" data-num-items="30" data-avatar-size="56"></ul>
