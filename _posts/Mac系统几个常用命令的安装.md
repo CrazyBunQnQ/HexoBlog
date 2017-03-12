@@ -38,7 +38,7 @@ tags:
 
     sudo xcodebuild -license
 
-**3. 输入下面的命令安装 2.4.1 版本的 MacPorts：**
+**3. 利用 wget 命令输入下面的命令安装 2.4.1 版本的 MacPorts：**
 
     wget http://distfiles.macports.org/MacPorts/MacPorts-2.4.1.tar.gz
     tar zxvf MacPorts-2.4.1.tar.gz
@@ -62,7 +62,7 @@ tags:
 
 # aircrack-ng 命令
 
-只需要在终端中输入下面的命令即可安装：
+只需要利用 port 命令在终端中输入下面的命令即可安装：
 
     sudo port install aircrack-ng
 
