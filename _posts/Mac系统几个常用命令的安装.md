@@ -11,10 +11,10 @@ tags:
 
 <!-- more -->
 
-# curl 命令
+## curl 命令
 >这个命令 Mac 系统自带的，不用安装。
 
-# brew 命令
+## brew 命令
 全称：[Homebrew][1]，安装很简单，只需要打开终端窗口，粘贴以下命令回车即可：
 
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -22,14 +22,14 @@ tags:
 >啊！这是最容易安装的一个命令了！简直不能再轻松！
 
 
-# wget 命令
+## wget 命令
 没有 wget 的日子是非常难过的，用了好几种办法安装 wget 都不好使，实践证明使用 brew 命令轻松搞定！
 
     brew install wget --with-libressl
 
 >我不会告诉你我是为了安装 wget 才安装了 Homebrew 的……
 
-# port 命令
+## port 命令
 全称：[MacPorts][2],安的我头都大了……
 
 **1. 需要先安装 Xcode 和 Xcode Command Line Tools**
@@ -60,7 +60,7 @@ tags:
 >不知道是不是我脸黑，使用了各种安装包都安装失败 orz……
 
 
-# aircrack-ng 命令
+## aircrack-ng 命令
 
 只需要利用 port 命令在终端中输入下面的命令即可安装：
 
