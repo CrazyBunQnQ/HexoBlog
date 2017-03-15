@@ -173,6 +173,78 @@ charAt 方法返回字符串中指定位置的字符
 	str3 = String.valueOf(value);//"false"
 	str4 = String.valueOf(value);//"abc"
 
+### 操作[正则表达式](/2017/03/15/正则表达式/)的方法
+
+**matchs 方法：**
+将一个字符串与正则表达式进行匹配，成功返回 true，否则返回 false，格式：
+
+	boolean matches(String regex);
+
+邮箱正则表达式 `[a-zA-Z0-9_]+@[a-zA-Z0-9_]+(.[a-zA-Z]+)+` 示例:
+
+	String regex = "[a-zA-Z0-9_]+@[a-zA-Z0-9_]+(\\.[a-zA-Z]+)+";
+	System.out.println(regex);//可以看到输出了我们想要的正则表达式
+	String email = "bao_456@163.c0m";
+	boolean b = email.matches(regex);
+	System.out.println(email + (b?"是个邮箱":"邮箱不合法"));//输出不合法
+	String email = "bao_456@163.com";
+	System.out.println(email + (b?"是个邮箱":"邮箱不合法"));//输出合法
+
+>**因为在正则表达式中“.”表示任意字符，为了让它单纯的表示一个“\.”,所以需要转义“\\.”**
+>**又因为在 Java 中“\”有特殊含义，所以还需要用“\\\”表示“\”**
+
+**spit 方法：**
+以 regex 表达式进行分割，将字符串分割成字符串数组，格式：
+
+	String[] spit(String regex);//
+
+示例：
+
+	String str = "abc123def456jk1789";
+	String[] arr = str.split("[0-9]");//单个字符
+	for (int i = 0; i < arr.length; i++) {
+		System.out.println(arr[i]);//结尾的三个空白字符被忽略
+	}
+
+>按照数字进行拆分，当字符串中连续匹配上两个，那么中间会拆分一个空字符
+>但是在字符串末尾连续匹配所有被拆分的空字符串被忽略
+
+	String str = "abc123def456jk1789";
+	arr = str.split("[0-9]+");//多个个字符
+	for (int i = 0; i < arr.length; i++) {
+		System.out.println(arr[i]);
+	}
+
+图片重命名示例：
+
+	String imageName = "1.jpg";
+	String[] arr = imageName.split
+	imageName = System.currentTimeMillis() + "." + arr[arr.length - 1];
+	System.
+
+当然也可以不用正则表达式重命名：
+
+	imageName = "1.2.3.jpg";
+	int index = imageName.lastIndexOf(".");
+	String ends = imageName.substring(index);
+	imageNmae = System.currentTimeMillis() + ends;
+	System.out.print(imageName);
+
+**replaceAll 方法：**
+将字符串中匹配正则表达式的字符串全部替换为新的字符串，格式：
+
+	replaceAll(String regex, String str)
+
+敏感字符屏蔽示例：
+
+	String str = "123abc456jk1789mmm";
+	str = str.replaceAll("[0-9]+","***");
+	System.out.println(str);//输出 “***abc***jk***mmm”
+	regex = "(tm|sb|mmp|jb|qnmlgb)";
+	String message = "你这个sb，qnmlgb，就是个jb";
+	message = message.replaceAll(regex,"**");
+	System.out.println(message);
+
 ## String 、StringBuilder 和 StringBuffer
 由于 String 的设计不适合频繁修改内容，所以 Java 提供了专门用来修改字符串内容的类：StringBuffer 和 StringBuilder，其提供编译字符串内容的相关方法，这两个类在修改字符串时的性能很好。
 
@@ -216,4 +288,4 @@ charAt 方法返回字符串中指定位置的字符
 - String 及 StringBuffer, StringBuilder 都是 java.lang 包下面的。
 - String 是不可变的，StringBuffer 及 StringBuilder 是可变的。
 - StringBuilder 是线程不安全的，并发处理，性能比 StringBuffer 稍快
-- StringBuffer 是线程安全的，同步处理的，性能比 StringBuffer 稍慢
+- StringBuffer 是线程安全的，同步处理的，性能比 StringBuilder 稍慢
