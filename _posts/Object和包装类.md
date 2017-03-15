@@ -22,6 +22,8 @@ Object 类中的 toString 方法返回的字符串为：类名@散列码
 对于重写的 toString() 方法所返回字符串格式，没有统一的要求，原则上返回字符串应当包含当前类的属性。
 >推荐使用 JSON 格式~
 
+---
+</br>
 ### equals 方法： ###
 **equals(Object object)方法返回类型为 boolean 类型，用于判断一个对象是否等于另一个对象**
 **Object 类中的该方法采用 == 进行判断两个对象是否相同**（存储地址相同），而在实际开发中一般需要重写 equals 方法，通过比较对象的属性来判断对象像不像。使得 equals 更有意义。（不重写则等同于 ==）
@@ -47,6 +49,8 @@ Object 类中的 toString 方法返回的字符串为：类名@散列码
 		return false;
 	}
 
+---
+</br>
 ### == 和 equals 区别 ###
 **==**
 - 是运算符
@@ -58,6 +62,7 @@ Object 类中的 toString 方法返回的字符串为：类名@散列码
 
 >重要的事情要多强调~ **Object 默认的 equals 方法等同于 ==**
 
+</br>
 ## 包装类 ##
 所有基本数据类型都有一个与之对应的类，称为包装类。包装类是 final 修饰的，位于 java.lang 包下。**包装类的默认值是 null** 
 
@@ -74,6 +79,8 @@ Object 类中的 toString 方法返回的字符串为：类名@散列码
 |char|java.lang.Character|java.lang.Object|
 |boolean|java.lang.Boolean|java.lang.Object|
 
+---
+</br>
 ### 包装类中的常量： ###
 
 |常量名|描述|
@@ -83,6 +90,8 @@ Object 类中的 toString 方法返回的字符串为：类名@散列码
 
 >char 和 boolean 中没有这两个常量
 
+---
+</br>
 ### 基本类型转换为包装类： ###
 
 - 通过 new 关键字进行转换，如： `new Integer(21)`
@@ -102,8 +111,10 @@ Object 类中的 toString 方法返回的字符串为：类名@散列码
 	str = "123abc";
 	int i = Integer.parseInt(str);//报错：java.lang.NumberFormatException
 
+---
+</br>
 ### 自动拆装箱： ###
-Java 5 之后加入了自动拆装箱功能，自动拆装箱是依靠 JDK 5.0 的编译器在编译的时候预处理的。
+JDK 5.0 (JDK 5.0 之后的版本号改为 JDK 1.6，每一个大版本增加 0.1 )之后加入了自动拆装箱功能，自动拆装箱是依靠 JDK 5.0 的编译器在编译的时候预处理的。
 
 自动拆箱：
 
