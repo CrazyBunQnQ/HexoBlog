@@ -23,7 +23,6 @@ Java 字符串就是 Unicode 字符序列。在标准 Java 类库中提供了一
 - **String 类的底层实际上就是字符数组，以及对字符数组的一系列操作。**
 - 字符串无论是中文还是英文，每个字符对应都是两个字节的定长编码。
 
----
 </br>
 ### 字符串的拼接
 
@@ -32,7 +31,6 @@ Java 字符串就是 Unicode 字符序列。在标准 Java 类库中提供了一
 
 >任何一个 Java 对象都可以转换成字符串
 
----
 </br>
 ### 空串与 null
 
@@ -102,7 +100,6 @@ String 类中提供了很多方法，这里只介绍几个最常用的方法，�
 >strA 与 strB 可以使字符串变量，也可以是字符串常量。
 >判断字符串的值是否相等建议不要使用 “==”，除非确实要查看存放地址是否相同。
 
----
 </br>
 ### length 方法
 String 在内存中采用 Unicode 编码，每个字符占用 2 个字节，任何一个字符（无论是中文还是英文）都算一个长度。可以使用 length 方法查看字符串的长度。
@@ -113,7 +110,6 @@ String 在内存中采用 Unicode 编码，每个字符占用 2 个字节，任�
 	String str2 = "hello";
 	System.out.println(str1.length());//输出5
 
----
 </br>
 ### indexOf 方法 ###
 indexOf 方法用来查找字符串位置，未找到则返回 -1。
@@ -130,7 +126,6 @@ indexOf 方法用来查找字符串位置，未找到则返回 -1。
 	index = str.indexOf("1",2);//index = 12
 	index = str.lastIndexOf("1");//index = 12
 	
----
 </br>
 ### substring 方法
 substring 方法可以从一个较大的字符串中提取一个子串。
@@ -146,7 +141,6 @@ substring 方法可以从一个较大的字符串中提取一个子串。
 
 >**Java API 中有一个特点：使用两个数表示范围时，含头不含尾**
 
----
 </br>
 ### trim 方法
 trim 方法去除字符串前后的空字符（**不能去除中间的空白字符**）
@@ -155,14 +149,12 @@ trim 方法去除字符串前后的空字符（**不能去除中间的空白字�
 	String trim = host.trim();//trim = "www.oracle.com.cn";
 	System.out.println(trim.length()); //输出17
 
----
 </br>
 ### charAt 方法
 charAt 方法返回字符串中指定位置的字符
 
 	char charAt(int index);//返字符串中第 index 个字符
 
----
 </br>
 ### startsWith 和 endsWith 方法
 检测一个字符串是否以指定的字符串开头或结尾
@@ -170,7 +162,6 @@ charAt 方法返回字符串中指定位置的字符
 	boolean startsWith(String prefix);//字符串是否以指定字符串开头
 	boolean endsWith(String suffix);//字符串是否以指定字符串结尾
 
----
 </br>
 ### toUpperCase 和 toLowerCase 方法
 将字符串中的英文转换成大写或小写
@@ -178,7 +169,6 @@ charAt 方法返回字符串中指定位置的字符
 	String uoUpperCase();//将字符串英文转换为大写
 	String uoLowerCase();//将字符串英文转换为小写
 
----
 </br>
 ### valueOf 方法
 将其他类型转换成字符串类型（有若干重载方法）
@@ -196,11 +186,10 @@ charAt 方法返回字符串中指定位置的字符
 	str3 = String.valueOf(value);//"false"
 	str4 = String.valueOf(value);//"abc"
 
----
 </br>
-### 操作正则表达式的方法
+### 根据正则表达式操作字符串的方法
 
-**matchs 方法：**
+#### matchs 方法：
 将一个字符串与[正则表达式](/2017/03/15/正则表达式/)进行匹配，成功返回 true，否则返回 false，格式：
 
 	boolean matches(String regex);
@@ -219,7 +208,7 @@ charAt 方法返回字符串中指定位置的字符
 >**又因为在 Java 中“\”有特殊含义，所以还需要用“\\\”表示“\”**
 
 </br>
-**spit 方法：**
+#### spit 方法：
 以 regex 表达式进行分割，将字符串分割成字符串数组，格式：
 
 	String[] spit(String regex);//
@@ -257,7 +246,7 @@ charAt 方法返回字符串中指定位置的字符
 	System.out.print(imageName);
 
 </br>
-**replaceAll 方法：**
+#### replaceAll 方法：
 将字符串中匹配正则表达式的字符串全部替换为新的字符串，格式：
 
 	replaceAll(String regex, String str)
@@ -302,7 +291,6 @@ charAt 方法返回字符串中指定位置的字符
 	costTime = new Date().getTime() - startTime;
 	System.out.println("StringBuffer 用时 " + costTime + " 毫秒");//性能也明显高于直接修改 String，在我的电脑上耗时 15 毫秒，比 StringBuilder 稍慢
 
----
 </br>
 ### StringBuilder 与 StringBuffer 的常用方法
 
@@ -314,7 +302,6 @@ charAt 方法返回字符串中指定位置的字符
 
 >以上方法返回值都是 StringBuilder 或 StringBuffer
 
----
 </br>
 ### String, StringBuffer 和 StringBuilder 区别：
 - String 及 StringBuffer, StringBuilder 都是 java.lang 包下面的。
