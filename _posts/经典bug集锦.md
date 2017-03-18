@@ -1,7 +1,9 @@
 ---
 title: 经典 bug 集锦
 date: 2017-03-15 15:15:15
-categories: 杀虫
+categories: 
+- 杀虫
+- Java
 tags: 
 - Debug
 - 调试

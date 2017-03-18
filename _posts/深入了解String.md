@@ -1,7 +1,7 @@
 ---
 title: 深入了解 String
 date: 2017-03-14 22:22:22
-categories: Java基础
+categories: Java 基础
 tags: 
 - String
 - 字符串
