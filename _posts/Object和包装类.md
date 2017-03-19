@@ -27,10 +27,19 @@ Object 类中的 toString 方法返回的字符串为：类名@散列码
 **equals(Object object)方法返回类型为 boolean 类型，用于判断一个对象是否等于另一个对象**
 **Object 类中的该方法采用 == 进行判断两个对象是否相同**（存储地址相同），而在实际开发中一般需要重写 equals 方法，通过比较对象的属性来判断对象像不像。使得 equals 更有意义。（不重写则等同于 ==）
 
-**重写 equals 需要包含以下三个部分：**
-- 任何对象与 null 比较返回 false
-- 任何对象与 自己 比较返回 true
-- 根据实际需求判断两个对象像不像
+**重写 equals 的方法需要具有以下特性：**
+- **自反性**：对于任何非空引用 x，x.equals(x) 应当返回 true。
+- **对称性**：对于任何引用 x 和 y，当且仅当 y.equals(x) 返回 true，x.equals(y) 也应该返回 true。
+- **传递性**：对于任何引用 x、y 和 z，如果 x.euqals(y) 返回 true，y.equals(z) 返回 true，则 x.equals(z) 也应该返回 true。
+- **一致性**：如果 x 和 y 引用的对象没有发生变化，反复调用 x.equals(y) 应该返回同样的结果。
+- 对于任意**非空**引用 x，x.equals(null) 应该返回 false。
+
+**重写 equals 的步骤：**
+- 检测 obj 是否为 null，如果为 null，返回 false。
+- 检测 this 与 obj 是否引用同一个对象（任何对象与 自己 比较返回 true）。
+- 比较 this 与 obj 是否同属一个类。如果 equals 方法在每个子类中有所改变，就是用 getClass 检测；如果所有的子类都有一样的 equals 方法，就用 instanceof 检测。
+- 如果使用 instanceof 检测，将 obj 转换为相应的类类型变量
+- 根据需求比较像不像。使用 == 比较基本类型，使用 equals 比较对象域。
 
 代码示例：
 
@@ -41,12 +50,19 @@ Object 类中的 toString 方法返回的字符串为：类名@散列码
 		if (obj==this) {//判断是否是自己
 			return true;
 		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
 		if (obj instanceof Person) {//假如这是 Person 类的 equals 方法
 			Person p =(Person)obj;
 			return p.name == this.name && p.age == this.age && p.sex == this.sex;//这里根据实际需求来写
 		}
 		return false;
 	}
+
+</br>
+### hashCode 方法
+hashCode() 方法又叫[散列函数](/2017/03/19/HashCode散列码/#散列函数)，**若重写 equals 方法则必须重写 hashCode 方法。**
 
 </br>
 ### == 和 equals 区别 ###
