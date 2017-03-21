@@ -53,3 +53,8 @@ hashCode() 方法就是获取该对象散列码的方法，hashCode() 方法定�
 可以看到，字符串 s 与 t 拥有相同的散列码，这是因为字符串的散列码是由内容计算的，而 StringBuilder 类的 sb 和 tb 却有着不同的散列码，这是因为在 StringBuilder 类中没有定义 hashCode 方法，所以它的散列码是由 Object 类默认的 hashCode 方法导出的对象存储地址。
 
 **equals 与 hashCode 的定义必须一致：如果 x.queals(y) 返回 true，那么 x.hashCode 就必须与 y.hashCode() 具有相同的值。**
+
+equals()相等的两个对象，hashcode()一定相等； 
+equals（）不相等的两个对象，hashcode()可能相等，也可能不等。
+
+反过来：hashcode()不等，一定能推出equals()也不等；hashcode()相等，equals()可能相等，也可能不等。

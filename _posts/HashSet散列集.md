@@ -3,7 +3,7 @@ title: HashSet 散列集
 date: 2017-03-19 22:22:22
 categories: 
 - Java 基础
-- 算法
+- 数据结构
 tags: 
 - 集合
 - HashSet
