@@ -1,6 +1,6 @@
 ---
 title: Map 映射
-date: 2017-03-19 23:23:23
+date: 2017-03-20 23:23:23
 categories: Java 基础
 tags: 
 - 集合
@@ -14,9 +14,11 @@ Map 接口定义了存储所谓的 key-value，即键值对。Key 可以看成 v
 
 实现 Map 接口最常用的是 HashMap，TreeMap。Map 也支持泛型。
 
+```java
 	Map map = new HashMap();
 	Map<String, Integer> m = new TreeMap<String, Integer>();
-	
+```
+
 映射的常用操作方法：
 
 |操作方法|描述|
@@ -29,6 +31,7 @@ Map 接口定义了存储所谓的 key-value，即键值对。Key 可以看成 v
 ### V put(K k, V v) ###
 若 Map 中不存在以 key 为关键码的条目，则将条目 (key, value) 加入到映射中并返回 null，否则，将已有条目的数据对象替换为 value，并返回原先的数据对象。
 
+```java
 	map.put("语文", 60);
 	map.put("数学", 99);
 	map.put("英语", 59);
@@ -39,62 +42,81 @@ Map 接口定义了存储所谓的 key-value，即键值对。Key 可以看成 v
 	map.put("英语", 80);
 	System.out.println(map);
 	//m.put(2,"dsf");//报错，已经指定了泛型的类型
+```
 
 ### putAll(Map m)
 
+```java
 	m.putAll(map);
 	System.out.println(m);
+```
 
 ### get(Object k)
 根据给定的 key 获取对应的 value 对象，不存在则返回 null。
 
+```java
 	Integer value = m.get("语文");
 	System.out.printLn(value);//60
 	value = m.get("生物");
 	System.out.printLn(value);//null
+```
 
 ### V remove(K k)
 根据给定的 key 所对应的记录从 Map 中移除，并且将该删除成功后的 value 值返回。
 
+```java
 	value = m.remove("英语");
 	System.out.println(value);
 	System.out.print(m);
+```
 
 ### int size()
 返回 Map 中的元素个数
 
+```java
 	System.out.print(m.size());
+```
 
 ### void clear()
 该方法用于清空所有元素。
 
+```java
 	m.clear();
 	System.out.print(m.size());
+```
 
 ### boolean containsKey(Object key)
 判断 Map 中是否包含给定的 key，包含则返回 true，否则返回 false。
 
+```java
 	System.out.println("map 中是否包含 " + m.containsKey("英语"));
 	System.out.println("map 中是否包含 " + m.containsKey("语文"));
+```
 
 ### Set keySet()
 用于返回当前 Map 中所有的 key（键），存入一个 Set 集合。
 
+```java
 	Set<String> set = m.keySet();
 	System.out.println(set);
+```
 
 ### Collection values()
 用于返回当前 Map 中所有的 value（值），存入一个 Collection 集合。（因为 value可以重复，所以不是 Set）
 
+```java
 	Collection<Integer> c = m.values();
 	System.out.println(c);
+```
 
 ### Set<Entry<K,V>> entrySet()
 **会将当前Map中每一组 key-value封装为一个 Entry对象，并存入一个Set集合返回。**
 也就是新的 Set 集合中每个元素都是一个 Entry 对象。每一个 Entry 对象都对应一个 key-value 键值对
 
+```java
 	Set<Entry<String, Integer>> entry = m.entrySet();
 	System.out.println(entry);
+```
 
 ## 遍历 Map
 遍历 Map 有三种方式：
@@ -105,6 +127,7 @@ Map 接口定义了存储所谓的 key-value，即键值对。Key 可以看成 v
 
 ### 遍历所有 key ###
 
+```java
 	Map<String, Integer> m = new TreeMap<String, Integer>();
 	m.put("语文", 60);
 	m.put("数学", 99);
@@ -116,20 +139,25 @@ Map 接口定义了存储所谓的 key-value，即键值对。Key 可以看成 v
 	for(String key:set) {
 		System.out.println("key:" + key + ",  value:" + m.get(key));
 	}
+```
 
 ### 遍历每一组键值对
 
+```java
 	Set<Entry<String, Integer>> entry = m.entrySet();
 	for(Entry<String, Integer> e:entry) {//遍历 Set 集合，拿到每一个 Entry 对象
 		System.out.println("key:" + e.getKey() + ",  value:" + e.getValue());
 	}
+```
 
 ### ~~遍历所有 value~~
 不常用
 
+```java
 	for (Integer i:m.values()) {
 		System.out.println(i);
 	}
+```
 
 </br>
 # 坑有点大！稍后填坑！！！ #
