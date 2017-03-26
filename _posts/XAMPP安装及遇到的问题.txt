@@ -1,0 +1,88 @@
+---
+date: 2016-10-20 16:48
+status: public
+title: XAMPP安装及遇到的问题
+---
+
+先附上中文界面(菜单内部仍为英文)
+![](~/00-47-53.jpg)
+XAMPP下载地址：
+中文版：http://www.xampps.com/
+官网：http://www.xampp.org/
+linux下课使用wget命令下载https://www.apachefriends.org/xampp-files/5.6.24/xampp-linux-x64-5.6.24-1-installer.run
+
+下载安装后打开为如下界面：
+![](~/00-49-18.jpg)
+看起来好像出了很多错误，当然并没有。默认Apache组件处于运行中（注意绿色），但没有加载到windows系统中作为服务。先stop停止掉Apache，然后点击左侧红色的X安装apache服务，需要添加Mysql也是同样的操作。
+我们开启Apache服务，X变为绿色的√，然后打开浏览器访问localhost(或127.0.0.1本机地址)，看到下面的页面，说明服务器环境搭建成功。
+![](~/00-50-36.jpg)
+那我们自己写的文件该放在哪里才能运行呢？答案是在xampp\htdocs目录下，如果存在index.php文件，优先执行该文件，如果不存在，则访问localhost将显示网站目录。下面是我将原来目录的Index.php修改为index2.php时访问localhost出现的页面。
+![](~/00-52-33.jpg)
+
+服务器环境搭建成功后需要做的事
+修改phpMyAdmin配置：
+首先打开D:/XAMPP/phpMyAdmin文件夹中的config.inc.php文件。
+搜索
+“$cfg['Servers'][$i]['auth_type'] = 'config';”
+将其中的config（系缺省值）更改为“cookie”保存。
+
+登录XAMPP
+通过默认主页http://localhost左侧的phpmyadmin导航栏进入phpmyadmin界面（可直接通过http://localhost/phpmyadmin/进入web登陆界面，输入用户名root密码root后直接点击登录即可）
+注：在默认状态下，phpmyadmin有两个用户名，分别是pma和root。其中，root是管理员身份，而pma则是普通用户身份，但二者在缺省状态下均无密码
+若提示 服务器无响应(或者本地MySQL服务器的套接字没有正确配置)的问题，请看后面解决办法
+
+建立新的管理员账号及删除原有的root账号
+首先进入用户选项卡，点击root账号编辑其权限，在底端的修改密码输入相应的密码
+![](~/00-52-54.jpg)
+![](~/00-53-02.jpg)
+
+需要注意
+1.root等管理员密码无需再config.inc.php中更改。
+2.只有pma不设置密码时，XAMPP主界面的MySQL database的状态才会显示为ACTIVATED状态！
+3.不要使用XAMPP for Windows Version 1.5.2自带的mysql管理软件来设置。如果设置了，会在C:\windows目录下产生一个my.ini文件。如果要重新安装，则需要将此my.ini文件删除，以免影响后续设置。
+4.必要时清更改默认端口，APACHE的默认端口是80，如果你装有IIS，就会有冲突。所以，要更改一个端口。打开XAMPP/apache/conf/httpd.conf，把listen 80改为其它的端口，入99,8080等。
+5.您可能会遇到安装了xampp，在本机通过localhost和ip都可以访问，但是局域网其他机器不能访问的问题。解决方法是：修改XAMPP/apache/httpd.conf，把Listen 80改成Listen 192.168.0.188:80,192.168.0.188换成您服务器的ip。
+
+我遇到的问题以及解决方法：
+服务器无响应(或者本地MySQL服务器的套接字没有正确配置)的问题
+第一种情况：（深度清理垃圾导致host.MYD丢失）
+host.MYD文件是一个0字节文件，即没有任何内容，但在启动mysql时会被调用，写入一些临时信息，深度清理垃圾时，我选择扫描空文件和空文件夹，就将host.MYD扫描到并删除了，再次启动wamp，就产生如上问题；
+解决方案：第一次安装wamp时，在安装目录下找到host.MYD，其路径为"C:\wamp\bin\mysql\mysql5.5.20\data\mysql\host.MYD(我默认安           装wamp在C盘根目录)"，你可以选择备份一个host.MYD，或者新建一个空的“文本文档.txt”将其改为“host.MYD”，放到其正确路径下即           可。
+ 
+第二种情况：（防火墙阻止导致mysql无法启动）
+原因：未启动 本地 mysql 服务器
+解决方法：
+        第一步，找到mysql的安装路径 D:\Program Files\MySQL\MySQL Server 5.1\bin
+        第二步，双击 mysqld.exe文件，如果windows防火墙弹出阻止提示框，点击解除阻止即可
+
+第三种情况：(mysql套接字文件绑定ip无效)
+原因 ：如果未指定主机名或指定了特殊的主机名localhost，将使用Unix套接字，Unix套接字默认为/tmp/mysql.sock，而本机并没有配置这样          的套接字文件，所以自然是连接失败了。
+解决方法：找到phpmyadmin文件夹在wamp\phpmyadmin下（具体视自己安装的路径来查找），找到config.inc.php文件，用notepad(记事本)等软件打开找到$cfg['Servers'][$i]['host'] = 'localhost';这一行，然后将这里的localhost修改为127.0.0.1。有网友建议添加$cfg['Servers'][$i]['hide_db'] = ‘information_schema’;//使用登陆后看不见information_schema数据库，这一句其实不加也无所谓。
+
+phpMyAdmin界面左边出现错误提示
+![](~/00-58-47.jpg)
+解决方法：（我居然吭哧半天看懂了英文...以防以后在遇到的时候看不懂。。。先记下来= =哈哈）
+方法一：
+You have to run the create_tables.sql inside the examples/ folder on phpMyAdmin to create the tables needed for the advanced features. That or disable those features by commenting them on the config file.– oso96_2000 Oct 6 '12 at 21:36
+That's an alternative, yes. For importing the .sql file, you should go to the import tab on phpmyadmin and select that file, and then send the form. Just that :) – oso96_2000 Oct 7 '12 at 10:11
+在phpMyAdmin的导入选项卡中选择XAMPP\phpMyAdmin\examples\中的create_tables.sql文件上传并执行即可
+![](~/00-59-01.jpg)
+![](~/00-59-11.jpg)
+如果还提示上述错误，则
+You will find create_tables.sql.gz file in /usr/share/doc/phpmyadmin/examples/
+Extract it and change pma_ prefix by pma__ or vice versa
+编辑create_tables.sql文件，将其中所有的的pma_（单下划线）换成pma__（双下划线）后再次上传执行即可。
+![](~/00-59-23.jpg)
+
+方法二：（适用于Linux系统）
+直接执行
+sudo dpkg-reconfigure phpmyadmin
+
+使用配置文件中定义的控制用户连接失败
+![](~/00-59-40.jpg)
+编辑XAMPP\phpMyAdmin\config.inc.php文件将
+$cfg['Servers'][$i]['controluser'] = '';
+$cfg['Servers'][$i]['controlpass'] = '';
+![](~/00-59-50.jpg)
+两行改成你的数据库用户名和密码，保存即可
+![](~/00-59-56.jpg)
