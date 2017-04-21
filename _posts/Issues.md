@@ -29,6 +29,20 @@ Windows → Preferences → Plug-in Development → API Baselines
 >建议在[这里](http://www.ibm.com/developerworks/library/os-eclipse-api-tools/)研读一下 API baselines ，然后再决定这些 API baselines 是否对你有用。
 
 <br/>
+### java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
+**报错信息：**java.lang.ClassNotFoundException: com.mysql.jdbc.Driver...
+**报错原因：**
+1. 驱动类名称写错
+2. 没有添加 jar 包
+	1. 项目中没有添加 mysql-connector-java-x.x.xx-bin.jar 包
+	2. Web 项目中添加了 mysql-connector-java-x.x.xx-bin.jar 包，但是在 Tomcat 安装目录的 lib 目录下没有该 jar 包
+
+**解决方法:**
+- 对于第一种原因仔细查找下改掉拼错的单词就行了，不多解释啦。
+- 对于第二种报错原因的第一种情况，下载 mysql-connector-java-x.x.xx-bin.jar 添加进去就可以了，这里也不多说。
+- 悲催的我遇到了另一种情况，已经将 mysql-connector-java-x.x.xx-bin.jar 包添加到项目中，测试数据库连接也是没有问题的，但是在 server 中运行时却报错...此时只要将相同的 jar 包复制一份到 Tomcat 安装目录中的 lib 文件夹中重启 Tomcat 服务器即可。
+
+<br/>
 ## MySQL Issues
 ### #1089-incorrect prefix key
 ```MySQL
@@ -59,3 +73,22 @@ PRIMARY KEY (`id`)
 
 <br/>
 ## HTML Issues
+
+<br/>
+## Git
+###
+**错误提示：**You asked to pull from the remote 'master', but did not specify
+a branch. Because this is not the default configured remote
+for your current branch, you must specify a branch on the command line.
+
+**报错原因：**你拉取指定名为 “master” 的远程仓库，但是该远程仓库没有指定分支。因为你当前的分支不是默认的远程仓库，所以必须要指定一个分支。
+
+**解决办法：**
+- 编辑项目下的 `.git/config` 文件，加入下面的代码：
+```
+[branch "master"]
+  remote = origin
+  merge = refs/heads/master
+```
+
+**参考：**[StackOverFlow](http://stackoverflow.com/questions/4847101/git-which-is-the-default-configured-remote-for-branch)
