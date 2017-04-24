@@ -188,3 +188,5 @@ delete from 表名 where 字段名 is null;
 >例如，拼接 name 和 ':' 语句为：`select concat(name,':')`
 
 
+## 添加 外键
+alert table 表名 add constraint 约束名称 foreign key(字段名) references 表名(字段名)
