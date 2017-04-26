@@ -30,7 +30,9 @@ Windows → Preferences → Plug-in Development → API Baselines
 
 <br/>
 ### java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-**报错信息：**java.lang.ClassNotFoundException: com.mysql.jdbc.Driver...
+**报错信息：**
+java.lang.ClassNotFoundException: com.mysql.jdbc.Driver...
+
 **报错原因：**
 1. 驱动类名称写错
 2. 没有添加 jar 包
@@ -41,6 +43,17 @@ Windows → Preferences → Plug-in Development → API Baselines
 - 对于第一种原因仔细查找下改掉拼错的单词就行了，不多解释啦。
 - 对于第二种报错原因的第一种情况，下载 mysql-connector-java-x.x.xx-bin.jar 添加进去就可以了，这里也不多说。
 - 悲催的我遇到了另一种情况，已经将 mysql-connector-java-x.x.xx-bin.jar 包添加到项目中，测试数据库连接也是没有问题的，但是在 server 中运行时却报错...此时只要将相同的 jar 包复制一份到 Tomcat 安装目录中的 lib 文件夹中重启 Tomcat 服务器即可。
+
+<br/>
+### ERROR StatusLogger No log4j2 configuration file found.
+**报错信息：**
+ERROR StatusLogger No log4j2 configuration file found. Using default configuration: logging only errors to the console. Set system property 'org.apache.logging.log4j.simplelog.StatusLogger.level' to TRACE to show Log4j2 internal initialization logging.
+
+**报错原因：**
+- 没有找到 log4j2 的配置文件
+
+**解决办法：**
+因为用的是 log4j2 所以不能按照大多数网站上写的配置 `log4j.properties` ，需要将配置文件名改为 `log4j2.properties`。
 
 <br/>
 ## MySQL Issues
@@ -70,6 +83,17 @@ PRIMARY KEY (`id`)
 ```
 
 **参考：**[MySQL 官方文档](https://dev.mysql.com/doc/refman/5.5/en/create-index.html)
+
+<br/>
+### com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+**报错信息：**
+com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure.
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+**报错原因：**
+- 未开启 mysql 服务
+
+**解决办法：**
+- 启动 mysql 服务
 
 <br/>
 ## HTML Issues
