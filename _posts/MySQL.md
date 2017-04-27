@@ -189,4 +189,8 @@ delete from 表名 where 字段名 is null;
 
 
 ## 添加 外键
-alert table 表名 add constraint 约束名称 foreign key(字段名) references 表名(字段名)
+alter table 表名 add constraint 约束名称 foreign key(字段名) references 表名(字段名)
+
+## 分页查询
+select * from 表名 limit 页数,条数
+select * from emp limit 0,2;//查询第一页，每页两条

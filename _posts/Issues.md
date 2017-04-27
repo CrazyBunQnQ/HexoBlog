@@ -55,6 +55,28 @@ ERROR StatusLogger No log4j2 configuration file found. Using default configurati
 **解决办法：**
 因为用的是 log4j2 所以不能按照大多数网站上写的配置 `log4j.properties` ，需要将配置文件名改为 `log4j2.properties`。
 
+**参考：**
+
+
+<br/>
+### <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd"> 系统找不到指定的文件
+**警告信息：**
+The file cannot be validated as the XML definition "项目路径\src\log4j.dtd (系统找不到指定的文件。)" that is specified as describing the syntax of the file cannot be located.
+
+**报错原因：**
+- 要么缺少 log4j.dtd 文件
+- log4j.dtd 名称写错。
+- log4j.dtd 文件未放在 src 目录下
+
+**解决办法：**
+- log4j.dtd 位置（若已有 log4j.dtd 文件则忽略此条）
+	- log4j 1.x：使用解压缩工具解压log4j.jar文件，找到org/apache/log4j/xml目录下的log4j.dtd 文件。
+	- log4j 2.x：使用解压缩工具解压 log4j-core-2.8.2.jar 文件，找到根目录下的 Log4j-events.dtd 文件。
+- 将找到的 log4j.dtd 文件拷贝到项目路径的 src 目录下即可。
+
+**参考：**
+[log4j.xml 提示不能找到 log4j.dtd](http://blog.csdn.net/linshutao/article/details/6578788)
+
 <br/>
 ## MySQL Issues
 ### #1089-incorrect prefix key

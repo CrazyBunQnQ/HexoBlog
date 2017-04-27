@@ -34,6 +34,8 @@ try {
 		//判断 item 是否为普通的文本域
 		if (item.ifFormField()) {
 			//正常处理文本域
+			String fieldName = item.getFieldName();//获取文本域的 name 属性值
+			String fieldValue = item.getString("utf-8");//获取文本域的 value 属性值
 		} else {//否则该 item 是文件
 			//进行文件上传
 			//1. 设置上传文件地址，获取文件夹绝对路径
@@ -47,7 +49,7 @@ try {
 			String prefix = fileName.substring(0, point);//获取前缀
 			String suffix = fileName.substring(point, fileName.length());//获取后缀
 			System.out.println("前缀: " + prefix + ", 后缀： " + suffix);
-			fileName = prefix + UUID.randowUUID() + suffix;//文件名结尾添加 UUID 唯一标识
+			fileName = prefix + UUID.randomUUID() + suffix;//文件名结尾添加 UUID 唯一标识
 			System.out.println("文件路径: " + realPath + fileName);
 			//4. 上传文件
 			String fileType item.getContentType();//获取上传文件的类型
