@@ -61,15 +61,26 @@ buffer：设置 out 缓存（默认 8 kb）， out 对象输出到浏览器两�
 	2.缓冲区已满
 
 	- include 指令：
+想 jsp 页面中天健一个片段文件 .jspf
 ```JSP
-<%@ include %>
+<%@ include file="xxx.jspf "%>
 ```
+jspf 片段页面
 	- taglib 指令：
+标签库 jstl
 ```JSP
 <%@ taglib %>
 ```
 - JSP 内置对象
-out、reponse、request等9个内置对象
+	- request
+	- response
+	- out
+	- session
+	- pageContext
+	- ServletContext application
+	- ServletConfig config
+	- page
+	- Throwable exception(只有当页面设置了 isErrorPage="true" 时才出现)
 
 ## 转发原理
 - 只有一次请求

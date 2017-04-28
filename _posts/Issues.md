@@ -118,6 +118,34 @@ The last packet sent successfully to the server was 0 milliseconds ago. The driv
 - 启动 mysql 服务
 
 <br/>
+### 使用 PreparedStatement 将中文数据存入 mysql 中显示 "?"
+**表现形式：**
+- 在数据库中查看插入的中文数据全都显示 "?"，Java 取出来的数据也显示 "?"
+- 在数据库工具中手动插入的中文数据正常显示，Java 取出来的数据也正常显示。
+- preparedStatement 语句执行前，通过
+```Java
+System.out.println(preparedStatement.toString());
+```
+输出的 mysql 语句，其中文数据也显示 ?
+```
+com.mysql.jdbc.JDBC42PreparedStatement@4102b8: INSERT INTO catgory VALUES ('d6509', '??', 1)
+```
+
+**问题原因：**
+设置驱动时未指定编码格式。
+
+**解决办法：**
+将原先的数据库驱动配置
+```
+jdbc:mysql://localhost:3306/数据库名
+```
+改为
+```
+jdbc:mysql://localhost:3306/数据库名?characterEncoding=utf8
+```
+>其中数据库名为你自己的数据库名称
+
+<br/>
 ## HTML Issues
 
 <br/>
