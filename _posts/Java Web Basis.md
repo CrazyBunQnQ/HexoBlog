@@ -1,6 +1,14 @@
 ---
-titile: Web
+title: Java Web 基本概念
 date: 2017-04-19 22:22:22
+categories: 
+- Web 基础
+- 待完善
+tags: 
+- Web
+- tomcat
+- http 协议
+- servlet
 ---
 
 Web 就是网页的意思，互联网上主机提供的对外访问的资源。
@@ -84,7 +92,7 @@ Java Web 就是 Java 提供 Web 资源访问的技术总成
 
 
 ## http 协议
-HTTP 是 hypertext transfer protocol（超文本传输协议） 的简写，踏实 TCP/TP 协议的一个应用层协议，用于定义 web 浏览器 与 web 服务器之间交换数据的过程：
+HTTP 是 hypertext transfer protocol（超文本传输协议）的简写，它是 TCP/TP 协议的一个应用层协议，用于定义 web 浏览器 与 web 服务器之间交换数据的过程：
 版本：
 - Http 1.0 只支持单个 web 资源的访问
 - HTTP 1.1 支持多个web资源访问
@@ -168,9 +176,3 @@ PrintWriter out = res.getWriter();
 >-cp 确定添加的classpath 路径
 >-d 生成对应的pakage文件夹
 >. 当前目录
-
-
-找到 localhost 主机
-找到 hello 文件夹
-找到 web。xml 文件
-找到 /hello 映射的 servlet-mapping

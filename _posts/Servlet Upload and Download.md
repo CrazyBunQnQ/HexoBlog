@@ -1,15 +1,20 @@
 ---
 title: Servlet 文件上传和下载
 date: 2017-4-26 11:16:30 
-
-
+categories: 
+- Java 基础
+tags: 
+- Servlet
+- upload
+- download
 ---
 
-<!--more-->
+Servlet 实现上传和下载的依赖包：
+- commons-fileupload-x.x.x.jar
+- commons-io-x.x.x.jar
+>x.x.x 为版本号
 
-依赖包：
-commons-fileupload-x.x.x.jar
-commons-io-x.x.x.jar
+<!--more-->
 
 ## 文件上传
 

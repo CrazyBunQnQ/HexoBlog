@@ -1,7 +1,9 @@
 ---
 title: JavaScript 验证码的实现
 date: 2017-04-14 22:22:22
-categories: Web 基础
+categories: 
+- Web 基础
+- 未完成
 tags: 
 - JavaScript
 - 验证码
