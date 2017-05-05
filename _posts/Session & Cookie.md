@@ -1,14 +1,21 @@
 ---
-title: Session & Cookie
+title: 会话技术之 Session 和 Cookie
 date: 2017-4-25 9:46:04 
-
-
+categories: 
+- Java 基础
+- 待完善
+tags: 
+- Session
+- Cookie
+- 域对象
+- scope
 ---
 
 浏览器和服务器通信的过程中会产生一些数据，Session 技术可以解决这些数据的保存问题。
 会话技术有两种：
 - Cookie - 浏览器端的数据存储，将数据保存在浏览器端
 - Session - 服务器端的数据存储，将数据保存在服务器端
+
 <!--more-->
 
 ## 使用 Cookie 技术保存数据
@@ -87,7 +94,7 @@ request.getSession();会判断当前服务器有没有为该用户创建 session
 当浏览器再次访问服务器的时候，会携带 cookie 对象（JESSIONID）
 浏览器会话时间结束：关闭浏览器
 
-## 域对象
+## 域(scope) 对象
 - 域对象是个容器，request、session 和 application
 - 域对象有作用范围：
 	- request：一次请求中（每次请求都有 request 对象）

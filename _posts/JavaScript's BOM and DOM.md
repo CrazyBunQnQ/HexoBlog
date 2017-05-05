@@ -1,5 +1,5 @@
 ---
-title: BOM & DOM
+title: JavaScript 之 BOM 和 DOM 对象
 date: 2017-04-14 22:22:22
 categories: Web 基础
 tags: 
