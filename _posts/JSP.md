@@ -1,8 +1,11 @@
 ---
-title: JSP
+title: 初识 JSP
 date: 2017-4-24 9:13:42 
-
-
+categories: 
+- Java 基础
+- 待完善
+tags: 
+- JSP
 ---
 
 JSP (Java Server Page) 和 Servlet 都是用来解决动态 web 资源的技术。

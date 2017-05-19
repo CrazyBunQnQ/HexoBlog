@@ -1,11 +1,10 @@
 ---
-title: Servlet
+title: 初识 Servlet
 date: 2017-4-21 10:44:22
-
-
+categories: Java 基础
+tags:
+- Servlet
 ---
-
-<!--more--> 
 
 ## Servlet 生命周期
 1. 初始化阶段
@@ -16,6 +15,8 @@ Servlet 是一个多线程的。
 会调用 service() 方法
 3. 终止阶段
 服务器关闭的时候会调用 destroy() 方法
+
+<!--more--> 
 
 <br/>
 ## Servlet 相关对象的创建
