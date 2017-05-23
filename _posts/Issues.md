@@ -171,7 +171,8 @@ jdbc:mysql://localhost:3306/数据库名?characterEncoding=utf8
 
 <br/>
 ## Git
-###
+### You asked to pull from the remote 'master', but did not specify
+a branch. 
 **错误提示：**You asked to pull from the remote 'master', but did not specify
 a branch. Because this is not the default configured remote
 for your current branch, you must specify a branch on the command line.
