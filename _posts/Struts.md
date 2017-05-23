@@ -129,3 +129,291 @@ el 表达式 一次从 pageContext request action session application 中取值
 ```
 
 >默认值是"/"，但不建议用默认值
+
+## struts2 访问 request response session
+1. 不推荐
+```Java
+//获取原始类型的 request 和 response 对象一次请求 一次响应期间
+HttpServletRequest request = ServletActionContext.getRequest();
+HttpServletRequest response = ServletActionContext.getResponse();
+//获取 session
+HttpSession session = request.getSession();
+//获取 Servlet 上下文，对于一个应用，它是唯一的
+ServletContext application = ServletActionContext.getServletContext();
+```
+
+2. ActionContext
+返回 Map 类型的 request response session 对象
+```Java
+Map<String, Object> request = (Map<String, Object>)ActionContext.getContext().get("request");
+Map<String, Object> session = ActionContext.getContext.getSession();
+Map<String, Object> application = (Map<String, Object>)ActionContext.getContext().getApplication();
+
+requset.put("r", "requset");
+session.put("s", "session");
+application.put("a", "application");
+```
+
+3. 注入式(推荐)
+以上两种访问方式都是侵入式编程
+实现接口
+Action ... implements RequestAware,SessionAware,ApplicationAware
+实现接口方法后，参数就是 request session application 对象
+```Java
+private Map<String , Object> appliacation;
+setApplication(Map<String, Object> application) {
+	this.application = application;
+}
+```
+
+推荐将获取 session 等对象封装到一个基类中，例如 BaseAction.java:
+```Java
+public class BaseAction extends ActionSupport implements RequestAware, SessionAware, ApplicationAware {
+
+	protected Map<String, Object> appliacation;
+	protected Map<String, Object> request;
+	protected Map<String, Object> session;
+
+	@Override
+	public void setApplication(Map<String, Object> appliacation) {
+		this.application = application;
+	}
+
+	@Override
+	public void setApplication(Map<String, Object> request) {
+		this.session = request;
+	}
+
+	@Override
+	public void setApplication(Map<String, Object> session) {
+		this.session = session;
+	}
+}
+```
+
+## result type
+```XML
+<result type="..."></result>
+```
+>result name 默认为 success
+>配置文件可以使用 el 表达式
+
+### dispatcher 
+转发到页面
+<result type="dispatcher">
+
+### freemaker
+
+### stream
+流响应，服务器发送给浏览器的是 流格式的数据(byet序列)，可以用来下载
+```XML
+<result name="success" type="stream">
+	<param name="inputName">is</parm>
+	<!--
+	contentDisposition
+	attachment:保存 另存 提示
+	inline ： 直接在浏览器打开【默认】
+	-->
+	<param name="contentDisposition">attachment;filename=${filename}</param>
+	<param name="bufferSize">5*1024</param><!--5K缓冲区，默认 1024-->
+	<param name="contentType">text/pl..</param>
+</result>
+```
+
+```Java
+class DownloadAction{
+	private String filename;//下载文件名
+	private InputStream is;//用来接收下载的文件内容	
+
+	set...
+	getFilename() {
+		return urlencoder.encode(filename, "utf-8");
+	}
+
+	public String execute() {
+		filename="1.png";
+		//根据逻辑路径“download”获取实际发布到服务器上的文件物理路径
+		String realPath = ServletActionContext.getServletContext().getRealPath("/download");
+		String downPath = realPath + "/" + filename;
+		//将要下载的文件内容 转换为 byte by byte
+		is = new FileInputStream(new File(downPath));
+		return "success";
+	}
+}
+```
+
+没有保存的下载（如验证码）：
+```XML
+<result type="stream">
+	inputName>inputStream
+	bufferSize>5*1024
+</result>
+```
+
+```JAVA
+Map<string, bufferedImage> map = ImageUtil.getImage();
+String code = map.keySet().iterator().next();
+BufferedImage img = map.get(code);
+//将 image 对象 转换成 InputStream 格式 发送给浏览器
+ByteArrayoutputStream baos = new ByteArrayOutputStream(inputStream);
+JPEGCodec jp = JPEGCodec.createJPEGEncoder(baos);
+jp.encode(image);
+//转化流
+inputStream = new ByteArrayInputStream(baos.toByteArray());
+return SUCCESS;
+```
+
+### json
+服务器发送给浏览器的是 json 数据
+- **需要引入 struts-json-plugin.jar（中间件）**
+- **需要改配置文件继承 json-default**
+
+<result type="json" class="org.apache.struts2.json.JSONResult">
+1.如果这里什么都不写，会将 action中所有的属性，转换成 json 格式 发送给浏览器
+2.通过 incluDEProperties 将制定的属性以json格式发送给浏览器
+3.如果返回的是 list，则需要加上.*
+	<param name="includeProperties">flag,sfdf</param><!--要返回的数据-->
+</result>
+
+### jfreechart 、highchart
+图表响应，需要导入 jfreechart 或 highchart 包
+>工厂设计模式
+>(20多种涉及模式)
+
+### chain
+转发到 Action
+
+### redirect
+重定向到 jsp 页面
+>jsp 无法渠道 action 属性的值
+
+### redirectAction
+重定向到另外一个 Action 类
+
+### chain 与 redirectAction 区别
+- chain 两个 Action 可以共享值
+- redirectAction 两个 Action 无法共享值
+
+示例：
+```Java
+private String name;
+
+setName()
+
+getName
+
+public String excute() {
+sysout( "action1 name" + name);
+return SUCCESS;
+}
+
+
+
+private String name;
+
+setName()
+
+getName
+
+public String excute() {
+sysout( "action2 name" + name);
+return SUCCESS;
+}
+
+```
+
+chain01.jsp:
+```JSP
+form action chain01.action
+name="name"
+submit
+/form
+```
+
+struts.xml:
+```XML
+action name= chain01
+result type = chain
+chain02
+
+action name=chain02
+result type dispatcher
+index.jsp
+```
+
+访问 chain01.jsp
+action01 获取值
+chain 转发到 action02
+action02 也能获取chain01.jsp提交的值
+
+若使用 重定向 则 action02拿不到 chain01.jsp 提交的值
+
+
+>跨包调用 action
+```XML
+<result>
+	<param name="namespace">/aaa</param>
+	<param name="actionName">/chain02</param>
+</result>
+```
+
+
+Two to two,too two to two.Two two,too two to two,too1. 决定是否可以访问 action 对象
+将 action 的共同逻辑编写在拦截器中
+
+## 拦截器 Interceptor
+拦截 action 对象，其你去过来不立即走 action 二十先走 拦截器
+1. 决定是否可以访问 action 对象
+2. 将 action 的共同逻辑编写在拦截器中
+3.
+
+
+### 自定义拦截器
+```Java
+//public  class TimeInterceptor implements Interceptor {
+public  class TimeInterceptor extends AbstractInterceptor {
+	//ActionInvocation 是 action 对象的执行者
+	@Override
+	public String interept(ActionInvocation invocation) thorws ... {
+		long start = System.currentTimeMillis();
+		String result = invocation.invoke();//调用后续的拦截器或者 action 对象
+		long end = System.currentTimeMillis();
+		long time = end - start;
+		String className = invocation.getAction().getClass().getSimpleName();
+		//代理模式
+		String methodName = invocation.getProxy().getMethod();
+		String msg = "在" + className + "类的" + methodName + "方法上花费了" + tiom "毫秒"；
+		log.info(msg);
+		FileWriter fw = new FileWriter(new File("D:\\2a.txt"), true);
+		fw.write(msg)
+		return result;
+	}
+}
+```
+
+在 struts.xml 中声明拦截器（多个包则每个包都需要声明）
+```XML
+<package>
+	<interceptor name="timeInterceptor" class="..."></interceptor>
+	<!--
+	1. 如果一个没有配置任何的拦截器 struts 会默认提供一个 defaultStack （默认拦截器栈）
+	2. 一旦配置了一个拦截器，则不再提供 defaultStack 拦截器
+	3. defaultStack 是个很重要的拦截器，所以若手动配置了其他拦截器一定要加上这个默认拦截器-->
+	<interceptor name="defaultStack"></interceptor>
+	<!--若配置了 default 则所有 action 都会用默认的拦截器，action 中不再需要配置-->
+	<default-interceptor-ref name="timeInterceptor"></default-interceptor-ref>
+	<action ...>
+		<interceptor-ref name="timeInterceptor"></interceptor-ref>
+		...
+	</action>
+</package>
+```
+1. 如果一个没有配置任何的拦截器 struts 会默认提供一个 defaultStack （默认拦截器栈）
+2. 一旦配置了一个拦截器，则不再提供 defaultStack 拦截器
+3. defaultStack 是个很重要的拦截器，所以若手动配置了其他拦截器一定要加上这个默认拦截器
+
+定义拦截器栈
+参考 defaultStack
+
+<br/>
+### 内置拦截器
