@@ -79,6 +79,26 @@ The file cannot be validated as the XML definition "项目路径\src\log4j.dtd (
 [log4j.xml 提示不能找到 log4j.dtd](http://blog.csdn.net/linshutao/article/details/6578788)
 
 <br/>
+### Project facet Java 1.8 is not supported by target runtime Apache Tomcat v7.0.
+**报错信息：**
+- Project facet Java 1.8 is not supported by target runtime Apache Tomcat v7.0.
+- Project facet Java version 1.8 is not supported.
+![Project facet Java version 1.8 is not supported.](http://wx1.sinaimg.cn/mw690/a6e9cb00ly1ff4q9grjocj20el0goaae.jpg)
+
+**报错原因：**
+- 根本原因：JDK 的版本与 Tomcat 设置的版本不匹配
+- 可能是你导入的项目中的 JDK 与你的 Tomcat 设置不同
+- 也可能是你更换/更新了 JDK 版本(需要完全一致，包括第几次修订)导致该版本与 Tomcat 设置的版本不匹配
+
+**解决办法：**
+重新配置 tomcat
+1. 如图：右键 Servers 窗口空白位置 —— New —— Server —— Configure runtime environments... —— Add —— 选择 Tomcat 版本 —— Next
+![设置 Tomcat 对应的 JDK 版本 No.1](http://wx4.sinaimg.cn/mw690/a6e9cb00ly1ff4rlvtwfdj217f0jrwi6.jpg)
+2. 如图：选择 Tomcat 安装目录 —— 选择 JDK 版本 —— Finish
+![设置 Tomcat 对应的 JDK 版本 No.2](http://wx4.sinaimg.cn/mw690/a6e9cb00ly1ff4red30u5j20el0fqmxw.jpg)
+
+
+<br/>
 ## MySQL Issues
 ### #1089-incorrect prefix key
 ```MySQL
@@ -151,7 +171,8 @@ jdbc:mysql://localhost:3306/数据库名?characterEncoding=utf8
 
 <br/>
 ## Git
-###
+### You asked to pull from the remote 'master', but did not specify
+a branch. 
 **错误提示：**You asked to pull from the remote 'master', but did not specify
 a branch. Because this is not the default configured remote
 for your current branch, you must specify a branch on the command line.
