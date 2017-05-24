@@ -85,6 +85,19 @@ View → 发出请求 → 总控制器 → 分发请求 → 分控制器 → 接
 </struts>
 ```
 
+
+### 全局配置
+<!--全局result-->
+<global-results>
+	<result name="error" >/error.jsp</result>
+</global-results>
+<!--全局异常-->
+<global-exception-mappings>
+	<exception-mapping result="error" exception="java.lang"></exception-mapping>
+</global-exception-mappings>
+
+
+
 ### 执行流程
 url-发出请求-  action-方法-result-jsp
 
@@ -126,6 +139,7 @@ el 表达式 一次从 pageContext request action session application 中取值
 分门别类,区分不同包的同名请求，当多个 package 的 action 冲突的时候，可以根据 namespace 区分
 ```
 <package name="com.crazybunqnq.action" extends="struts-default" namespace="/emp">
+</package>
 ```
 
 >默认值是"/"，但不建议用默认值
@@ -141,6 +155,7 @@ HttpSession session = request.getSession();
 //获取 Servlet 上下文，对于一个应用，它是唯一的
 ServletContext application = ServletActionContext.getServletContext();
 ```
+
 
 2. ActionContext
 返回 Map 类型的 request response session 对象
@@ -369,8 +384,10 @@ Two to two,too two to two.Two two,too two to two,too1. 决定是否可以访问 
 
 
 ### 自定义拦截器
+1. 定义拦截器，实现 Interceptor 或 继承 MethodFilterInterceptor 或 AbstractInterceptor
 ```Java
 //public  class TimeInterceptor implements Interceptor {
+//public class TimeInterceptor extends MethodFilterInterceptor {
 public  class TimeInterceptor extends AbstractInterceptor {
 	//ActionInvocation 是 action 对象的执行者
 	@Override
@@ -391,7 +408,7 @@ public  class TimeInterceptor extends AbstractInterceptor {
 }
 ```
 
-在 struts.xml 中声明拦截器（多个包则每个包都需要声明）
+2. 在 struts.xml 中声明拦截器（多个包则每个包都需要声明）
 ```XML
 <package>
 	<interceptor name="timeInterceptor" class="..."></interceptor>
@@ -408,6 +425,7 @@ public  class TimeInterceptor extends AbstractInterceptor {
 	</action>
 </package>
 ```
+
 1. 如果一个没有配置任何的拦截器 struts 会默认提供一个 defaultStack （默认拦截器栈）
 2. 一旦配置了一个拦截器，则不再提供 defaultStack 拦截器
 3. defaultStack 是个很重要的拦截器，所以若手动配置了其他拦截器一定要加上这个默认拦截器
@@ -417,3 +435,28 @@ public  class TimeInterceptor extends AbstractInterceptor {
 
 <br/>
 ### 内置拦截器
+fileUpload 上传拦截器
+```XML
+<interceptor-ref name="fileUpload">
+	<param name="maximumSize">1024</param><!-- 最大大小（字节） -->
+	<param name="allowedTypes">image/jpeg, image/png,image/gif</param><!-- 允许类型 -->
+	<!-- <param name="allowedExtensions">.jpg, .png,.gif</param>允许的后缀类型 -->
+</interceptor-ref>
+```
+
+token/tokenSession:组织表单重复提交
+
+### 国际化
+
+
+图片服务器分离技术
+
+虚拟目录
+
+
+## ognl 表达式
+对象图导航语言，提供一个对象，获取这个对象属性值，或者对属性参与加工。
+- 表达式没有 # 号，就去 root 区查找对应的值
+- 表达式有 # 号，就去 context 区查找对应的值
+
+ognl 表达式要结合 struts 标签使用
