@@ -188,3 +188,19 @@ for your current branch, you must specify a branch on the command line.
 ```
 
 **参考：**[StackOverFlow](http://stackoverflow.com/questions/4847101/git-which-is-the-default-configured-remote-for-branch)
+
+<br/>
+## Eclipse
+### An internal error occurred during: “Launching Project”. Java.lang.NullPointerException.
+**错误提示：**如图
+![错误提示](http://wx4.sinaimg.cn/mw690/a6e9cb00ly1ffyhhppv7kj20aa07jdfx.jpg)
+
+**报错原因：**
+- 我的报错原因大概是写代码的时候突然断电，笔记本上没有电池，开机之后就这样了
+
+**解决办法：**
+1. 退出 eclipse
+2. 进入 eclipse 的工作区间
+3. 删除 .metadata 文件夹，确保 .metadata 文件夹得隐藏文件也要删除
+4. 重启 eclipse，并重新导入你的工程
+5. 常用设置也被还原了，记得改回来...TAT

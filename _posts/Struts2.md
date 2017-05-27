@@ -33,7 +33,7 @@ View → 发出请求 → 总控制器 → 分发请求 → 分控制器 → 接
 ## **Struts2 入门开发**
 首先要[下载 struets2 资源包]()（jar 包、源码、示例代码）
 1. 创建 web 项目
-2. 引入 jar 包
+2. 引入 jar 包 
 	1. commons-fileupload 上传
 	2. commons-io 下载
 	3. commons-lang 
