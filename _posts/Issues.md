@@ -204,3 +204,52 @@ for your current branch, you must specify a branch on the command line.
 3. 删除 .metadata 文件夹，确保 .metadata 文件夹得隐藏文件也要删除
 4. 重启 eclipse，并重新导入你的工程
 5. 常用设置也被还原了，记得改回来...TAT
+
+<br/>
+## Spring
+### java.lang.IllegalArgumentException
+**错误提示：**
+```
+java.lang.IllegalArgumentException
+    at org.springframework.asm.ClassReader.<init>(Unknown Source)
+    at org.springframework.asm.ClassReader.<init>(Unknown Source)
+    at org.springframework.asm.ClassReader.<init>(Unknown Source)
+    at org.springframework.core.type.classreading.SimpleMetadataReader.<init>(SimpleMetadataReader.java:52)
+    at org.springframework.core.type.classreading.SimpleMetadataReaderFactory.getMetadataReader(SimpleMetadataReaderFactory.java:80)
+    at org.springframework.core.type.classreading.CachingMetadataReaderFactory.getMetadataReader(CachingMetadataReaderFactory.java:101)
+    at org.springframework.core.type.classreading.SimpleMetadataReaderFactory.getMetadataReader(SimpleMetadataReaderFactory.java:76)
+    at org.springframework.context.annotation.ConfigurationClassParser.getImports(ConfigurationClassParser.java:298)
+    at org.springframework.context.annotation.ConfigurationClassParser.getImports(ConfigurationClassParser.java:300)
+    at org.springframework.context.annotation.ConfigurationClassParser.getImports(ConfigurationClassParser.java:300)
+    at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:230)
+    at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:153)
+    at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:130)
+    at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:285)
+    at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:223)
+    at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:630)
+    at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:461)
+    at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:383)
+    at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:283)
+    at com.demo.web.listener.InitApplicationListener.contextInitialized(InitApplicationListener.java:32)
+    at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4729)
+    at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5167)
+    at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+    at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:725)
+    at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:701)
+    at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:717)
+    at org.apache.catalina.startup.HostConfig.deployWAR(HostConfig.java:945)
+    at org.apache.catalina.startup.HostConfig$DeployWar.run(HostConfig.java:1768)
+    at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+    at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+    at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+    at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+at java.lang.Thread.run(Thread.java:745)
+```
+
+**报错原因：**
+ASM 与 JDK 8 不兼容
+
+**解决办法：**
+如果你想继续使用 JDK 8 的话，需要使用 Spring 4.0 或更高版本。
+
+**参考：**[CSDN](http://blog.csdn.net/sgls652709/article/details/49878741)
