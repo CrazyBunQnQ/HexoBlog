@@ -56,9 +56,6 @@ ERROR StatusLogger No log4j2 configuration file found. Using default configurati
 **解决办法：**
 因为用的是 log4j2 所以不能按照大多数网站上写的配置 `log4j.properties` ，需要将配置文件名改为 `log4j2.properties`。
 
-**参考：**
-
-
 <br/>
 ### <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd"> 系统找不到指定的文件
 **警告信息：**
@@ -272,6 +269,21 @@ for your current branch, you must specify a branch on the command line.
 **参考：**[StackOverFlow](http://stackoverflow.com/questions/4847101/git-which-is-the-default-configured-remote-for-branch)
 
 <br/>
+## IntelliJ IDEA
+### java: Compilation failed: internal java compiler error
+**错误提示：**如图
+![错误提示](http://wx3.sinaimg.cn/mw690/a6e9cb00ly1fgrfd1loxcj20yg04wdm9.jpg)
+
+**报错原因：**
+- 代码中使用了高版本的 Java 特性，而项目的编译器版本低于该版本，导致无法编译。
+
+**解决办法：**
+- 设置项目的编译器版本高于等于支持该特性的 Java 版本
+
+![错误提示](http://wx1.sinaimg.cn/mw690/a6e9cb00ly1fgrfgso7ktj21kw14dqaa.jpg)
+>此设置只是表明了该项目支持的最低 JDK 版本，与项目中用到的 JDK 无关。
+
+<br/>
 ## Eclipse
 ### An internal error occurred during: “Launching Project”. Java.lang.NullPointerException.
 **错误提示：**如图
@@ -288,8 +300,8 @@ for your current branch, you must specify a branch on the command line.
 5. 常用设置也被还原了，记得改回来...TAT
 
 <br/>
-## Spring
-### java.lang.IllegalArgumentException
+## Framework
+### Spring: java.lang.IllegalArgumentException
 **错误提示：**
 ```
 java.lang.IllegalArgumentException
@@ -335,3 +347,20 @@ ASM 与 JDK 8 不兼容
 如果你想继续使用 JDK 8 的话，需要使用 Spring 4.0 或更高版本。
 
 **参考：**[CSDN](http://blog.csdn.net/sgls652709/article/details/49878741)
+
+### Mybatis: org.apache.ibatis.binding.BindingException
+**错误信息：**
+org.apache.ibatis.binding.BindingException: Invalid bound statement (not found)
+
+**报错原因：**
+- 这个问题，通常是由 Mapper interface 和对应的 xml 文件的定义对应不上引起的，这时就需要仔细检查对比包名、xml 中的 namespace、接口中的方法名称等是否对应。
+
+**解决办法：**
+
+1. 检查xml文件所在package名称是否和Mapper interface所在的包名一一对应；
+2. 检查xml的namespace是否和xml文件的package名称一一对应；
+3. 检查方法名称是否对应；
+4. 去除xml文件中的中文注释；
+5. 随意在xml文件中加一个空格或者空行然后保存。
+
+**参考：**[mybatis 绑定错误](http://blog.csdn.net/softwarehe/article/details/8889206)

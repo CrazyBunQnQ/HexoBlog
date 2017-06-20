@@ -1,6 +1,6 @@
 ---
 title: Java 的三种代理模式
-date: 2017-6-6 09:32
+date: 2017-05-27 09:32
 categories: 设计模式
 tag: 
 - Proxy
@@ -8,6 +8,8 @@ tag:
 
 代理（Proxy）是一种设计模式，提供了对目标对象另外的访问方式，即通过代理对象访问目标对象，这样做的好处是：可以在目标对象实现的基础上，增强额外的功能操作，即扩展目标对象的功能。
 这里使用到编程中的一个思想：不要随意去修改别人已经写好的代码或者方法，如果需要修改，可以通过代理的方式来扩展该方法。
+- [Source code](https://github.com/CrazyBunQnQ/ShowMeCode/tree/master/src/main/java/com/crazybunqnq/designpattern/proxy)
+- [Unit Test](https://github.com/CrazyBunQnQ/ShowMeCode/tree/master/src/test/java/designmodle/proxy)
 
 <!--more-->
 
@@ -20,6 +22,8 @@ tag:
 2. Subject是委托类和代理类的接口；
 3. request() 是委托类和代理类的共同方法。
 >代理模式的关键点是：代理对象与目标对象：代理对象是对目标对象的扩展，并会调用目标对象。
+
+<br/>
 
 ## 静态代理
 静态代理在使用时，需要定义接口或者父类，被代理对象与代理对象一起实现相同的接口或者是继承相同父类。
