@@ -194,3 +194,12 @@ alter table 表名 add constraint 约束名称 foreign key(字段名) references
 ## 分页查询
 select * from 表名 limit 页数,条数
 select * from emp limit 0,2;//查询第一页，每页两条
+
+## 关联子查询
+给定表：
+![表](http://wx1.sinaimg.cn/mw690/a6e9cb00ly1fgsyojg2euj207a0ei3z2.jpg)
+写出 sql 语句查询出下面的结果：
+![结果](http://wx2.sinaimg.cn/mw690/a6e9cb00ly1fgsyojww7bj20au040wej.jpg)
+```sql
+SELECT nam, (SELECT COUNT(jieguo) FROM table1 WHERE nam=t1.nam AND jieguo='win') win_num, (SELECT COUNT(jieguo) FROM table1 WHERE nam=t1.nam AND jieguo='lost') lost_num FROM table1 t1 GROUP BY nam ;
+```
