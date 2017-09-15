@@ -175,6 +175,29 @@ org.apache.catalina.core.StandardContext.filterStart Exception starting filter [
 
 **参考：**[stackoverflow.com](https://stackoverflow.com/questions/23421278/exception-starting-filter-struts2-java-lang-classnotfoundexception-org-apache-s)
 
+<br/>
+### !!! JUnit version 3.8 or later expected:
+**报错信息：**
+```
+!!! JUnit version 3.8 or later expected:
+
+java.lang.RuntimeException: Stub!
+	at junit.runner.BaseTestRunner.<init>(BaseTestRunner.java:5)
+	at junit.textui.TestRunner.<init>(TestRunner.java:54)
+	at junit.textui.TestRunner.<init>(TestRunner.java:48)
+	at junit.textui.TestRunner.<init>(TestRunner.java:41)
+	at com.intellij.rt.execution.junit.JUnitStarter.junitVersionChecks(JUnitStarter.java:224)
+	at com.intellij.rt.execution.junit.JUnitStarter.canWorkWithJUnitVersion(JUnitStarter.java:207)
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:61)
+```
+
+**报错原因：**
+Android 平台（android.jar）已经包含了 JUnit 类。当你试图用新的 JUnit 注解测试代码时，IDEA 测试运行这些类并认为这些类来自旧的 JUnit，所以得到了这个错误信息。
+>[原文](https://stackoverflow.com/questions/2422378/intellij-idea-with-junit-4-7-junit-version-3-8-or-later-expected)：This problem happens because Android Platform (android.jar) already contains JUnit classes. IDEA test runner loads these classes and sees that they are from the old JUnit, while you are trying to use annotated tests which is a feature of the new JUnit, therefore you get the error from the test runner.
+
+**解决办法：**
+- 打开 Project Structure > Modules > Dependencies
+- 移除 你自己导入的 JUnit-x.x.jar.
 
 <br/>
 ## MySQL Issues
@@ -347,6 +370,8 @@ ASM 与 JDK 8 不兼容
 
 **参考：**[CSDN](http://blog.csdn.net/sgls652709/article/details/49878741)
 
+<br/>
+
 ### Mybatis: org.apache.ibatis.binding.BindingException
 **错误信息：**
 org.apache.ibatis.binding.BindingException: Invalid bound statement (not found)
@@ -363,3 +388,176 @@ org.apache.ibatis.binding.BindingException: Invalid bound statement (not found)
 5. 随意在xml文件中加一个空格或者空行然后保存。
 
 **参考：**[mybatis 绑定错误](http://blog.csdn.net/softwarehe/article/details/8889206)
+
+<br/>
+
+### SpringMVC: java.lang.IllegalStateException: getOutputStream() has already been called for this response
+**报错信息：**
+
+```
+七月 05, 2017 9:27:36 下午 org.apache.catalina.core.ApplicationDispatcher invoke
+严重: Servlet.service() for servlet jsp threw exception
+java.lang.IllegalStateException: getOutputStream() has already been called for this response
+	at org.apache.catalina.connector.Response.getWriter(Response.java:662)
+	at org.apache.catalina.connector.ResponseFacade.getWriter(ResponseFacade.java:213)
+	at javax.servlet.ServletResponseWrapper.getWriter(ServletResponseWrapper.java:104)
+	at org.apache.jasper.runtime.JspWriterImpl.initOut(JspWriterImpl.java:125)
+	at org.apache.jasper.runtime.JspWriterImpl.flushBuffer(JspWriterImpl.java:118)
+	at org.apache.jasper.runtime.PageContextImpl.release(PageContextImpl.java:186)
+	at org.apache.jasper.runtime.JspFactoryImpl.internalReleasePageContext(JspFactoryImpl.java:125)
+	at org.apache.jasper.runtime.JspFactoryImpl.releasePageContext(JspFactoryImpl.java:79)
+	at org.apache.jsp.jsp.product.productList_jsp._jspService(productList_jsp.java:678)
+	at org.apache.jasper.runtime.HttpJspBase.service(HttpJspBase.java:70)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:731)
+	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:439)
+	at org.apache.jasper.servlet.JspServlet._serviceJspFile(JspServlet.java:395)
+	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java)
+	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:339)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:731)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:303)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:743)
+	at org.apache.catalina.core.ApplicationDispatcher.doInclude(ApplicationDispatcher.java:603)
+	at org.apache.catalina.core.ApplicationDispatcher.include(ApplicationDispatcher.java:542)
+	at org.springframework.web.servlet.view.InternalResourceView.renderMergedOutputModel(InternalResourceView.java:160)
+	at org.springframework.web.servlet.view.AbstractView.render(AbstractView.java:303)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1286)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1041)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:984)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:901)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:872)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:650)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:731)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:303)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:241)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:197)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:241)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:218)
+	at org.apache.catalina.core.StandardContextValve.__invoke(StandardContextValve.java:110)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:506)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:169)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:103)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:962)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:116)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:445)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1115)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:637)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:316)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+七月 05, 2017 9:27:36 下午 org.apache.catalina.core.StandardWrapperValve invoke
+严重: Servlet.service() for servlet [SpringMVC] in context with path [] threw exception [java.lang.IllegalStateException: getOutputStream() has already been called for this response] with root cause
+java.lang.IllegalStateException: getOutputStream() has already been called for this response
+	at org.apache.catalina.connector.Response.getWriter(Response.java:662)
+	at org.apache.catalina.connector.ResponseFacade.getWriter(ResponseFacade.java:213)
+	at javax.servlet.ServletResponseWrapper.getWriter(ServletResponseWrapper.java:104)
+	at org.apache.jasper.runtime.JspWriterImpl.initOut(JspWriterImpl.java:125)
+	at org.apache.jasper.runtime.JspWriterImpl.flushBuffer(JspWriterImpl.java:118)
+	at org.apache.jasper.runtime.PageContextImpl.release(PageContextImpl.java:186)
+	at org.apache.jasper.runtime.JspFactoryImpl.internalReleasePageContext(JspFactoryImpl.java:125)
+	at org.apache.jasper.runtime.JspFactoryImpl.releasePageContext(JspFactoryImpl.java:79)
+	at org.apache.jsp.jsp.product.productList_jsp._jspService(productList_jsp.java:678)
+	at org.apache.jasper.runtime.HttpJspBase.service(HttpJspBase.java:70)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:731)
+	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:439)
+	at org.apache.jasper.servlet.JspServlet._serviceJspFile(JspServlet.java:395)
+	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java)
+	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:339)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:731)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:303)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:743)
+	at org.apache.catalina.core.ApplicationDispatcher.doInclude(ApplicationDispatcher.java:603)
+	at org.apache.catalina.core.ApplicationDispatcher.include(ApplicationDispatcher.java:542)
+	at org.springframework.web.servlet.view.InternalResourceView.renderMergedOutputModel(InternalResourceView.java:160)
+	at org.springframework.web.servlet.view.AbstractView.render(AbstractView.java:303)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1286)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1041)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:984)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:901)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:872)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:650)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:731)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:303)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:241)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:197)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:241)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:218)
+	at org.apache.catalina.core.StandardContextValve.__invoke(StandardContextValve.java:110)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:506)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:169)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:103)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:962)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:116)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:445)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1115)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:637)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:316)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+```
+
+**报错原因：**
+1. HTTP 的基本原则：一个请求，一个响应。你只能将一件事送回请求。HTML 页面或 PDF 文档或图像等。如果您已经获得了输入/输出流，则 Java 会抱怨，因为你应该只获取其中的一个。
+2. 在 <% 或 %> 后面有空格或空行
+
+我遇到的是第一种。
+
+**解决办法：**
+1. 我属于第一种情况，下载文件的 action 在文件下载后又返回了一个 boolean 值到请求，导致该问题。我将该方法的返回类型更改为 void 后问题解决。参考 [stackoverflow](https://stackoverflow.com/questions/25909657/java-lang-illegalstateexception-getoutputstream-has-already-been-called-for-t)
+2. 第二种我没遇到，[stackoverflow 上的回答](https://stackoverflow.com/questions/1776142/getoutputstream-has-already-been-called-for-this-response)：
+Ok, you should be using a servlet not a JSP but if you really need to... add this directive at the top of your page:
+
+```jsp
+<%@ page trimDirectiveWhitespaces="true" %>
+```
+
+Or in the jsp-config section your web.xml
+```xml
+<jsp-config>
+  <jsp-property-group>
+    <url-pattern>*.jsp</url-pattern>
+    <trim-directive-whitespaces>true</trim-directive-whitespaces>
+  </jsp-property-group>
+</jsp-config>
+```
+
+Also flush/close the OutputStream and return when done.
+```java
+dataOutput.flush();
+dataOutput.close();
+return;
+```
+
+## Tools
+### SQL Developer 连接 Oracle 数据库被拒绝
+**报错信息：**
+- 状态: 失败 -测试失败: Listener refused the connection with the following error:
+ORA-12505, TNS:listener does not currently know of SID given in connect descriptor.
+
+**报错原因：**
+- 服务器是集群的，所以连接属性上不能选择 sid，而应该选择「服务名」。
+
+**解决办法：**
+- 将连接属性改成「服务名」，如图：
+![新建/修改数据库连接](http://wx2.sinaimg.cn/mw690/a6e9cb00ly1finmzwhm4jj215o0na78c.jpg)
