@@ -2,7 +2,7 @@
 title: IDEA keymap for Mac
 date: 2017-06-01 16:06:06
 categories: 工具使用
-tag:
+tags:
 - IntellJ IDEA
 - Keymap
 ---
