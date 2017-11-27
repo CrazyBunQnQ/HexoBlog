@@ -1,6 +1,6 @@
 ---
 title: zsh 基础
-date: 2017-12-01 22:22:22
+date: 2017-11-26 22:22:22
 categories: Shell
 tags:
 - bash
@@ -589,6 +589,8 @@ select i (aa bb cc) {
 |mkdir dir|创建目录|
 |cp file1 file2|复制 file1 到 file2|
 |mv file1 file2|移动或重命名 file1 为 file2|
+|cd dir|改变当前目录为 dir|
+|cd ..|返回上一级目录|
 
 <br/>
 ### chmod 权限命令

@@ -1,6 +1,6 @@
 ---
 title: I/O 流的简单应用
-date: 2017-10-25 22:22:22
+date: 2017-10-22 22:22:22
 categories: Java 基础
 tags:
 - I/O 流
