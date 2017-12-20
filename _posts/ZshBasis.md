@@ -591,6 +591,7 @@ select i (aa bb cc) {
 |mv file1 file2|移动或重命名 file1 为 file2|
 |cd dir|改变当前目录为 dir|
 |cd ..|返回上一级目录|
+|tr -d str \<file1\> file2|删除 file1 文件中所有的 str 并保存为 file2 文件|
 
 <br/>
 ### chmod 权限命令
