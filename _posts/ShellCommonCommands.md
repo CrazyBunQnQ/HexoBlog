@@ -1,5 +1,5 @@
 ---
-title: Shell 数字转字符串补 0 并赋值
+title: bash 常用命令
 date: 2018-03-13 15:49:50
 categories: Shell
 tags:
@@ -28,4 +28,19 @@ hh=`echo 8 | awk '{printf("%02d\n",$0)}'`
 mm=`echo $(rand 0 25) | awk '{printf("%02d\n",$0)}'`
 ss=`echo $(rand 0 59) | awk '{printf("%02d\n",$0)}'`
 echo $day $hh:$mm:$ss
+```
+
+## 登陆 Linux 服务器
+
+```bash
+ssh username@ip
+```
+
+## Linux 文件传输
+
+```bash
+# 将本地文件上传到服务器的目的路径
+scp -P 端口号 本地文件路径 username@服务器ip:目的路径
+# 将服务器上目的路径的文件下载到本地路径
+scp -P 端口号 username@ip:路径 本地路径
 ```
