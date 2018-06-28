@@ -301,7 +301,8 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
 - actionURL：提交到指定方法中, 例如在后台自定义 [`update`](#自定义Action方法) 方法，则 name 属性为 update
     ```html
     <portlet:actionURL var="updateForm" name="update"></portlet:actionURL>
-    <form action="<%updateURL>" method="post">
+    <!-- 也可以在 action 中添加额外参数 -->
+    <form action="<%updateURL%>&otherParm=other" method="post">
         用户名：<input type="text" name="uName">
         <input type="submit">
     </form>
@@ -310,16 +311,14 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
     ```html
     <!-- 引用 renderURL 标签-->
     <portlet:renderURL var="updateURL"/>
-    <form action="<%updateURL>" method="post">
+    <form action="<%updateURL%>" method="post">
         <!--  -->
         用户名：<input type="text" name="<portlet:namespace/>uName">
         <input type="submit">
     </form>
     ```
 
-><font color="#FF6655">注意 name 属性需要添加 namespace 属性</font>，否则后台取不到值
->liferay-portlet.xml 配置 requires-namespaced-parameters 属性为 false，则不需要添加 namespace 属性
->namespace 作用：避免多个相同的 portlet 表单冲突，因为 portlet 可以设置为一个页面显示多个，它会为每个 name 生成一个唯一编码
+>[<font color="#FF6655">注意 name 属性需要添加 namespace 属性</font>](#<portlet:namespace>)，否则后台取不到值
 
 ## Portlet标签
 
@@ -331,29 +330,59 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
 - actionRequest
 - ...
 
-### \<portlet:renderURL\>
+### 请求类标签
+
+#### \<portlet:renderURL\>
+
+用于提交表单，类似 Get 请求
 
 ```jsp
-<portlet:renderURL var="updateURL"/>
+<portlet:renderURL var="updateURL">
+    <!-- 添加值为 "sss" 的参数 updateParm -->
+    <portlet:param name="updateParm" value="sss"/>
+</portlet:renderURL>
 ```
 
 >示例可以参考 [liferay 提交表单](#提交表单)
 
-### \<portlet:actionURL\>
+#### \<portlet:actionURL\>
+
+用于提交表单，类似 Post 请求
 
 ```jsp
-<portlet:actionURL var="updateForm" name="update"></portlet:actionURL>
+<portlet:actionURL var="updateForm" name="update">
+    <!-- 添加值为 "sss" 的参数 updateParm -->
+    <portlet:param name="updateParm" value="sss"/>
+</portlet:actionURL>
 ```
 
 >示例可以参考 [liferay 提交表单](#提交表单)
 
-### \<portlet:resourceURL\>
+#### \<portlet:resourceURL\>
+
+用于资源传输类请求
+
+```jsp
+<portlet:resourceURL>
+    <!-- 添加值为 "sss" 的参数 updateParm -->
+    <portlet:param name="updateParm" value="sss"/>
+<portlet:resourceURL>
+```
 
 ### \<portlet:param\>
 
+该标签无法单独使用，需要配合[请求类标签](#请求类标签)使用
+
 ### \<portlet:namespace\>
 
+- namespace 作用：避免多个相同的 portlet 表单冲突，因为 portlet 可以设置为一个页面显示多个，它会为每个 name 生成一个唯一编码
+- [liferay-portlet.xml](#liferay-portlet.xml) 配置 requires-namespaced-parameters 属性为 false，则不需要添加 namespace 属性
+
 ### \<liferay-theme:defineObjects\>
+
+### ~~\<portlet:property\>~~
+
+该标签虽然在 portlet 里有定义但是在 liferay 中没有用到
 
 ## 地址参数解析
 
