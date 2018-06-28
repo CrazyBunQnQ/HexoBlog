@@ -124,44 +124,47 @@ tags:
 
 #### liferay-portlet.xml
 
-- 基本配置
-    ```xml
-    <role-mapper>
-		<role-name>administrator</role-name>
-		<role-link>Administrator</role-link>
-	</role-mapper>
-	<role-mapper>
-		<role-name>guest</role-name>
-		<role-link>Guest</role-link>
-	</role-mapper>
-	<role-mapper>
-		<role-name>power-user</role-name>
-		<role-link>Power User</role-link>
-	</role-mapper>
-	<role-mapper>
-		<role-name>user</role-name>
-		<role-link>User</role-link>
-	</role-mapper>
-    ```
+##### 基本配置
+```xml
+<role-mapper>
+    <role-name>administrator</role-name>
+    <role-link>Administrator</role-link>
+</role-mapper>
+<role-mapper>
+    <role-name>guest</role-name>
+    <role-link>Guest</role-link>
+</role-mapper>
+<role-mapper>
+    <role-name>power-user</role-name>
+    <role-link>Power User</role-link>
+</role-mapper>
+<role-mapper>
+    <role-name>user</role-name>
+    <role-link>User</role-link>
+</role-mapper>
+```
 
-- portlet 配置：同样每创建一个 portlet 也会在此文件里添加一些该 portlet 的相关配置
-    ```xml
-    <portlet>
-        <!-- 与 portlet.xml 中的 name 关联 -->
-        <portlet-name>hello</portlet-name>
-        <!-- 页面标题前面显示的图标 -->
-        <icon>/icon.png</icon>
-        <!-- 是否可以创建多次，默认 false 只能添加一次 -->
-        <instanceable>true</instanceable>
-        <!-- jsp 表单中是否需要填写 namespace，默认 true 必须填写 -->
-        <requires-namespaced-parameters>false</requires-namespaced-parameters>
-        <!-- 引入的 css 文件 -->
-        <header-portlet-css>/css/main.css</header-portlet-css>
-        <!-- 引入的 js 文件 -->
-        <footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
-        <css-class-wrapper>hello-portlet</css-class-wrapper>
-    </portlet>
-    ```
+##### portlet 配置
+
+同样每创建一个 portlet 也会在此文件里添加一些该 portlet 的相关配置
+    
+```xml
+<portlet>
+    <!-- 与 portlet.xml 中的 name 关联 -->
+    <portlet-name>hello</portlet-name>
+    <!-- 页面标题前面显示的图标 -->
+    <icon>/icon.png</icon>
+    <!-- 是否可以实例多次，默认 false 只能添加一次 -->
+    <instanceable>true</instanceable>
+    <!-- jsp 表单中是否需要填写 namespace，默认 true 必须填写 -->
+    <requires-namespaced-parameters>false</requires-namespaced-parameters>
+    <!-- 引入的 css 文件 -->
+    <header-portlet-css>/css/main.css</header-portlet-css>
+    <!-- 引入的 js 文件 -->
+    <footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
+    <css-class-wrapper>hello-portlet</css-class-wrapper>
+</portlet>
+```
 
 #### liferay-desplay.xml
 
@@ -207,7 +210,14 @@ public void doView(RenderRequest renderRequest,
 
 ```java
 public void update(ActionRequest request, ActionResponse response) {
+    // 接收参数
     String userName = request.getParameter("uName");
+    // 重定向
+    try{
+        // response.sendRedirect("/html/hello/edit.jsp");
+    } catch (Exception e) {
+        ...
+    }
 }
 ```
 
@@ -219,6 +229,18 @@ public void updateMethod(ActionRequest request, ActionResponse response) {
     String userName = request.getParameter("uName");
 }
 ```
+
+#### processAction
+
+如果 [\<portlet:actionURL\>](#<portlet:actionURL>) 没有 name 属性则会进入这个方法
+
+```java
+@Override
+public void doView(RenderRequest renderRequest,
+		RenderResponse renderResponse) throws IOException, PortletException {
+	// TODO Auto-generated method stub
+	super.doView(renderRequest, renderResponse);
+}                                                               ```
 
 ### ParamUtil
 
@@ -273,13 +295,25 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
 
 ## 页面显示
 
-首先要在 jsp 页面中引入 [portlet 内对象](#<portlet:defineObjects>)：
+在 portlet.xml 中指定了每个 portlet 对应的 jsp 文件，这里不再赘述
+
+### 引用 portlet 对象
+
+首先要在 jsp 页面中引入 [portlet 内置对象](#<portlet:defineObjects>)否则无法调用 portlet 的 java 对象：
 
 ```jsp
 <portlet:defineObjects />
 ```
 
-在 portlet.xml 中指定了每个 portlet 对应的 jsp 文件，这里不再赘述，只介 API 用法和一些语法
+### 引用 js 和 css
+
+因为 liferay 开发实际是在写代码片段，所以必须要写全路径 `<%= renderRequest.getContextPath()%>`
+
+```jsp
+<script type="text/javascript" src="<%= renderRequest.getContextPath()%>/js/jquery.js">
+```
+
+>相对路径是绝对无法取到的
 
 ### 显示数据
 
@@ -299,6 +333,7 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
 使用 Liferay 提交表单需要先引用标签 `actionURL` 或 `renderURL`
 
 - actionURL：提交到指定方法中, 例如在后台自定义 [`update`](#自定义Action方法) 方法，则 name 属性为 update
+
     ```html
     <portlet:actionURL var="updateForm" name="update"></portlet:actionURL>
     <!-- 也可以在 action 中添加额外参数 -->
@@ -308,6 +343,7 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
     </form>
     ```
 - renderURL：提交到 [`doView`](#doView) 方法
+
     ```html
     <!-- 引用 renderURL 标签-->
     <portlet:renderURL var="updateURL"/>
@@ -319,6 +355,7 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
     ```
 
 >[<font color="#FF6655">注意 name 属性需要添加 namespace 属性</font>](#<portlet:namespace>)，否则后台取不到值
+>配置 [`<requires-namespaced-parameters>`](#liferay-portlet.xml) 属性为 false，则不需要添加 namespace 属性
 
 ## Portlet标签
 
@@ -340,6 +377,8 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
 <portlet:renderURL var="updateURL">
     <!-- 添加值为 "sss" 的参数 updateParm -->
     <portlet:param name="updateParm" value="sss"/>
+    <!-- 跳转页面 -->
+    <portlet:param name="jspPage" value="/html/hello/edit.jsp"/>
 </portlet:renderURL>
 ```
 
@@ -375,8 +414,22 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
 
 ### \<portlet:namespace\>
 
-- namespace 作用：避免多个相同的 portlet 表单冲突，因为 portlet 可以设置为一个页面显示多个，它会为每个 name 生成一个唯一编码
-- [liferay-portlet.xml](#liferay-portlet.xml) 配置 requires-namespaced-parameters 属性为 false，则不需要添加 namespace 属性
+- namespace 作用：避免多个相同的 portlet 表单冲突，因为 portlet 可以设置为一个页面显示多个，它会为每个 name 生成一个唯一编码，该编码还可以用到各种地方
+    - 例如：JavaScript
+        ```javascript
+        <script>
+            function <portlet:namespace/>save() {
+                ...
+            }
+        </script>
+        ```
+        ```jsp
+        <button onclick="<portlet:namespace/>save()"/>
+        ```
+
+
+><font color="#FF6633">如果设置了 [`<instanceable>true</instanceable>`](#liferay-portlet.xml) 属性请不要设置 [`<requires-namespaced-parameters>`](#liferay-portlet.xml) 为 false</font>, 避免实例化多个 portlet 之后无法取到值
+
 
 ### \<liferay-theme:defineObjects\>
 
