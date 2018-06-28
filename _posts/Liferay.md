@@ -232,7 +232,7 @@ public void updateMethod(ActionRequest request, ActionResponse response) {
 
 #### processAction
 
-如果 [\<portlet:actionURL\>](#actionURL) 没有 name 属性则会进入这个方法
+如果 [`<portlet:actionURL>`](#actionURL) 没有 name 属性则会进入这个方法
 
 ```java
 @Override
@@ -247,10 +247,12 @@ public void doView(RenderRequest renderRequest,
 #### getString()
 
 - 该方法可以自动判空：例如字符串值为 null 则转为空字符串
+
     ```java
     String userName = ParamUtil.getString(renderRequest, "uName");
     ```
 - 也可以添加默认值：若为空则赋值为默认值
+
     ```java
     String userName = ParamUtil.getString(renderRequest, "uName", "baozi");
     ```
@@ -429,16 +431,16 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
 - namespace 作用：避免多个相同的 portlet 表单冲突，因为 portlet 可以设置为一个页面显示多个，它会为每个 name 生成一个唯一编码，该编码还可以用到各种地方
     - 例如：JavaScript
 
-        ```javascript
-        <script>
-            function <portlet:namespace/>save() {
-                ...
-            }
-        </script>
-        ```
-        ```jsp
-        <button onclick="<portlet:namespace/>save()"/>
-        ```
+    ```javascript
+    <script>
+        function <portlet:namespace/>save() {
+            ...
+        }
+    </script>
+    ```
+    ```jsp
+    <button onclick="<portlet:namespace/>save()"/>
+    ```
 
 ><font color="#FF6633">如果设置了 [`<instanceable>true</instanceable>`](#liferay-portlet.xml) 属性请不要设置 [`<requires-namespaced-parameters>`](#liferay-portlet.xml) 为 false</font>, 避免实例化多个 portlet 之后无法取到值
 
