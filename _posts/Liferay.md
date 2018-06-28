@@ -246,16 +246,13 @@ public void doView(RenderRequest renderRequest,
 
 #### getString()
 
-- 该方法可以自动判空：例如字符串值为 null 则转为空字符串
+该方法可以自动判空：若为空则赋值为默认值，省略默认值则为空字符串
 
-    ```java
-    String userName = ParamUtil.getString(renderRequest, "uName");
-    ```
-- 也可以添加默认值：若为空则赋值为默认值
-
-    ```java
-    String userName = ParamUtil.getString(renderRequest, "uName", "baozi");
-    ```
+```java
+String userName = ParamUtil.getString(renderRequest, "uName");
+// 或
+String userName = ParamUtil.getString(renderRequest, "uName", "baozi");
+```
 
 >同样的还有 `getInteger()`、`getBoolean()`、`getDate()` 等等
 >但是注意，Integer 类型会进行类型转换，若<font color="#FF6633">转换失败</font>则赋值为默认值
@@ -334,7 +331,7 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
 
 使用 Liferay 提交表单需要先引用标签 `actionURL` 或 `renderURL`
 
-- actionURL：提交到指定方法中, 例如在后台自定义 [`update`](#自定义Action方法) 方法，则 name 属性为 update
+1. actionURL：提交到指定方法中, 例如在后台自定义 [`update`](#自定义Action方法) 方法，则 name 属性为 update
 
     ```html
     <portlet:actionURL var="updateForm" name="update"></portlet:actionURL>
@@ -344,7 +341,7 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
         <input type="submit">
     </form>
     ```
-- renderURL：提交到 [`doView`](#doView) 方法
+1. renderURL：提交到 [`doView`](#doView) 方法
 
     ```html
     <!-- 引用 renderURL 标签-->
@@ -428,23 +425,22 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
 <portlet:namespace/>
 ```
 
-- namespace 作用：避免多个相同的 portlet 表单冲突，因为 portlet 可以设置为一个页面显示多个，它会为每个 name 生成一个唯一编码，该编码还可以用到各种地方
-    - 例如：JavaScript
+避免多个相同的 portlet 表单冲突，因为 portlet 可以设置为一个页面显示多个，它会为每个 name 生成一个唯一编码，该编码还可以用到各种地方：
 
-    ```javascript
-    <script>
-        function <portlet:namespace/>save() {
-            ...
-        }
-    </script>
-    ```
-    ```jsp
-    <button onclick="<portlet:namespace/>save()"/>
-    ```
+```javascript
+<script>
+    function <portlet:namespace/>save() {
+        ...
+    }
+</script>
+```
+```jsp
+<button onclick="<portlet:namespace/>save()"/>
+```
 
 ><font color="#FF6633">如果设置了 [`<instanceable>true</instanceable>`](#liferay-portlet.xml) 属性请不要设置 [`<requires-namespaced-parameters>`](#liferay-portlet.xml) 为 false</font>, 避免实例化多个 portlet 之后无法取到值
 
-### <iferay-theme:defineObjects
+### iferay-theme:defineObjects
 
 ```jsp
 <liferay-theme:defineObjects>
