@@ -232,7 +232,7 @@ public void updateMethod(ActionRequest request, ActionResponse response) {
 
 #### processAction
 
-如果 [\<portlet:actionURL\>](#<portlet:actionURL>) 没有 name 属性则会进入这个方法
+如果 [\<portlet:actionURL\>](#actionURL) 没有 name 属性则会进入这个方法
 
 ```java
 @Override
@@ -299,7 +299,7 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
 
 ### 引用 portlet 对象
 
-首先要在 jsp 页面中引入 [portlet 内置对象](#<portlet:defineObjects>)否则无法调用 portlet 的 java 对象：
+首先要在 jsp 页面中引入 [portlet 内置对象](#defineObjects)否则无法调用 portlet 的 java 对象：
 
 ```jsp
 <portlet:defineObjects />
@@ -354,14 +354,18 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
     </form>
     ```
 
->[<font color="#FF6655">注意 name 属性需要添加 namespace 属性</font>](#<portlet:namespace>)，否则后台取不到值
+>[<font color="#FF6655">注意 name 属性需要添加 namespace 属性</font>](#namespace)，否则后台取不到值
 >配置 [`<requires-namespaced-parameters>`](#liferay-portlet.xml) 属性为 false，则不需要添加 namespace 属性
 
 ## Portlet标签
 
-### \<portlet:defineObjects\>
+### defineObjects
 
 引入该标签后可以调用 Portlet 中的默认对象
+
+```jsp
+<portlet:defineObjects>
+```
 
 - renderRequest
 - actionRequest
@@ -369,7 +373,7 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
 
 ### 请求类标签
 
-#### \<portlet:renderURL\>
+#### renderURL
 
 用于提交表单，类似 Get 请求
 
@@ -384,7 +388,7 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
 
 >示例可以参考 [liferay 提交表单](#提交表单)
 
-#### \<portlet:actionURL\>
+#### actionURL
 
 用于提交表单，类似 Post 请求
 
@@ -397,7 +401,7 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
 
 >示例可以参考 [liferay 提交表单](#提交表单)
 
-#### \<portlet:resourceURL\>
+#### resourceURL
 
 用于资源传输类请求
 
@@ -408,14 +412,23 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
 <portlet:resourceURL>
 ```
 
-### \<portlet:param\>
+### param
 
 该标签无法单独使用，需要配合[请求类标签](#请求类标签)使用
 
-### \<portlet:namespace\>
+```jsp
+<portlet:param name="" value=""/>
+```
+
+### namespace
+
+```jsp
+<portlet:namespace/>
+```
 
 - namespace 作用：避免多个相同的 portlet 表单冲突，因为 portlet 可以设置为一个页面显示多个，它会为每个 name 生成一个唯一编码，该编码还可以用到各种地方
     - 例如：JavaScript
+
         ```javascript
         <script>
             function <portlet:namespace/>save() {
@@ -427,15 +440,17 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
         <button onclick="<portlet:namespace/>save()"/>
         ```
 
-
 ><font color="#FF6633">如果设置了 [`<instanceable>true</instanceable>`](#liferay-portlet.xml) 属性请不要设置 [`<requires-namespaced-parameters>`](#liferay-portlet.xml) 为 false</font>, 避免实例化多个 portlet 之后无法取到值
 
+### <iferay-theme:defineObjects
 
-### \<liferay-theme:defineObjects\>
+```jsp
+<liferay-theme:defineObjects>
+```
 
-### ~~\<portlet:property\>~~
+### ~~property~~
 
-该标签虽然在 portlet 里有定义但是在 liferay 中没有用到
+`<portlet:property>` 标签虽然在 portlet 里有定义但是在 liferay 中没有用到
 
 ## 地址参数解析
 
