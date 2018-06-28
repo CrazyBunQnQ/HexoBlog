@@ -50,15 +50,35 @@ tags:
     <display-name>Hello</display-name>
     <!-- 后台 java 类 -->
     <portlet-class>com.baozi.demo.hello.HelloPortlet</portlet-class>
-    <!-- 所用的 jsp 文件 -->
+    <!-- 每个模式所对应的 jsp 文件 -->
     <init-param>
         <name>view-template</name>
         <value>/html/hello/view.jsp</value>
     </init-param>
+    <init-param>
+        <name>edit-template</name>
+        <value>/html/hello/edit.jsp</value>
+    </init-param>
+    <init-param>
+        <name>help-template</name>
+        <value>/html/hello/help.jsp</value>
+    </init-param>
+    <init-param>
+        <name>about-template</name>
+        <value>/html/hello/about.jsp</value>
+    </init-param>
     <expiration-cache>0</expiration-cache>
+    <!-- 支持的模式：每个模式对应一个上面的 jsp 文件 -->
     <supports>
         <mime-type>text/html</mime-type>
+        <!-- 显示模式 -->
         <portlet-mode>view</portlet-mode>
+        <!-- 编辑模式 -->
+        <portlet-mode>edit</portlet-mode>
+        <!-- 帮助模式 -->
+        <portlet-mode>help</portlet-mode>
+        <!-- 显示模式 -->
+        <portlet-mode>about</portlet-mode>
     </supports>
     <portlet-info>
         <title>Hello</title>
@@ -200,11 +220,68 @@ public void updateMethod(ActionRequest request, ActionResponse response) {
 }
 ```
 
-### view.jsp
+### ParamUtil
+
+#### getString()
+
+- 该方法可以自动判空：例如字符串值为 null 则转为空字符串
+    ```java
+    String userName = ParamUtil.getString(renderRequest, "uName");
+    ```
+- 也可以添加默认值：若为空则赋值为默认值
+    ```java
+    String userName = ParamUtil.getString(renderRequest, "uName", "baozi");
+    ```
+
+>同样的还有 `getInteger()`、`getBoolean()`、`getDate()` 等等
+>但是注意，Integer 类型会进行类型转换，若<font color="#FF6633">转换失败</font>则赋值为默认值
+
+### PortalUtil
+
+该类可以去到很多方法
+
+```java
+/*============================对象获取=======================*/
+try {
+    //获取用户
+    User user = PortalUtil.getUser(renderRequest);
+    //获取公司getCompany
+} catch (PortalException | SystemException e) {
+    e.printStackTrace();
+}
+
+/*============================值获取===========================*/
+//获取用户id
+long userId = PortalUtil.getUserId(httpServletRequest);
+long userId = PortalUtil.getUserId(portletRequest);
+//getScopeGroupId
+//getCompanyId
+//获取当前端口getPortalPort
+//获取当前地址getPortalUrl(renderRequest)
+```
+
+### ThemeDisplay
+
+该对象可以获取各种显示相关的信息
+
+获取方式：
+
+```java
+//获取 ThemeDisplay
+ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTME_DISPLAY);
+```
+
+## 页面显示
+
+首先要在 jsp 页面中引入 [portlet 内对象](#<portlet:defineObjects>)：
+
+```jsp
+<portlet:defineObjects />
+```
 
 在 portlet.xml 中指定了每个 portlet 对应的 jsp 文件，这里不再赘述，只介 API 用法和一些语法
 
-#### 显示数据
+### 显示数据
 
 通过 java 代码 `(String)renderRequest.getAttribute("data");` 或 EL 表达式 `${data}`获取后台传回来的属性值
 
@@ -217,9 +294,9 @@ public void updateMethod(ActionRequest request, ActionResponse response) {
 <%=data %>
 ```
 
-#### 提交表单
+### 提交表单
 
-使用 Liferay 的 action 需要先引用标签 `actionURL` 或 `renderURL`，**只能使用一个**
+使用 Liferay 提交表单需要先引用标签 `actionURL` 或 `renderURL`
 
 - actionURL：提交到指定方法中, 例如在后台自定义 [`update`](#自定义Action方法) 方法，则 name 属性为 update
     ```html
@@ -232,7 +309,7 @@ public void updateMethod(ActionRequest request, ActionResponse response) {
 - renderURL：提交到 [`doView`](#doView) 方法
     ```html
     <!-- 引用 renderURL 标签-->
-    <portlet:renderURL var="updateURL"></portlet:renderURL>
+    <portlet:renderURL var="updateURL"/>
     <form action="<%updateURL>" method="post">
         <!--  -->
         用户名：<input type="text" name="<portlet:namespace/>uName">
@@ -243,3 +320,51 @@ public void updateMethod(ActionRequest request, ActionResponse response) {
 ><font color="#FF6655">注意 name 属性需要添加 namespace 属性</font>，否则后台取不到值
 >liferay-portlet.xml 配置 requires-namespaced-parameters 属性为 false，则不需要添加 namespace 属性
 >namespace 作用：避免多个相同的 portlet 表单冲突，因为 portlet 可以设置为一个页面显示多个，它会为每个 name 生成一个唯一编码
+
+## Portlet标签
+
+### \<portlet:defineObjects\>
+
+引入该标签后可以调用 Portlet 中的默认对象
+
+- renderRequest
+- actionRequest
+- ...
+
+### \<portlet:renderURL\>
+
+```jsp
+<portlet:renderURL var="updateURL"/>
+```
+
+>示例可以参考 [liferay 提交表单](#提交表单)
+
+### \<portlet:actionURL\>
+
+```jsp
+<portlet:actionURL var="updateForm" name="update"></portlet:actionURL>
+```
+
+>示例可以参考 [liferay 提交表单](#提交表单)
+
+### \<portlet:resourceURL\>
+
+### \<portlet:param\>
+
+### \<portlet:namespace\>
+
+### \<liferay-theme:defineObjects\>
+
+## 地址参数解析
+
+- p_p_id: portlet id
+    - 如果该 portlet 允许实例化多次(`<instanceable>`)则结尾会有实例化 id
+- p_p_lifecycle: 请求类型
+    - 0: RenderRequest, 相当于 Get
+    - 1: ActionRequest, 相当于 Post
+- p_p_state: 状态
+    - normal: 正常
+    - maximized: 最大化
+    - minimized: 最小化
+    - pop_up: 不显示头尾模式，用于弹窗
+    - EXCLUSIVE: 
