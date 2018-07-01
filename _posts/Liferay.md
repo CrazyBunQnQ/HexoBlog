@@ -20,14 +20,16 @@ tags:
 - 扩展了了 Liferay 的 Tomcat
 - JDK 7
 
-<br/>
+<br>
+
 ### 注意事项
 
 - 工作空间设置为 **utf-8** 编码
 - Ant 编译时会在 SDK dist 目录下打个 war 包，然后复制到 Tomcat deploy 目录下，**部署成功后会将其删除**(判断部署成功的方法)
 - 整个项目虽然显示在 Eclipse 中，但实际上并不在 Eclipse 空间中，而是在 Liferay SDK 所在目录里...**不在工作空间里...不在工作空间里...不在空间里...**
 
-<br/>
+<br>
+
 ## 开发模式
 
 - Portlet：Liferay 插件，结构与 Web 工程类似
@@ -36,7 +38,8 @@ tags:
 - Layout：布局模板
 - Theme：主题开发
 
-<br/>
+<br>
+
 ## 配置文件
 
 ### WEB-INF
@@ -125,7 +128,8 @@ tags:
 >}
 >```
 
-<br/>
+<br>
+
 #### liferay-portlet.xml
 
 ##### 基本配置
@@ -148,7 +152,8 @@ tags:
 </role-mapper>
 ```
 
-<br/>
+<br>
+
 ##### portlet 配置
 
 同样每创建一个 portlet 也会在此文件里添加一些该 portlet 的相关配置
@@ -171,7 +176,8 @@ tags:
 </portlet>
 ```
 
-<br/>
+<br>
+
 #### liferay-desplay.xml
 
 用来设置每个 portlet 的分类，根据 portlet id
@@ -190,7 +196,8 @@ tags:
 </category>
 ```
 
-<br/>
+<br>
+
 ## 常用 API
 
 ### MVCPortlet
@@ -213,7 +220,8 @@ public void doView(RenderRequest renderRequest,
 
 >页面中的 portlet 显示 “此 portlet 已被卸载。请重新部署或将其从页面删除” 时，一般是因为控件还未部署完成，部署完成后刷新页面即可
 
-<br/>
+<br>
+
 #### 自定义Action方法
 
 ```java
@@ -238,7 +246,8 @@ public void updateMethod(ActionRequest request, ActionResponse response) {
 }
 ```
 
-<br/>
+<br>
+
 #### processAction
 
 如果 [`<portlet:actionURL>`](#actionURL) 没有 name 属性则会进入这个方法
@@ -251,7 +260,8 @@ public void doView(RenderRequest renderRequest,
 	super.doView(renderRequest, renderResponse);
 }                                                               ```
 
-<br/>
+<br>
+
 ### ParamUtil
 
 #### getString()
@@ -267,7 +277,8 @@ String userName = ParamUtil.getString(renderRequest, "uName", "baozi");
 >同样的还有 `getInteger()`、`getBoolean()`、`getDate()` 等等
 >但是注意，Integer 类型会进行类型转换，若<font color="#FF6633">转换失败</font>则赋值为默认值
 
-<br/>
+<br>
+
 ### PortalUtil
 
 该类可以去到很多方法
@@ -292,7 +303,8 @@ long userId = PortalUtil.getUserId(portletRequest);
 //获取当前地址getPortalUrl(renderRequest)
 ```
 
-<br/>
+<br>
+
 ### ThemeDisplay
 
 该对象可以获取各种显示相关的信息
@@ -304,7 +316,8 @@ long userId = PortalUtil.getUserId(portletRequest);
 ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTME_DISPLAY);
 ```
 
-<br/>
+<br>
+
 ## 页面显示
 
 在 portlet.xml 中指定了每个 portlet 对应的 jsp 文件，这里不再赘述
@@ -317,7 +330,8 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
 <portlet:defineObjects />
 ```
 
-<br/>
+<br>
+
 ### 引用 js 和 css
 
 因为 liferay 开发实际是在写代码片段，所以必须要写全路径 `<%= renderRequest.getContextPath()%>`
@@ -328,7 +342,8 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
 
 >相对路径是绝对无法取到的
 
-<br/>
+<br>
+
 ### 显示数据
 
 通过 java 代码 `(String)renderRequest.getAttribute("data");` 或 EL 表达式 `${data}`获取后台传回来的属性值
@@ -342,7 +357,8 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
 <%=data %>
 ```
 
-<br/>
+<br>
+
 ### 提交表单
 
 使用 Liferay 提交表单需要先引用标签 `actionURL` 或 `renderURL`
@@ -372,7 +388,8 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
 >[<font color="#FF6655">注意 name 属性需要添加 namespace 属性</font>](#namespace)，否则后台取不到值
 >配置 [`<requires-namespaced-parameters>`](#liferay-portlet.xml) 属性为 false，则不需要添加 namespace 属性
 
-<br/>
+<br>
+
 ## Portlet标签
 
 ### defineObjects
@@ -387,7 +404,8 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
 - actionRequest
 - ...
 
-<br/>
+<br>
+
 ### 请求类标签
 
 #### renderURL
@@ -405,7 +423,8 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
 
 >示例可以参考 [liferay 提交表单](#提交表单)
 
-<br/>
+<br>
+
 #### actionURL
 
 用于提交表单，类似 Post 请求
@@ -419,7 +438,8 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
 
 >示例可以参考 [liferay 提交表单](#提交表单)
 
-<br/>
+<br>
+
 #### resourceURL
 
 用于资源传输类请求
@@ -431,7 +451,8 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
 <portlet:resourceURL>
 ```
 
-<br/>
+<br>
+
 ### param
 
 该标签无法单独使用，需要配合[请求类标签](#请求类标签)使用
@@ -440,7 +461,8 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
 <portlet:param name="" value=""/>
 ```
 
-<br/>
+<br>
+
 ### namespace
 
 ```jsp
@@ -462,19 +484,22 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
 
 ><font color="#FF6633">如果设置了 [`<instanceable>true</instanceable>`](#liferay-portlet.xml) 属性请不要设置 [`<requires-namespaced-parameters>`](#liferay-portlet.xml) 为 false</font>, 避免实例化多个 portlet 之后无法取到值
 
-<br/>
+<br>
+
 ### iferay-theme:defineObjects
 
 ```jsp
 <liferay-theme:defineObjects>
 ```
 
-<br/>
+<br>
+
 ### ~~property~~
 
 `<portlet:property>` 标签虽然在 portlet 里有定义但是在 liferay 中没有用到
 
-<br/>
+<br>
+
 ## 地址参数解析
 
 - p_p_id: portlet id
@@ -488,3 +513,29 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
     - minimized: 最小化
     - pop_up: 不显示头尾模式，用于弹窗
     - EXCLUSIVE: 
+
+<br>
+
+## Portlet之间的通信
+
+
+
+<br>
+
+### PortletSession
+
+<br>
+
+### Portlet URL 调用
+
+<br>
+
+### Public render parameters
+
+<br>
+
+### Portlet events
+
+<br>
+
+### 通过 URL 传参
