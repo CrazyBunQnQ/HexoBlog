@@ -17,9 +17,9 @@ tags:
 
 您可以通过 HTTP 通过简单对象访问协议(SOAP)访问 Liferay 的服务。打包协议是 SOAP，传输协议是 HTTP。
 
->**Note**:与身份验证相关的令牌必须伴随每个Liferay web服务调用。有关详细信息，请阅读本章前面关于服务安全层的一节。
+>**Note**:与身份验证相关的令牌必须伴随每个Liferay web service 调用。有关详细信息，请阅读本章前面关于服务安全层的一节。
 
-作为一个示例，让我们看看 Liferay 的 `Company`、`User` 和 `UserGroup` portal 服务的 SOAP web 服务类，以执行以下操作:
+作为一个示例，让我们看看 Liferay 的 `Company`、`User` 和 `UserGroup` portal 服务的 SOAP web service 类，以执行以下操作:
 
 1. 列出 User 测试所属的每个 UserGroup。
 2. 添加一个名为 MyGroup 的新 UserGroup。
@@ -47,7 +47,7 @@ import com.liferay.portal.service.http.UserServiceSoapServiceLocator;
 
 >**Note**:在 Liferay 6.2 之前，有两个不同的 url 用于访问远程 Liferay 服务。`http://[host]:[port]/api/secure/axis` 用于需要验证的服务，`http://[host]:[port]/api/axis` 用于不需要验证的服务。从 Liferay 6.2 开始，所有远程 Liferay 服务都需要身份验证，使用 `http://[host]:[port]/api/axis` URL 访问它们。
 
-以下是UserGroup的安全web服务列表:
+以下是 UserGroup 的安全 web 服务列表:
 
 - `Portal_UserGroupService` (wsdl)
     - `addGroupUserGroups`
@@ -62,7 +62,7 @@ import com.liferay.portal.service.http.UserServiceSoapServiceLocator;
 
 >**Note**: Liferay 的开发人员使用一个名为 _Service Builder_ 的工具，通过 SOAP 自动公开他们的服务。如果您对使用 _Service Builder_ 感兴趣，请参阅本指南中的服务构建器章节。
 
-每个 web 服务都列出了其名称、操作和到其 WSDL 文件的链接。WSDL 文件是用 XML 编写的，并提供了描述和定位 web service 的模型。
+每个 web service 都列出了其名称、操作和到其 WSDL 文件的链接。WSDL 文件是用 XML 编写的，并提供了描述和定位 web service 的模型。
 
 下面是 `UserGroup` 的 `addUserGroup` 操作的 WSDL 摘录:
 
@@ -76,19 +76,19 @@ publicLayoutSetPropertyId privateLayoutSetPropertyId">
 
 要使用该服务，您需要将 WSDL URL 连同登录凭证传递给服务的 SOAP 服务定位器 (service locator)。我们将在下一节中向您展示一个示例。
 
-接下来，让我们调用 web 服务!
+接下来，让我们调用 web service !
 
 <br>
 
 ## SOAP JAVA CLIENT
 
-可以使用 Eclipse IDE 轻松地设置 Java web 服务客户端。方法如下:
+可以使用 Eclipse IDE 轻松地设置 Java web service 客户端。方法如下:
 
 在 Eclipse 中，为计划在客户端代码中使用的每个服务向项目添加一个新的 Web Service Client。对于我们的目的，我们正在构建的客户端需要 portal 的 Company、User 和 User Group 服务的 Web Service Client。
 
-添加您的 Web 服务客户端在 Eclipse IDE 中,单击 new → other…,然后点开 Web Services 类别。单击 Web Service Client。
+添加您的 Web service 客户端在 Eclipse IDE 中,单击 new → other…,然后点开 Web Services 类别。单击 Web Service Client。
 
-对于您创建的每个客户端，都会提示您输入所需服务的服务定义(WSDL)。由于我们的示例 web 服务客户端将使用Liferay Portal 的 Company、User 和 UserGroup 服务，因此我们需要输入以下 WSDL:
+对于您创建的每个客户端，都会提示您输入所需服务的服务定义(WSDL)。由于我们的示例 web service 客户端将使用Liferay Portal 的 Company、User 和 UserGroup 服务，因此我们需要输入以下 WSDL:
 
 ```url
 http://localhost:8080/api/axis/Portal_CompanyService?wsdl
@@ -100,7 +100,7 @@ http://localhost:8080/api/axis/Portal_UserGroupService?wsdl
 
 ![新建 Web Service Client](https://dev.liferay.com/documents/12052/378662/api-web-svc-wsdl.png/f35ee8a8-3cc5-4013-7bbe-687d7f2b2f5c?version=1.0&t=1516399490165)
 
-当您指定 WSDL 时，Eclipse 将自动添加使用该 web 服务所需的辅助文件和库。非常棒！在您使用上面的 WSDL 之一创建了 web 服务客户端项目之后，您需要使用剩余的 WSDL 在项目中创建其他客户端。在一个现有的项目中创建一个额外的客户端,右键单击项目并选择 New → Web Service Client。单击 Next，输入 WSDL，并完成向导。
+当您指定 WSDL 时，Eclipse 将自动添加使用该 web service 所需的辅助文件和库。非常棒！在您使用上面的 WSDL 之一创建了 web 服务客户端项目之后，您需要使用剩余的 WSDL 在项目中创建其他客户端。在一个现有的项目中创建一个额外的客户端,右键单击项目并选择 New → Web Service Client。单击 Next，输入 WSDL，并完成向导。
 
 下面的代码定位并调用操作来创建一个名为 `MyUserGroup` 的新用户组，并向其添加屏幕显示名称为 _test_ 的用户。在 web service client 项目中创建一个 `LiferaySoapClient.java` 文件，并向其添加以下代码。如果您在一个包中创建这个类，而不是在下面代码中指定的那个包中，那么就用您的包替换这个包。要从 Eclipse 运行客户端，请确保您的 Liferay 服务器正在运行，请右键单击 `LiferaySoapClient.java` 类，并选择 _Run as java application_。检查控制台，检查服务调用是否成功。
 
@@ -260,18 +260,18 @@ User groups for user 10196 ...
 - 屏幕名称和密码作为凭证在 URL 中传递。
 - 服务的名称(例如，`Portal_UserGroupService`) 在 URL 的末尾指定。请记住，<font color="#FF6666">服务名称可以在 web 服务列表中找到</font>。
 
-操作 `getCompanyByVirtualHost()`、`getUserIdByScreenName()`、`getUserUserGroups()`、`addUserGroup()` 和 `addUserGroupUsers()` 是为 WSDL 文件中的 `-ServiceSOAP` 类`CompanyServiceSoap`、`UserServiceSoap` 和 `UserGroupServiceSoap` 指定的。关于每个 Liferay web 服务的参数类型、参数顺序、请求类型、响应类型和返回类型的信息可以方便地在 WSDL 中指定。一切都在你的身边!
+操作 `getCompanyByVirtualHost()`、`getUserIdByScreenName()`、`getUserUserGroups()`、`addUserGroup()` 和 `addUserGroupUsers()` 是为 WSDL 文件中的 `-ServiceSOAP` 类`CompanyServiceSoap`、`UserServiceSoap` 和 `UserGroupServiceSoap` 指定的。关于每个 Liferay web service 的参数类型、参数顺序、请求类型、响应类型和返回类型的信息可以方便地在 WSDL 中指定。一切都在你的身边!
 
-接下来，让我们用 JavaScript AJAX 实现 web 服务客户端。
+接下来，让我们用 JavaScript 实现 web service 客户端。
 
->原文[使用 PHP 实现 web 服务客户端](https://dev.liferay.com/zh/develop/tutorials/-/knowledge_base/6-2/soap-web-services#soap-php-client)
+>原文[使用 PHP 实现 web service 客户端](https://dev.liferay.com/zh/develop/tutorials/-/knowledge_base/6-2/soap-web-services#soap-php-client)
 
 ## SOAP JavaScript CLIENT
 
-您可以用支持 web 服务调用的任何语言编写客户端。让我们调用我们在创建 Java 客户端时所做的相同操作，这次使用 JavaScript 客户端:
+您可以用<font color="#FF6666">支持 Web Service 调用的任何语言编写客户端</font>。让我们调用我们在创建 Java 客户端时所做的相同操作，这次使用 JavaScript 客户端:
 
 ```javascript
 
 ```
 
-请记住，您可以用任何支持使用 SOAP web 服务的语言实现 web 服务客户端。要学习如何实现OAuth，以便您可以访问第三方服务，请参见授权访问使用OAuth教程的服务。
+请记住，您<font color="#FF6666">可以用任何支持使用 SOAP Web Service 的语言实现 web service 客户端</font>。要学习如何实现 OAuth，以便您可以访问第三方服务，请参见授权访问使用 OAuth 教程的服务。
