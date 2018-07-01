@@ -1,7 +1,7 @@
 ---
-title: Liferay Web Service
+title: Liferay Web Service
 date: 2018-07-01 10:40:22
-categories: 触类旁通
+categories: 触类旁通
 tags:
 - Liferay
 - WebService
@@ -80,7 +80,7 @@ publicLayoutSetPropertyId privateLayoutSetPropertyId">
 
 <br>
 
-### SOAP JAVA CLIENT
+## SOAP JAVA CLIENT
 
 可以使用 Eclipse IDE 轻松地设置 Java web 服务客户端。方法如下:
 
