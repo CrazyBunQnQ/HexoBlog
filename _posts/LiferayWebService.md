@@ -1,6 +1,6 @@
 ---
 title: Liferay Web Service
-date: 2018-07-01 10:40:22
+date: 2018-07-08 10:40:22
 categories: 触类旁通
 tags:
 - Liferay
@@ -265,6 +265,8 @@ User groups for user 10196 ...
 接下来，让我们用 JavaScript 实现 web service 客户端。
 
 >原文[使用 PHP 实现 web service 客户端](https://dev.liferay.com/zh/develop/tutorials/-/knowledge_base/6-2/soap-web-services#soap-php-client)
+
+<br>
 
 ## SOAP JavaScript CLIENT
 
