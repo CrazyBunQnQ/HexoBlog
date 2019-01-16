@@ -1,6 +1,6 @@
 ---
 title: Struts2 内建拦截器简介
-date: 
+date: 2017-06-08 09:24:00
 categories: 触类旁通
 tags: 
 - Struts 2
