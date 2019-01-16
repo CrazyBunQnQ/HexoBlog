@@ -123,11 +123,11 @@ document.getElementByID("tb").appendChild(tr);
 
 ## JQuery:
 js 框架 封装了原始 js 代码
-封装了 js的操作
+封装了 js 的操作
 功能
 开发效率快 准确度高
 屏蔽所有浏览器的差异，兼容性好
-jquery 对象  （dom 对象封装后成了 jquery对象）
+jquery 对象  （dom 对象封装后成了 jquery 对象）
 dom 对象
 
 1. [jquery 选择器](http://www.w3school.com.cn/jquery/jquery_ref_selectors.asp)

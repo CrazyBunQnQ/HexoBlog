@@ -15,9 +15,9 @@ tags:
 
 ## 反射
 ### class 类
-在Java 中，每一个class 都有一个相应的 Class 对象，也就是说，当我们编写玩一个类，编译完成后，产生的 .class 文件中就会产生一个 class 对象，用于表示这个类的信息。
+在 Java 中，每一个 class 都有一个相应的 Class 对象，也就是说，当我们编写玩一个类，编译完成后，产生的 .class 文件中就会产生一个 class 对象，用于表示这个类的信息。
 
-Class 类是反射源头。Class类的构造器被私有化，无法被访问，但是可以通过下面三种方式实例化 Class 类：
+Class 类是反射源头。Class 类的构造器被私有化，无法被访问，但是可以通过下面三种方式实例化 Class 类：
 
 1. 通过 `Class.forName("完整包名.类名")` 方法
 2. 通过 `类.Class`
@@ -143,15 +143,15 @@ try {
 **创建测试类的步骤：**
 1. 导入 Junit 测试包
 2. 新建一个目录存放测试代码
-3. 测试类使用Test作为类的后缀
-4. 测试方法使用test作为前缀/后缀
+3. 测试类使用 Test 作为类的后缀
+4. 测试方法使用 test 作为前缀/后缀
 5. 测试方法上面必须有 @Test 修饰
 6. 测试方法必须是 public void 修饰，不带任何参数
 
 ## 解析 properties 文件
 步骤：
 1. 创建一个 Properties 对象
-2. 使用对象的load()方法进行加载 properties 文件
+2. 使用对象的 load()方法进行加载 properties 文件
 3. 使用 getProperty(String key) 获取 value 值
 
 >默认 ISO8859-1 编码读写，可以改编写字符集，但不能修改读的字符集

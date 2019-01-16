@@ -8,7 +8,7 @@ tags:
 - XML
 ---
 
-XML (Extenstion Markup Language 扩展性标记语言)，可以用来做资源配置文件(.properties, xml)、数据的传输格式(json, xml数据)。
+XML (Extenstion Markup Language 扩展性标记语言)，可以用来做资源配置文件(.properties, xml)、数据的传输格式(json, xml 数据)。
 
 <!--more-->
 
@@ -37,7 +37,7 @@ XML (Extenstion Markup Language 扩展性标记语言)，可以用来做资源�
 
 ### dtd 校验
 
-举例：user.xml 文件,规则：要求根标记为 users，users下只能有 user标签。
+举例：user.xml 文件,规则：要求根标记为 users，users 下只能有 user 标签。
 <users>
 	
 	<user id="必选" height="可选">
@@ -113,7 +113,7 @@ sax 解析以事件驱动的方式来解析文档
     element.addAttribute("属性名","属性值");
     //在指定元素中添加元素值
     element.addElement("元素名").addText("元素之");
-    //规范XML格式
+    //规范 XML 格式
     OutputFormat format = OutputFormat.creatPrettyPrint();
     format.setEncoding("utf-8");
     //将数据写入 XML 文档

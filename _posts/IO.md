@@ -57,7 +57,7 @@ listFiles()
 
 >"."表示当前类所在项目的根目录
 
->File.separator 匹配不同系统的分隔符，比如windows下表示 "\"
+>File.separator 匹配不同系统的分隔符，比如 windows 下表示 "\"
 
 
 ## 输入和输出流 ##
@@ -74,7 +74,7 @@ read()
           从输入流中读取数据的下一个字节。以 int 形式返回，返回的是 0-255 范围内的 int 字节值，若返回 -1， 则读取到末尾，处理效率低，基本不用。
 
 public int read(byte[] b)
-         throws IOException从输入流中读取一定数量的字节，并将其存储在缓冲区数组 b 中。以整数形式返回实际读取的字节数。在输入数据可用、检测到文件末尾或者抛出异常前，此方法一直阻塞。 
+         throws IOException 从输入流中读取一定数量的字节，并将其存储在缓冲区数组 b 中。以整数形式返回实际读取的字节数。在输入数据可用、检测到文件末尾或者抛出异常前，此方法一直阻塞。
 如果 b 的长度为 0，则不读取任何字节并返回 0；否则，尝试读取至少一个字节。如果因为流位于文件末尾而没有可用的字节，则返回值 -1；否则，至少读取一个字节并将其存储在 b 中。 
 
 将读取的第一个字节存储在元素 b[0] 中，下一个存储在 b[1] 中，依次类推。读取的字节数最多等于 b 的长度。设 k 为实际读取的字节数；这些字节将存储在 b[0] 到 b[k-1] 的元素中，不影响 b[k] 到 b[b.length-1] 的元素。
@@ -83,12 +83,12 @@ public int read(byte[] b)
 OutputStream 是所有字节输出流的父类，其定义写出方法:
 
 public abstract void write(int b)
-                    throws IOException将指定的字节写入此输出流。write 的常规协定是：向输出流写入一个字节。要写入的字节是参数 b 的八个低位。b 的 24 个高位将被忽略。 
+                    throws IOException 将指定的字节写入此输出流。write 的常规协定是：向输出流写入一个字节。要写入的字节是参数 b 的八个低位。b 的 24 个高位将被忽略。
 OutputStream 的子类必须提供此方法的实现。
 
 
 public void write(byte[] b)
-           throws IOException将 b.length 个字节从指定的 byte 数组写入此输出流。write(b) 的常规协定是：应该与调用 write(b, 0, b.length) 的效果完全相同。 
+           throws IOException 将 b.length 个字节从指定的 byte 数组写入此输出流。write(b) 的常规协定是：应该与调用 write(b, 0, b.length) 的效果完全相同。
 
 ## 文件字节流
 FileOutputStream 是文件的字节输出流，可以以字节为单位将数据写入文件。
@@ -96,28 +96,28 @@ FileOutputStream 是文件的字节输出流，可以以字节为单位将数据
 FileOutputStream 有两个常用构造方法：
 
 public FileOutputStream(File file)
-                 throws FileNotFoundException创建一个向指定 File 对象表示的文件中写入数据的文件输出流。创建一个新 FileDescriptor 对象来表示此文件连接。 
+                 throws FileNotFoundException 创建一个向指定 File 对象表示的文件中写入数据的文件输出流。创建一个新 FileDescriptor 对象来表示此文件连接。
 首先，如果有安全管理器，则用 file 参数表示的路径作为参数来调用 checkWrite 方法。 
 
 如果该文件存在，但它是一个目录，而不是一个常规文件；或者该文件不存在，但无法创建它；抑或因为其他某些原因而无法打开，则抛出 FileNotFoundException。 
 
 
 public FileOutputStream(String name)
-                 throws FileNotFoundException创建一个向具有指定名称的文件中写入数据的输出文件流。创建一个新 FileDescriptor 对象来表示此文件连接。 
+                 throws FileNotFoundException 创建一个向具有指定名称的文件中写入数据的输出文件流。创建一个新 FileDescriptor 对象来表示此文件连接。
 首先，如果有安全管理器，则用 name 作为参数调用 checkWrite 方法。 
 
 如果该文件存在，但它是一个目录，而不是一个常规文件；或者该文件不存在，但无法创建它；抑或因为其他某些原因而无法打开它，则抛出 FileNotFoundException。 
 
 
 public void close()
-           throws IOException关闭此文件输出流并释放与此流有关的所有系统资源。此文件输出流不能再用于写入字节。 
+           throws IOException 关闭此文件输出流并释放与此流有关的所有系统资源。此文件输出流不能再用于写入字节。
 如果此流有一个与之关联的通道，则关闭该通道。 
 
 
 使用以上两种构造期创建的文件字节输出流向指定文件写出数据，
 若指定的文件以及包含了内容，那么当使用 fos 对其 写入就是覆盖操作，当前的文件的内容全部清空。
 
-若想在文件中将原有的数据保存，在其之后追加新数据，则需要在构造器中添加第二个 boolean 参数，当参数为 true 时则追加，false则覆盖。
+若想在文件中将原有的数据保存，在其之后追加新数据，则需要在构造器中添加第二个 boolean 参数，当参数为 true 时则追加，false 则覆盖。
 
 
 FileInputStream 是文件字节输入流：
@@ -135,7 +135,7 @@ FileInputStream 是文件字节输入流：
 关闭流之前，缓冲输出流会将缓冲区内容一次性写出。
 
 public void flush()
-           throws IOException刷新此缓冲的输出流。这迫使所有缓冲的输出字节被写出到底层输出流中。 
+           throws IOException 刷新此缓冲的输出流。这迫使所有缓冲的输出字节被写出到底层输出流中。
 
 
 ### BufferedInputStream 是缓冲输入流，用来读取。
@@ -169,24 +169,24 @@ ObjectOutputStream 在对象进行序列化的时候有一个要求，需要序�
 
 
 ## 字符流 ##
-底层依然是字节流，以char 为单位进行读写数据。
+底层依然是字节流，以 char 为单位进行读写数据。
 
 ###　Reader(抽象类)：是字符输入流的父类。
 public int read()
-         throws IOException读取单个字符。在字符可用、发生 I/O 错误或者已到达流的末尾前，此方法一直阻塞。 
+         throws IOException 读取单个字符。在字符可用、发生 I/O 错误或者已到达流的末尾前，此方法一直阻塞。
 用于支持高效的单字符输入的子类应重写此方法。 （基本不用）
 返回：
 作为整数读取的字符，范围在 0 到 65535 之间 (0x00-0xffff)，如果已到达流的末尾，则返回 -1 
 
 
 public int read(char[] cbuf)
-         throws IOException将字符读入数组。在某个输入可用、发生 I/O 错误或者已到达流的末尾前，此方法一直阻塞。 
+         throws IOException 将字符读入数组。在某个输入可用、发生 I/O 错误或者已到达流的末尾前，此方法一直阻塞。
 返回：
 读取的字符数，如果已到达流的末尾，则返回 -1
 
 ### Writer(抽象类)：是字符输出流的父类。
 public void write(int c)
-           throws IOException写入单个字符。要写入的字符包含在给定整数值的 16 个低位中，16 高位被忽略。 
+           throws IOException 写入单个字符。要写入的字符包含在给定整数值的 16 个低位中，16 高位被忽略。
 用于支持高效单字符输出的子类应重写此方法。 （基本不用）
 
 参数：
@@ -194,7 +194,7 @@ c - 指定要写入字符的 int。
 
 
 public void write(char[] cbuf)
-           throws IOException写入字符数组。 
+           throws IOException 写入字符数组。
 
 参数：
 cbuf - 要写入的字符数组 
@@ -202,7 +202,7 @@ cbuf - 要写入的字符数组
 
 
 public void write(String str)
-           throws IOException写入字符串。 
+           throws IOException 写入字符串。
 
 参数：
 str - 要写入的字符串 
@@ -240,7 +240,7 @@ public PrintWriter(Writer out,
 参数：
 out - 字符输出流
 autoFlush - boolean 变量；如果为 true，则 println、printf 或 format 方法将刷新输出缓冲区
->特点，可以安航写字符串，内部默认嵌套一个bufferedreader作为
+>特点，可以安航写字符串，内部默认嵌套一个 bufferedreader 作为
 
 
 ### BufferedReader
@@ -258,7 +258,7 @@ sz - 输入缓冲区的大小
 
 方法：
 public String readLine()
-                throws IOException读取一个文本行。通过下列字符之一即可认为某行已终止：换行 ('\n')、回车 ('\r') 或回车后直接跟着换行。 
+                throws IOException 读取一个文本行。通过下列字符之一即可认为某行已终止：换行 ('\n')、回车 ('\r') 或回车后直接跟着换行。
 
 返回：
 包含该行内容的字符串，不包含任何行终止符，如果已到达流末尾，则返回 null

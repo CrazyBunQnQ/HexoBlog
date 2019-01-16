@@ -78,7 +78,7 @@ num2 = int(string)
 print (num + num2)
 ```
 
->如果你不知道变量是什么类型，可以通过 `type()` 函数lai 查看类型
+>如果你不知道变量是什么类型，可以通过 `type()` 函数 lai 查看类型
 
 ```python
 num = 3

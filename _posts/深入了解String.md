@@ -84,16 +84,16 @@ String 类没有提供用于修改字符串的方法，所以在 Java 文档中�
 ```java
 	String s1 = "abc";//常量池暂时没有 "abc"，所以这里会创建一个新对象
 	String s2 = "abc";//首先去常量池查找，所以不会创建新对象
-	String s3 = new String("abc");//创建了新对象，使用new关键字不会缓存到常量池当中
+	String s3 = new String("abc");//创建了新对象，使用 new 关键字不会缓存到常量池当中
 	System.out.println("s1 == s2 ? " + s1 == s2);//输出 true，因为引用同样的地址
 	System.out.println("s1 == s3 ? " + s1 == s3);//输出 false，因为地址不同
 	s1 = s1 + "";//只要改变，一定创建新对象
 	System.out.println("s1 == s2 ? " + s1 == s2);//输出 false，因为又创建了新对象
 	System.out.println("s1 == s3 ? " + s1 == s3);//输出 false
-	String s4 = "a" + "bc";//JVM 会将代码优化：JVM 看到的是"abc",该字符串常量池已存在，所以直接使用即可
+	String s4 = "a" + "bc";//JVM 会将代码优化：JVM 看到的是 "abc",该字符串常量池已存在，所以直接使用即可
 	System.out.println("s1 == s4 ? " + s1 == s4);//输出 true
 	String s5 = "a";
-	String s6 = s5 + "bc";//这里 JVM 则不会优化，所以不会使用常量池中的"abc"
+	String s6 = s5 + "bc";//这里 JVM 则不会优化，所以不会使用常量池中的 "abc"
 	System.out.println("s2 == s6 ? " + s2 == s6);//输出 false
 ```
 
@@ -118,9 +118,9 @@ String 在内存中采用 Unicode 编码，每个字符占用 2 个字节，任�
 ```java
 	字符串类型变量.length();//返回 int 类型
 	String str1 ="一二三四五";
-	System.out.println(str1.length());//输出5
+	System.out.println(str1.length());//输出 5
 	String str2 = "hello";
-	System.out.println(str1.length());//输出5
+	System.out.println(str1.length());//输出 5
 ```
 
 </br>
@@ -128,7 +128,7 @@ String 在内存中采用 Unicode 编码，每个字符占用 2 个字节，任�
 indexOf 方法用来查找字符串位置，未找到则返回 -1。
 
 ```java
-	int indexOf(String str);//在字符串中检测给定字符串str，第一次出现的位置。
+	int indexOf(String str);//在字符串中检测给定字符串 str，第一次出现的位置。
 	int indexOf(String str, int fromIndex);//在字符串中的第 fromIndex 位置（包含）开始检索给定字符串 str 的位置。
 	int lastIndexOf(String str);//返回 str 出现在字符串中最后一次的位置。
 ```
@@ -157,7 +157,7 @@ substring 方法可以从一个较大的字符串中提取一个子串。
 ```java
 	String host ="www.oracle.com.cn ";
 	String sub = host.substring(4);//sub = "oracle.com.cn "; 
-	sub = host.substring(4,10);//sub = "oracle";截取字符串第4位到第10位之间的字符串
+	sub = host.substring(4,10);//sub = "oracle";截取字符串第 4 位到第 10 位之间的字符串
 ```
 
 >**Java API 中有一个特点：使用两个数表示范围时，含头不含尾**
@@ -167,9 +167,9 @@ substring 方法可以从一个较大的字符串中提取一个子串。
 trim 方法去除字符串前后的空字符（**不能去除中间的空白字符**）
 
 ```java
-	System.out.println(host.length());//输出18
+	System.out.println(host.length());//输出 18
 	String trim = host.trim();//trim = "www.oracle.com.cn";
-	System.out.println(trim.length()); //输出17
+	System.out.println(trim.length()); //输出 17
 ```
 
 </br>
@@ -307,7 +307,7 @@ charAt 方法返回字符串中指定位置的字符
 	str = str.replaceAll("[0-9]+","***");
 	System.out.println(str);//输出 “***abc***jk***mmm”
 	regex = "(tm|sb|mmp|jb|qnmlgb)";
-	String message = "你这个sb，qnmlgb，就是个jb";
+	String message = "你这个 sb，qnmlgb，就是个 jb";
 	message = message.replaceAll(regex,"**");
 	System.out.println(message);
 ```
@@ -351,7 +351,7 @@ charAt 方法返回字符串中指定位置的字符
 	append(String str);//追加字符串
 	insert(int index,String str);向指定字符串位置插入字符串
 	delete(int star, int end);//删除指定位置的字符串
-	replace(int start, int end, String str);//将指定位置的字符串替换成给定的字符串str
+	replace(int start, int end, String str);//将指定位置的字符串替换成给定的字符串 str
 	reverse();//反转字符串
 ```
 

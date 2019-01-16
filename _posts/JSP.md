@@ -55,7 +55,7 @@ work/Catalina/localhost/项目名/org/apache/jsp/网页名
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.util*, java...."%>
 ```
 language:让 JSP 页面选择开发的语言
-import: 导入 jar 包，jsp 自带的包（servlet.* servlet.http.* servlet.jsp.* java.lang），可以在同一个import 属性下(用逗号隔开)，也可以分多行写
+import: 导入 jar 包，jsp 自带的包（servlet.* servlet.http.* servlet.jsp.* java.lang），可以在同一个 import 属性下(用逗号隔开)，也可以分多行写
 pageEncoding: 设置页面的编码
 contentType：设置服务器响应编码
 isThreadSafe： 设置线程是否安全（默认为 true 线程安全）
@@ -99,5 +99,5 @@ jspf 片段页面
 
 >MVC(Model View Controller) 设计模式
 Servlet 负责逻辑控制，数据获取
-JSP负责数据接收，页面的显式
+JSP 负责数据接收，页面的显式
 model 对数据进行 CRUD （Dao + entity）)

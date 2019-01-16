@@ -66,7 +66,7 @@ The file cannot be validated as the XML definition "项目路径\src\log4j.dtd (
 
 **解决办法：**
 - log4j.dtd 位置（若已有 log4j.dtd 文件则忽略此条）
-	- log4j 1.x：使用解压缩工具解压log4j.jar文件，找到org/apache/log4j/xml目录下的log4j.dtd 文件。
+	- log4j 1.x：使用解压缩工具解压 log4j.jar 文件，找到 org/apache/log4j/xml 目录下的 log4j.dtd 文件。
 	- log4j 2.x：使用解压缩工具解压 log4j-core-2.8.2.jar 文件，找到根目录下的 Log4j-events.dtd 文件。
 - 将找到的 log4j.dtd 文件拷贝到项目路径的 src 目录下即可。
 
@@ -380,11 +380,11 @@ org.apache.ibatis.binding.BindingException: Invalid bound statement (not found)
 
 **解决办法：**
 
-1. 检查xml文件所在package名称是否和Mapper interface所在的包名一一对应；
-2. 检查xml的namespace是否和xml文件的package名称一一对应；
+1. 检查 xml 文件所在 package 名称是否和 Mapper interface 所在的包名一一对应；
+2. 检查 xml 的 namespace 是否和 xml 文件的 package 名称一一对应；
 3. 检查方法名称是否对应；
-4. 去除xml文件中的中文注释；
-5. 随意在xml文件中加一个空格或者空行然后保存。
+4. 去除 xml 文件中的中文注释；
+5. 随意在 xml 文件中加一个空格或者空行然后保存。
 
 **参考：**[mybatis 绑定错误](http://blog.csdn.net/softwarehe/article/details/8889206)
 

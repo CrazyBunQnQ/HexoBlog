@@ -254,9 +254,9 @@ public static String bytes2HexString(int len, byte[] bytes) {
     final String HEX = "0123456789abcdef";
     StringBuilder sb = new StringBuilder(bytes.length * 2);
     for (int i = 0; i < len; i++) {
-        // 取出这个字节的高4位，然后与0x0f与运算，得到一个0-15之间的数据，通过HEX.charAt(0-15)即为16进制数
+        // 取出这个字节的高 4 位，然后与 0x0f 与运算，得到一个 0-15 之间的数据，通过 HEX.charAt(0-15)即为 16 进制数
         sb.append(HEX.charAt((bytes[i] >> 4) & 0x0f));
-        // 取出这个字节的低位，与0x0f与运算，得到一个0-15之间的数据，通过HEX.charAt(0-15)即为16进制数
+        // 取出这个字节的低位，与 0x0f 与运算，得到一个 0-15 之间的数据，通过 HEX.charAt(0-15)即为 16 进制数
         sb.append(HEX.charAt(bytes[i] & 0x0f));
     }
     return sb.toString();
@@ -296,7 +296,7 @@ public static byte[] hexString2Bytes(String s) {
     int len = s.length();
     byte[] b = new byte[len / 2];
     for (int i = 0; i < len; i += 2) {
-        // 两位一组，表示一个字节,把这样表示的16进制字符串，还原成一个字节
+        // 两位一组，表示一个字节,把这样表示的 16 进制字符串，还原成一个字节
         b[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4) + Character.digit(s.charAt(i + 1), 16));
     }
     return b;

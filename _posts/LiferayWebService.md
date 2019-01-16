@@ -17,7 +17,7 @@ tags:
 
 您可以通过 HTTP 通过简单对象访问协议(SOAP)访问 Liferay 的服务。打包协议是 SOAP，传输协议是 HTTP。
 
->**Note**:与身份验证相关的令牌必须伴随每个Liferay web service 调用。有关详细信息，请阅读本章前面关于服务安全层的一节。
+>**Note**:与身份验证相关的令牌必须伴随每个 Liferay web service 调用。有关详细信息，请阅读本章前面关于服务安全层的一节。
 
 作为一个示例，让我们看看 Liferay 的 `Company`、`User` 和 `UserGroup` portal 服务的 SOAP web service 类，以执行以下操作:
 
@@ -88,7 +88,7 @@ publicLayoutSetPropertyId privateLayoutSetPropertyId">
 
 添加您的 Web service 客户端在 Eclipse IDE 中,单击 new → other…,然后点开 Web Services 类别。单击 Web Service Client。
 
-对于您创建的每个客户端，都会提示您输入所需服务的服务定义(WSDL)。由于我们的示例 web service 客户端将使用Liferay Portal 的 Company、User 和 UserGroup 服务，因此我们需要输入以下 WSDL:
+对于您创建的每个客户端，都会提示您输入所需服务的服务定义(WSDL)。由于我们的示例 web service 客户端将使用 Liferay Portal 的 Company、User 和 UserGroup 服务，因此我们需要输入以下 WSDL:
 
 ```url
 http://localhost:8080/api/axis/Portal_CompanyService?wsdl
@@ -260,7 +260,7 @@ User groups for user 10196 ...
 - 屏幕名称和密码作为凭证在 URL 中传递。
 - 服务的名称(例如，`Portal_UserGroupService`) 在 URL 的末尾指定。请记住，<font color="#FF6666">服务名称可以在 web 服务列表中找到</font>。
 
-操作 `getCompanyByVirtualHost()`、`getUserIdByScreenName()`、`getUserUserGroups()`、`addUserGroup()` 和 `addUserGroupUsers()` 是为 WSDL 文件中的 `-ServiceSOAP` 类`CompanyServiceSoap`、`UserServiceSoap` 和 `UserGroupServiceSoap` 指定的。关于每个 Liferay web service 的参数类型、参数顺序、请求类型、响应类型和返回类型的信息可以方便地在 WSDL 中指定。一切都在你的身边!
+操作 `getCompanyByVirtualHost()`、`getUserIdByScreenName()`、`getUserUserGroups()`、`addUserGroup()` 和 `addUserGroupUsers()` 是为 WSDL 文件中的 `-ServiceSOAP` 类 `CompanyServiceSoap`、`UserServiceSoap` 和 `UserGroupServiceSoap` 指定的。关于每个 Liferay web service 的参数类型、参数顺序、请求类型、响应类型和返回类型的信息可以方便地在 WSDL 中指定。一切都在你的身边!
 
 接下来，让我们用 JavaScript 实现 web service 客户端。
 

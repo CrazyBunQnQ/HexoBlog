@@ -1,5 +1,5 @@
 ---
-title: Mac系统几个常用命令的安装
+title: Mac 系统几个常用命令的安装
 date: 2017-03-11 22:17:16
 categories: 触类旁通
 tags: 

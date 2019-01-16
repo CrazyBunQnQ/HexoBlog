@@ -28,10 +28,10 @@ tags:
 
 <br/>
 ## 结构化查询语言
-- SQL是在关系数据库上执行数据操作、检索及维护所使用的标准语言，可以用来查询数据，操纵数据，定义数据，控制数据
+- SQL 是在关系数据库上执行数据操作、检索及维护所使用的标准语言，可以用来查询数据，操纵数据，定义数据，控制数据
 - 所有数据库都是用相同或者相似的语言
 
-SQL可分为：
+SQL 可分为：
 - 数据定义语言(DDL)：Data Definition Language,用于建立修改删除数据库对象，包括 Creat、Alter、Drop
 - 数据操纵语言(DML)：Data Manipulation Language，用于改变数据表中的数据，和事务相关，执行完后需要经过事务控制语句提交后才真正的将改变应用到数据库中，包括 Insert、Update，Delete
 - 事物控制语言(TCL)：Transaction Control Language，用于维护数据一致性，包括 Commit、Rollback、Savepoint（保存点）
@@ -39,7 +39,7 @@ SQL可分为：
 - 数据控制语言(DCL)：Data Control Language，用于执行权限的手语和回收操作，包括 Grant、Revoke、Create User
 
 <br/>
-## MySQL基本数据类型
+## MySQL 基本数据类型
 
 1. 数值类型
 2. 字符串类型
@@ -125,19 +125,19 @@ alter table 表名 change 旧字段名 新字段名 数据类型;
 - 插入记录：
 
 ```SQL
-insert into 表名（字段名1,字段名2,字段名3...) values (值1,值2,值3...);
+insert into 表名（字段名 1,字段名 2,字段名 3...) values (值 1,值 2,值 3...);
 ```
 - 插入完整记录：
 
 ```SQL
-insert into 表名 values (值1,值2,值3...);
+insert into 表名 values (值 1,值 2,值 3...);
 ```
 - 更新字段值：
 
 ```SQL
 update 表名 set 字段值=值;
 update 表名 set 字段名=值 where 字段名=值;
-update 表名 set 字段名1=值1,字段名2=值2... where 字段名=值;
+update 表名 set 字段名 1=值 1,字段名 2=值 2... where 字段名=值;
 ```
 
 <br/>
@@ -155,12 +155,12 @@ select now() from dual;
 - 查询某字段名的值：
 
 ```SQL
-select 列名1, 列名2... from 表名;
+select 列名 1, 列名 2... from 表名;
 ```
 - 使用别名：
 
 ```SQL
-select 列名1 as 别名1, 列名2 别名2, 列名3 as '别名3'... from 表名;
+select 列名 1 as 别名 1, 列名 2 别名 2, 列名 3 as '别名 3'... from 表名;
 ```
 - 限定范围查询：
 
@@ -183,7 +183,7 @@ delete from 表名
 delete from 表名 where 字段名=值;
 delete from 表名 where 字段名 is null;
 ```
->判断空的条件null 需要使用 is null
+>判断空的条件 null 需要使用 is null
 >可以使用 concat 拼接字符串
 >例如，拼接 name 和 ':' 语句为：`select concat(name,':')`
 

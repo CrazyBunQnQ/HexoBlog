@@ -22,7 +22,7 @@ tags:
 ```python
 # 图像处理标准库
 from PIL import Image
-# web测试
+# web 测试
 from selenium import webdriver
 # 鼠标操作
 from selenium.webdriver.common.action_chains import ActionChains

@@ -55,9 +55,9 @@ tag:
 1. 撤销最后一次提交的内容
     ```bash
     # 保留当前修改
-    git reset 上一次的提交id
+    git reset 上一次的提交 id
     # 抛弃当前修改，完全回到上个版本的状态
-    git reset --hard 上一次的提交id
+    git reset --hard 上一次的提交 id
     ```
     ![撤销提交内容](http://wx3.sinaimg.cn/large/a6e9cb00ly1fqvomg7zpyj20wy05utbq.jpg '撤销最后一次提交')
 1. 提交正确内容

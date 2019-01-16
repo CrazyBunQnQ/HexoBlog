@@ -55,7 +55,7 @@ View → 发出请求 → 总控制器 → 分发请求 → 分控制器 → 接
 </filter-mapping>
 ```
 
-4. 编写处理请求的 Action 类（分控制器）**继承 ActionSupport类**
+4. 编写处理请求的 Action 类（分控制器）**继承 ActionSupport 类**
 **方法一定是无参的，并且返回 String 类型** 返回的字符串和页面是一一对应的.
 
 5. 在类路径创建一个 **struts.xml** 文件
@@ -76,7 +76,7 @@ View → 发出请求 → 总控制器 → 分发请求 → 分控制器 → 接
 		<action name="login" class="com.crazybunqnq.LoginAction" method="doLogin">
 			<!-- 配置 Action 类返回的结果对应的页面
 			name:方法返回的字符串
-			type:响应类型，默认为转发"dispatcher"，改为 "redirect" 则变为重定向跳转，
+			type:响应类型，默认为转发 "dispatcher"，改为 "redirect" 则变为重定向跳转，
 改为 redirectAction 则重定向到另一个 Action ...
 			-->
 			<result name="success">/main.jsp</result>
@@ -87,7 +87,7 @@ View → 发出请求 → 总控制器 → 分发请求 → 分控制器 → 接
 
 
 ### 全局配置
-<!--全局result-->
+<!--全局 result-->
 <global-results>
 	<result name="error" >/error.jsp</result>
 </global-results>
@@ -105,9 +105,9 @@ url-发出请求-  action-方法-result-jsp
 
 Action 中的属性与页面请求的参数名相同，并设置好 get 和 set 方法即可。
 
-发送请求时会先获取请求参数值并调用set方法，再调用 action 的方法。
+发送请求时会先获取请求参数值并调用 set 方法，再调用 action 的方法。
 
-//底层请求参数 设置给set方法的形参，再给属性赋值
+//底层请求参数 设置给 set 方法的形参，再给属性赋值
 ```
 http://...../login?name=xxx&age=5&interest=eat&interest=play
 ```
@@ -220,7 +220,7 @@ public class BaseAction extends ActionSupport implements RequestAware, SessionAw
 ### freemaker
 
 ### stream
-流响应，服务器发送给浏览器的是 流格式的数据(byet序列)，可以用来下载
+流响应，服务器发送给浏览器的是 流格式的数据(byet 序列)，可以用来下载
 ```XML
 <result name="success" type="stream">
 	<param name="inputName">is</parm>
@@ -230,7 +230,7 @@ public class BaseAction extends ActionSupport implements RequestAware, SessionAw
 	inline ： 直接在浏览器打开【默认】
 	-->
 	<param name="contentDisposition">attachment;filename=${filename}</param>
-	<param name="bufferSize">5*1024</param><!--5K缓冲区，默认 1024-->
+	<param name="bufferSize">5*1024</param><!--5K 缓冲区，默认 1024-->
 	<param name="contentType">text/pl..</param>
 </result>
 ```
@@ -284,8 +284,8 @@ return SUCCESS;
 - **需要改配置文件继承 json-default**
 
 <result type="json" class="org.apache.struts2.json.JSONResult">
-1.如果这里什么都不写，会将 action中所有的属性，转换成 json 格式 发送给浏览器
-2.通过 incluDEProperties 将制定的属性以json格式发送给浏览器
+1.如果这里什么都不写，会将 action 中所有的属性，转换成 json 格式 发送给浏览器
+2.通过 incluDEProperties 将制定的属性以 json 格式发送给浏览器
 3.如果返回的是 list，则需要加上.*
 	<param name="includeProperties">flag,sfdf</param><!--要返回的数据-->
 </result>
@@ -293,7 +293,7 @@ return SUCCESS;
 ### jfreechart 、highchart
 图表响应，需要导入 jfreechart 或 highchart 包
 >工厂设计模式
->(20多种涉及模式)
+>(20 多种涉及模式)
 
 ### chain
 转发到 Action
@@ -359,9 +359,9 @@ index.jsp
 访问 chain01.jsp
 action01 获取值
 chain 转发到 action02
-action02 也能获取chain01.jsp提交的值
+action02 也能获取 chain01.jsp 提交的值
 
-若使用 重定向 则 action02拿不到 chain01.jsp 提交的值
+若使用 重定向 则 action02 拿不到 chain01.jsp 提交的值
 
 
 >跨包调用 action

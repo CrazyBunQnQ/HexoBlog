@@ -53,7 +53,7 @@ request：一次请求中
 session：一次会话中
 application：服务器声明周期
 作用范围依次递增
-findAttribute方法会检索四个域，检索的顺序是
+findAttribute 方法会检索四个域，检索的顺序是
 1. pageContext
 2. request
 3. session

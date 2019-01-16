@@ -61,4 +61,4 @@ hashCode() 方法就是获取该对象散列码的方法，hashCode() 方法定�
 equals()相等的两个对象，hashcode()一定相等； 
 equals（）不相等的两个对象，hashcode()可能相等，也可能不等。
 
-反过来：hashcode()不等，一定能推出equals()也不等；hashcode()相等，equals()可能相等，也可能不等。
+反过来：hashcode()不等，一定能推出 equals()也不等；hashcode()相等，equals()可能相等，也可能不等。

@@ -84,8 +84,8 @@ Java Web 就是 Java 提供 Web 资源访问的技术总成
 配置 server.xml 文件
 设置 <Host name="localhost"> 端口为 80 端口。
 
-### 配置 servlet的映射
-配置jsp映射
+### 配置 servlet 的映射
+配置 jsp 映射
 配置监听器，过滤器的映射
 配置错误处理页面
 
@@ -95,7 +95,7 @@ Java Web 就是 Java 提供 Web 资源访问的技术总成
 HTTP 是 hypertext transfer protocol（超文本传输协议）的简写，它是 TCP/TP 协议的一个应用层协议，用于定义 web 浏览器 与 web 服务器之间交换数据的过程：
 版本：
 - Http 1.0 只支持单个 web 资源的访问
-- HTTP 1.1 支持多个web资源访问
+- HTTP 1.1 支持多个 web 资源访问
 
 ### 客户端请求
 GET /baidu/index.heml HTTP/1.1
@@ -105,7 +105,7 @@ Host : localhost:8080
 Connection: keep-alive
 访问完毕后服务器保持链接
 Cache-Control: max-age=0
-缓存控制，>=0表示支持缓存
+缓存控制，>=0 表示支持缓存
 Upgrade-Insecure-Requests: 1
 自动将 HTTP 协议 升级为 HTTPS
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36
@@ -149,9 +149,9 @@ servlet 3.1 版本 --- 4.0
 ### 开发 servlet 步骤
 
 1. 
-2. 在classes 目录编写一个 HelloServlet.java
+2. 在 classes 目录编写一个 HelloServlet.java
 extends GenericServlet
-3. 编译生成.class文件
+3. 编译生成.class 文件
 1. 获取一个服务器写出流
 ```
 PrintWriter out = res.getWriter();
@@ -171,8 +171,8 @@ PrintWriter out = res.getWriter();
 </servlet-mapping>
 ```
 
->javac -cp jar包路径 -d pakage路径 java文件.java
+>javac -cp jar 包路径 -d pakage 路径 java 文件.java
 >javac -cp .\servlet-api.jar -d . HelloServlet.java
->-cp 确定添加的classpath 路径
->-d 生成对应的pakage文件夹
+>-cp 确定添加的 classpath 路径
+>-d 生成对应的 pakage 文件夹
 >. 当前目录

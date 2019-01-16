@@ -31,7 +31,7 @@ linux 下课使用 wget 命令下载
 
 **默认 Apache 组件处于运行中（注意绿色），但没有加载到 windows 系统中作为服务。先 stop 停止掉 Apache ，然后点击左侧红色的 X 安装 apache 服务，需要添加 Mysql 也是同样的操作。**
 
-**我们开启Apache服务，X 变为绿色的 √，然后打开浏览器访问 localhost (或 127.0.0.1 本机地址)，看到下面的页面，说明服务器环境搭建成功。**
+**我们开启 Apache 服务，X 变为绿色的 √，然后打开浏览器访问 localhost (或 127.0.0.1 本机地址)，看到下面的页面，说明服务器环境搭建成功。**
 
 ![PHP 界面](http://wx4.sinaimg.cn/mw690/a6e9cb00ly1fdix261yk9j20go0kptb7.jpg)
 
@@ -48,13 +48,13 @@ linux 下课使用 wget 命令下载
 a. 首先打开 D:/XAMPP/phpMyAdmin 文件夹中的 config.inc.php 文件。
 b. 搜索 `$cfg['Servers'][$i]['auth_type'] = 'config';`,将其中的 config（系缺省值）更改为“cookie”保存。
 
-2. **登录XAMPP**
+2. **登录 XAMPP**
 a. 通过默认主页 http://localhost 左侧的 phpmyadmin 导航栏进入 phpmyadmin 界面（可直接通过 http://localhost/phpmyadmin/ 进入 web 登陆界面，输入用户名 root 密码 root 后直接点击登录即可）
-**注：***在默认状态下，phpmyadmin 有两个用户名，分别是 pma 和 root 。其中，root 是管理员身份，而pma则是普通用户身份，但二者在缺省状态下均无密码*
+**注：***在默认状态下，phpmyadmin 有两个用户名，分别是 pma 和 root 。其中，root 是管理员身份，而 pma 则是普通用户身份，但二者在缺省状态下均无密码*
 若提示 服务器无响应(或者本地 MySQL 服务器的套接字没有正确配置)的问题，请看后面解决办法
 
-3. **建立新的管理员账号及删除原有的root账号**
-进入用户选项卡，点击root账号编辑其权限，在底端的修改密码输入相应的密码
+3. **建立新的管理员账号及删除原有的 root 账号**
+进入用户选项卡，点击 root 账号编辑其权限，在底端的修改密码输入相应的密码
 ![用户选项卡](http://wx3.sinaimg.cn/mw690/a6e9cb00ly1fdixbym4g9j20y00hjtbp.jpg)
 ![修改密码](http://wx3.sinaimg.cn/mw690/a6e9cb00ly1fdixcnissej20nt08egm2.jpg)
 
@@ -69,7 +69,7 @@ a. 通过默认主页 http://localhost 左侧的 phpmyadmin 导航栏进入 phpm
 ### 服务器无响应(或者本地 MySQL 服务器的套接字没有正确配置)的问题 ###
 1. 第一种情况：（深度清理垃圾导致 host.MYD 丢失）
 原因：host.MYD 文件是一个 0 字节文件，即没有任何内容，但在启动 mysql 时会被调用，写入一些临时信息，深度清理垃圾时，我选择扫描空文件和空文件夹，就将 host.MYD 扫描到并删除了，再次启动 wamp，就产生如上问题；
->解决方案：第一次安装 wamp 时，在安装目录下找到 host.MYD，其路径为 `"C:\wamp\bin\mysql\mysql5.5.20\data\mysql\host.MYD (我默认安装wamp在C盘根目录)"`，你可以选择备份一个 host.MYD，或者新建一个空的“文本文档.txt”将其改为“host.MYD”，放到其正确路径下即           可。
+>解决方案：第一次安装 wamp 时，在安装目录下找到 host.MYD，其路径为 `"C:\wamp\bin\mysql\mysql5.5.20\data\mysql\host.MYD (我默认安装 wamp 在 C 盘根目录)"`，你可以选择备份一个 host.MYD，或者新建一个空的“文本文档.txt”将其改为“host.MYD”，放到其正确路径下即           可。
  
 2. 第二种情况：（防火墙阻止导致 mysql 无法启动）
 原因：未启动本地 mysql 服务器
@@ -78,10 +78,10 @@ a. 通过默认主页 http://localhost 左侧的 phpmyadmin 导航栏进入 phpm
         第二步，双击 mysqld.exe 文件，如果 windows 防火墙弹出阻止提示框，点击解除阻止即可
 
 3. 第三种情况：(mysql 套接字文件绑定 ip 无效)
-原因：如果未指定主机名或指定了特殊的主机名 localhost，将使用Unix套接字，Unix 套接字默认为 `/tmp/mysql.sock`，而本机并没有配置这样的套接字文件，所以自然是连接失败了。
+原因：如果未指定主机名或指定了特殊的主机名 localhost，将使用 Unix 套接字，Unix 套接字默认为 `/tmp/mysql.sock`，而本机并没有配置这样的套接字文件，所以自然是连接失败了。
 >解决方法：找到 phpmyadmin 文件夹,在 `wamp\phpmyadmin` 下（具体视自己安装的路径来查找），找到 `config.inc.php` 文件，用 notepad (记事本)等软件打开找到 `$cfg['Servers'][$i]['host'] = 'localhost';` 这一行，然后将这里的 localhost 修改为 127.0.0.1。有网友建议添加 `$cfg['Servers'][$i]['hide_db'] = ‘information_schema’;` //使用登陆后看不见 information_schema 数据库，这一句其实不加也无所谓。
 
-### phpMyAdmin界面左边出现错误提示 ###
+### phpMyAdmin 界面左边出现错误提示 ###
 ![phpMyAdmin 显示错误](http://wx4.sinaimg.cn/mw690/a6e9cb00ly1fdixhm6ecxj205g0b3aam.jpg)
 **解决方法**：（我居然吭哧半天看懂了英文...以防以后在遇到的时候看不懂。。。先记下来= =哈哈）
 **方法一：**
@@ -101,7 +101,7 @@ Extract it and change pma_ prefix by pma__ or vice versa
 编辑 `create_tables.sql` 文件，将其中所有的的 pma_（单下划线）换成 pma__（双下划线）后再次上传执行即可。
 ![修改 create_tables.sql 文件](http://wx2.sinaimg.cn/mw690/a6e9cb00ly1fdixv68ldsj20ts0ppaeo.jpg)
 
-**方法二：（适用于Linux系统）**
+**方法二：（适用于 Linux 系统）**
 **直接执行**
 
     sudo dpkg-reconfigure phpmyadmin
@@ -117,8 +117,8 @@ Extract it and change pma_ prefix by pma__ or vice versa
 
 两行改成你的数据库用户名和密码，保存即可:
 
-![修改用户名密码1](http://wx1.sinaimg.cn/mw690/a6e9cb00ly1fdixz16ff0j20a201aq2w.jpg)
+![修改用户名密码 1](http://wx1.sinaimg.cn/mw690/a6e9cb00ly1fdixz16ff0j20a201aq2w.jpg)
 
 改为：
 
-![修改用户名密码2](http://wx3.sinaimg.cn/mw690/a6e9cb00ly1fdixzryyvdj20a701baa0.jpg)
+![修改用户名密码 2](http://wx3.sinaimg.cn/mw690/a6e9cb00ly1fdixzryyvdj20a701baa0.jpg)

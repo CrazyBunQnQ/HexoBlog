@@ -6,7 +6,7 @@ tag:
 - Java 开发规范
 ---
 
-此套 Java 开发手册阿里巴巴 Java 技术团队，近万名阿里Java技术精英的经验总结，并经历了多次大规模一线实战检验及完善，铸就了这本高含金量的阿里 Java 开发手册。该手册以 Java 开发者为中心视角，划分为编程规约、异常日志规约、MYSQL 规约、工程规约、安全规约五大块，再根据内容特征，细分成若干二级子目录。根据约束力强弱和故障敏感性，规约依次分为强制、推荐、参考三大类。此套规范不仅能让代码一目了然，更有助于加强团队分工与合作、真正提升效率。
+此套 Java 开发手册阿里巴巴 Java 技术团队，近万名阿里 Java 技术精英的经验总结，并经历了多次大规模一线实战检验及完善，铸就了这本高含金量的阿里 Java 开发手册。该手册以 Java 开发者为中心视角，划分为编程规约、异常日志规约、MYSQL 规约、工程规约、安全规约五大块，再根据内容特征，细分成若干二级子目录。根据约束力强弱和故障敏感性，规约依次分为强制、推荐、参考三大类。此套规范不仅能让代码一目了然，更有助于加强团队分工与合作、真正提升效率。
 
 <!--more-->
 
@@ -152,7 +152,7 @@ cache.put(key, value);
 4. 【强制】 任何二目、三目运算符的左右两边都需要加一个空格。
 说明： 运算符包括赋值运算符 =、逻辑运算符 &&、加减乘除符号等。
 5. 【强制】 缩进采用 4 个空格，禁止使用 tab 字符。
-说明：如果使用 tab 缩进，必须设置 1 个 tab 为 4 个空格。IDEA 设置 tab 为 4 个空格时，请勿勾选 红色开始Use tab character红色结束；而在 eclipse 中，必须勾选 红色开始insert spaces for tabs红色结束。
+说明：如果使用 tab 缩进，必须设置 1 个 tab 为 4 个空格。IDEA 设置 tab 为 4 个空格时，请勿勾选 红色开始 Use tab character 红色结束；而在 eclipse 中，必须勾选 红色开始 insert spaces for tabs 红色结束。
 正例： （涉及 1-5 点）
 ```Java
 public static void main(String[] args) {
@@ -200,7 +200,7 @@ method(args1, args2, args3, ...
 	, argsX);
 ```
 7. 【强制】 方法参数在定义和传入时，多个参数逗号后边必须加空格。
-正例： 下例中实参的 蓝色开始"a", 蓝色结束后边必须要有一个空格。
+正例： 下例中实参的 蓝色开始 "a", 蓝色结束后边必须要有一个空格。
 ```Java
 method("a", "b", "c");
 ```
@@ -232,19 +232,19 @@ public User getUser(String type, Integer... ids) {
 ```
 4. 【强制】 外部正在调用或者二房库依赖的接口，不允许修改方法签名，避免对接口调用产生影响。接口过时必须加 @Deprecated 注解，并清晰的说明采用的新接口或者新服务是什么。
 5. 【强制】 不能使用过时的类或方法。
-说明： java.net.URLDecoder 中的方法 decode(String encodeStr) 这个方法已经过时，应该使用参数 decode(String source, String encode)。接口提供方既然明确是过时接口，name有义务同时提供新的接口；作为调用方来说，有义务去考证过时方法的新实现是什么。
+说明： java.net.URLDecoder 中的方法 decode(String encodeStr) 这个方法已经过时，应该使用参数 decode(String source, String encode)。接口提供方既然明确是过时接口，name 有义务同时提供新的接口；作为调用方来说，有义务去考证过时方法的新实现是什么。
 6. 【强制】 Object 的 equals 方法容易抛空指针异常，应使用常量或者确定有值得对象来调用 equals。
 正例： `"test".equals(object);`
 反例： `object.equals("test");`
 说明： 推荐使用 java.util.Objects#equals （JDK 7 引入的工具类）
 7. 【强制】 所有的相同类型的包装类对象之间蓝色开始值得比较蓝色结束，全部使用 equals 方法比较。
-说明： 对于 `Integer var = ?` 在 蓝色开始-128 至 127蓝色结束 范围内的赋值，Integer 对象是在 IntegerCache.cache 产生，会复用已有对象，这个区间内的 Integer 值可以直接使用 == 进行判断，但是这个区间之外的所有数据，都会在堆上产生，并不会复用已有对象，这事一个大坑，推荐使用 equals 方法进行判断。
+说明： 对于 `Integer var = ?` 在 蓝色开始-128 至 127 蓝色结束 范围内的赋值，Integer 对象是在 IntegerCache.cache 产生，会复用已有对象，这个区间内的 Integer 值可以直接使用 == 进行判断，但是这个区间之外的所有数据，都会在堆上产生，并不会复用已有对象，这事一个大坑，推荐使用 equals 方法进行判断。
 8. 关于基本数据类型与包装数据类型的使用标准如下：
 	1 【强制】 所有的 POJO 类属性必须使用包装数据类型。
 	2 【强制】 RPC 方法的返回值和参数必须使用包装数据类型。
 	3 【推荐】 所有的局部变量使用基本数据类型。
 说明： POJO 类属性没有初始值是提醒使用者在需要使用时，必须自己显示的进行赋值，任何 NPE 问题，或者入库检查，都由使用者来保证。
-正例： 数据库的差U型那结果可能是 null，因为自动拆箱，用基本数据类型接收有 NPE 风险。
+正例： 数据库的差 U 型那结果可能是 null，因为自动拆箱，用基本数据类型接收有 NPE 风险。
 反例： 比如显示成交总额涨跌情况，即正负 x%，x 为基本数据类型，调用的 RPC 服务，调用不成功时，返回的是默认值，页面显示：0%，这是不合理的，应该显示成中划线 -。所以包装数据类型的 null 值，能够表示额外的信息，如：远程调用失败、异常退出等。
 9. 【强制】 定义 DO/DTO/VO 等 POJO 类时，不要设定任何属性蓝色开始默认值蓝色结束。
 反例： POJO 类的 gmtCreate 默认值为 `new Date();`，但是这个属性在数据提取时并没有置入具体值，在更新其它字段时又附带更新了此字段，导致创建时间被修改成当前时间。
@@ -374,7 +374,7 @@ new Comparator<Student>() {
 ```
 9. 【推荐】 集合初始化时，指定集合初始值大小。
 说明： HashMap 使用 HashMap(int initialCapacity) 初始化。
-正例： initialCapacity = (蓝色开始需要存储的元素个数 / 负载因子) + 1蓝色结束。注意蓝色开始负载因子（即 loader factor）蓝色结束默认为 0.75，如果暂时无法确定初始值大小，请设置为 16.
+正例： initialCapacity = (蓝色开始需要存储的元素个数 / 负载因子) + 1 蓝色结束。注意蓝色开始负载因子（即 loader factor）蓝色结束默认为 0.75，如果暂时无法确定初始值大小，请设置为 16.
 反例： HashMap 需要放置 1024 个元素，由于没有设置容量初始大小，随着元素不断增加，容量 7 次被迫扩大，resize 需要重建 hash 表，严重影响性能。
 10. 【推荐】 使用 entrySet 遍历 Map 类集合 KV，而不是 keySet 方式进行遍历。
 说明： keySet 其实是遍历了 2 次，一次是转为 Iterator 对象，另一次是从 hashMap 中去除 key 所对应的 value。而 entrySet 只是遍历了一次就把 key 和 value 都放到了 entry 中，效率更高。如果是 JDK 8，使用 Map.foreach 方法。
@@ -382,10 +382,10 @@ new Comparator<Student>() {
 11. 【推荐】 高度注意 Map 类集合 K/V 能不能存储 null 值的情况，如下表格：
 |**集合类**|**Key**|**Value**|**Super**|**说明**|
 |:---:|:---:|:---:|:---:|:---:|
-|Hashtable|橙色开始不允许为 null橙色结束|橙色开始不允许为 null橙色结束|Dictionary|线程安全|
-|ConcurrentHashMap|橙色开始不允许为 null橙色结束|橙色开始不允许为 null橙色结束|AbstractMap|分段锁技术|
-|TreeMap|红色开始不允许为 null红色结束|蓝色开始允许为 null蓝色结束|AbstractMap|线程不安全|
-|HashMap|蓝色开始允许为 null蓝色结束|蓝色开始允许为 null蓝色结束|AbstractMap|线程不安全|
+|Hashtable|橙色开始不允许为 null 橙色结束|橙色开始不允许为 null 橙色结束|Dictionary|线程安全|
+|ConcurrentHashMap|橙色开始不允许为 null 橙色结束|橙色开始不允许为 null 橙色结束|AbstractMap|分段锁技术|
+|TreeMap|红色开始不允许为 null 红色结束|蓝色开始允许为 null 蓝色结束|AbstractMap|线程不安全|
+|HashMap|蓝色开始允许为 null 蓝色结束|蓝色开始允许为 null 蓝色结束|AbstractMap|线程不安全|
 反例： 由于 HashMap 的安饶，很多人认为 ConcurrentHashMap 是可以置入 null 值，而事实上，存储 null 值时会抛出 NPE 异常。
 12. 【参考】 合理利用好集合的有序性（sort）和稳定性（order），避免集合的无序性（unsort）和不稳定性（unorder）带来的负面影响。
 说明： 有序性是指遍历的结果是按某种比较规则一次排列的。稳定性指集合每次遍历的元素次序是一定的。如：ArrayList 是 order/unsort；HashMap 是 unorder/unsort；TreeSet 是 order/sort。
@@ -408,9 +408,9 @@ public class TimerTaskThread extends Thread {
 说明： 使用线程池的好处是减少在创建和销毁线程上所花的时间以及系统资源的开销，解决资源不足的问题。如果不使用线程池，有可能造成系统创建大量同类线程而导致消耗完内存或“过度切换”的问题。
 4. 【强制】 线程池不允许使用 Executors 去创建，而是通过 ThreadPoolExecutor 的方式，这样的处理方式让写的同学更加明确线程池的运行规则，规避资源耗尽的风险。
 说明： Executors 返回的线程池对象的弊端如下：
-	1. 红色开始FixedThreadPool红色结束 和 红色开始SingleThreadPool红色结束：
+	1. 红色开始 FixedThreadPool 红色结束 和 红色开始 SingleThreadPool 红色结束：
 允许的请求队列长度为 Integer.MAX_VALUE，可能会堆积大量的请求，从而导致 OOM。
-	2. 红色开始CachedThreadPool红色结束 和 红色开始ScheduledThreadPool红色结束：
+	2. 红色开始 CachedThreadPool 红色结束 和 红色开始 ScheduledThreadPool 红色结束：
 允许的创建线程数量为 Integer.MAX_VALUE，可能会创建大量的线程，从而导致 OOM。
 5. 【强制】 SimpleDateFormat 是线程不安全的类，一般不要定义为 static 变量，如果定义为 static，必须加锁，或者使用 DateUtils 工具类。
 正例： 注意线程安全，使用 DateUtils。亦推荐如下处理：
@@ -544,9 +544,9 @@ put(elephant, fridge);
 ```
 方法名 put，加上两个有意义的变量名 elephant 和 fridge，已经说明了这是在干什么，语义清晰的代码不需要额外的注释。
 11. 【参考】 特殊注释标记，请注明标记人与标记时间。注意及时处理这些标记，通过标记扫描，经常清理此类标记。线上故障有时候就是来源于这些标记处的代码。
-	1. 待办事宜（蓝色开始TODO蓝色结束）：（标记人，标记时间，[预计处理时间]）
+	1. 待办事宜（蓝色开始 TODO 蓝色结束）：（标记人，标记时间，[预计处理时间]）
 	表示需要实现，但目前还未实现的功能。这实际上是一个 Javadoc 的标签，目前的 Javadoc 还没有实现，但已经被广泛使用。只能应用于类，接口和方法（因为它是一个 Javadoc 标签）。
-	2. 错误，不能工作（蓝色开始FIXME蓝色结束）：（标记人，标记时间，[预计处理时间]）
+	2. 错误，不能工作（蓝色开始 FIXME 蓝色结束）：（标记人，标记时间，[预计处理时间]）
 	在注释中用 FIXME 标记某代码是错误的，而且不能工作，需要及时纠正的情况。
 
 <br/>
@@ -560,7 +560,7 @@ Pattern pattern = Pattern.compile(规则);
 说明： 注意如果是 Boolean 包装类对象，优先调用 getXxx() 的方法。
 3. 【强制】 后台输送给页面的变量必须加 `$!{var}`——中间的感叹号。
 说明： 如果 var = null 或者不存在，那么 ${var} 会直接显示在页面上。
-4. 【强制】 注意 Math.random() 这个方法返回是 double 类型，注意取值的范围 0 ≤ x < 1 （能够取到蓝色开始零蓝色结束值，注意除零异常），如果想获取整数类型的随机数，不要将 x 放大 10 的若干倍然后取整，直接使用 Random 对象的 蓝色开始nextInt蓝色结束 或者 蓝色开始nextLong蓝色结束 方法。
+4. 【强制】 注意 Math.random() 这个方法返回是 double 类型，注意取值的范围 0 ≤ x < 1 （能够取到蓝色开始零蓝色结束值，注意除零异常），如果想获取整数类型的随机数，不要将 x 放大 10 的若干倍然后取整，直接使用 Random 对象的 蓝色开始 nextInt 蓝色结束 或者 蓝色开始 nextLong 蓝色结束 方法。
 5. 【强制】 获取当前毫秒数 `System.currentTimeMillis();` 而不是 `new Date().getTime();`
 说明： 如果想获取更加精确地纳秒级时间值，使用 `System.nanoTime()` 的方式。在 JDK 8 中，针对统计时间等场景，推荐使用 Instant 类。
 6. 【推荐】 不要在视图模板中加入任何复杂的逻辑。
@@ -584,7 +584,7 @@ Pattern pattern = Pattern.compile(规则);
 7. 【强制】 不能再 finally 快中使用 return，finally 块中的 return 返回后方法结束执行，不会再执行 try 块中的 return 语句。
 8. 【强制】 捕获异常与抛异常，必须是完全匹配，或者捕获异常是抛异常的父类。
 说明： 如果预期对方抛的是绣球，实际接到的是铅球，就会产生意外情况。
-9. 【推荐】 方法的蓝色开始返回值可以为 null蓝色结束，不强制返回空集合，或者空对象等，必须添加注释充分说明什么情况下回返回 null 值。调用方需要进行 null 判断放置 NPE 问题。
+9. 【推荐】 方法的蓝色开始返回值可以为 null 蓝色结束，不强制返回空集合，或者空对象等，必须添加注释充分说明什么情况下回返回 null 值。调用方需要进行 null 判断放置 NPE 问题。
 说明： 本手册明确放置 NPE 是调用者的责任。即使被调用方法返回空集合或者空对象，对调用者来说，也并非高枕无忧，必须考虑到远程调用失败、序列化失败、运行时异常等场景返回 null 的情况。
 10. 【推荐】 防止 NPE，是程序员的基本修养，注意 NPE 产生的场景：
 	1. 返回类型为基本数据类型，return 包装数据类型的对象时，自动拆箱有可能产生 NPE。

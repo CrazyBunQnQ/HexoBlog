@@ -28,7 +28,7 @@ Servlet 实现上传和下载的依赖包：
 创建 Servlet:
 ```Java
 //1. 获取 FileItemFactory 类
-FileItemFactory fif = new DiskFileItemFactory();//接口类，需要new 实现类
+FileItemFactory fif = new DiskFileItemFactory();//接口类，需要 new 实现类
 //2. 获取 ServletFileUpload 类
 ServletFileUpload sfu = new ServletFileUpload(fif);
 //3. 解析 request 对象

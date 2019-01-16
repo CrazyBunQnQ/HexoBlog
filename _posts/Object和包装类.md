@@ -64,7 +64,7 @@ Object 类中的 toString 方法返回的字符串为：类名@散列码
 
 </br>
 ### hashCode 方法
-hashCode() 方法又叫[散列函数](/2017/03/19/HashCode散列码/#散列函数)，**若重写 equals 方法则必须重写 hashCode 方法。**
+hashCode() 方法又叫[散列函数](/2017/03/19/HashCode 散列码/#散列函数)，**若重写 equals 方法则必须重写 hashCode 方法。**
 
 </br>
 ### == 和 equals 区别 ###
@@ -114,7 +114,7 @@ hashCode() 方法又叫[散列函数](/2017/03/19/HashCode散列码/#散列函�
 </br>
 ### 包装类转基本类型 ###
 
-- 调用XXXValue(XXX)，返回基本类型。如 `IntegerValue(new Integer(123))`
+- 调用 XXXValue(XXX)，返回基本类型。如 `IntegerValue(new Integer(123))`
 
 </br>
 ### 字符串转换基本类型： ###

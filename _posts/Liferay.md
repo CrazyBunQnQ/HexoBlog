@@ -222,7 +222,7 @@ public void doView(RenderRequest renderRequest,
 
 <br>
 
-#### 自定义Action方法
+#### 自定义 Action 方法
 
 ```java
 public void update(ActionRequest request, ActionResponse response) {
@@ -288,19 +288,19 @@ String userName = ParamUtil.getString(renderRequest, "uName", "baozi");
 try {
     //获取用户
     User user = PortalUtil.getUser(renderRequest);
-    //获取公司getCompany
+    //获取公司 getCompany
 } catch (PortalException | SystemException e) {
     e.printStackTrace();
 }
 
 /*============================值获取===========================*/
-//获取用户id
+//获取用户 id
 long userId = PortalUtil.getUserId(httpServletRequest);
 long userId = PortalUtil.getUserId(portletRequest);
 //getScopeGroupId
 //getCompanyId
-//获取当前端口getPortalPort
-//获取当前地址getPortalUrl(renderRequest)
+//获取当前端口 getPortalPort
+//获取当前地址 getPortalUrl(renderRequest)
 ```
 
 <br>
@@ -363,7 +363,7 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
 
 使用 Liferay 提交表单需要先引用标签 `actionURL` 或 `renderURL`
 
-1. actionURL：提交到指定方法中, 例如在后台自定义 [`update`](#自定义Action方法) 方法，则 name 属性为 update
+1. actionURL：提交到指定方法中, 例如在后台自定义 [`update`](#自定义 Action 方法) 方法，则 name 属性为 update
 
     ```html
     <portlet:actionURL var="updateForm" name="update"></portlet:actionURL>
@@ -390,7 +390,7 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
 
 <br>
 
-## Portlet标签
+## Portlet 标签
 
 ### defineObjects
 
@@ -516,7 +516,7 @@ ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKes.THTM
 
 <br>
 
-## Portlet之间的通信
+## Portlet 之间的通信
 
 
 

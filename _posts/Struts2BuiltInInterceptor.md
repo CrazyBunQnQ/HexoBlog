@@ -72,10 +72,10 @@ Struts 2 中有很多内置拦截器，本文将简单的
 **作用域拦截器：**这是范围转换拦截器，它可以将 Action 状态信息保存到 HttpSession 范围，或者保存到 ServletContext 范围内。
 
 ## servletConfig
-**Servlet 配置拦截器：**如果某个 Action 需要直接访问 Servlet API，就是通过这个拦截器实现的，它提供访问 HttpServletRequest 和 HttpServletResponse 的方法，以map方式访问。
+**Servlet 配置拦截器：**如果某个 Action 需要直接访问 Servlet API，就是通过这个拦截器实现的，它提供访问 HttpServletRequest 和 HttpServletResponse 的方法，以 map 方式访问。
 
 ## roles
-**角色拦截器：**这是一个 JAAS（Java Authentication and Authorization Service，Java授权和认证服务）拦截器，只有当浏览者取得合适的授权后，才可以调用被该拦截器拦截的 Action。
+**角色拦截器：**这是一个 JAAS（Java Authentication and Authorization Service，Java 授权和认证服务）拦截器，只有当浏览者取得合适的授权后，才可以调用被该拦截器拦截的 Action。
 
 ## timer
 **计时拦截器：**这个拦截器负责输出 Action 的执行时间，在分析该 Action 的性能瓶颈时比较有用。

@@ -102,7 +102,7 @@ Map 接口定义了存储所谓的 key-value，即键值对。Key 可以看成 v
 ```
 
 ### Collection values()
-用于返回当前 Map 中所有的 value（值），存入一个 Collection 集合。（因为 value可以重复，所以不是 Set）
+用于返回当前 Map 中所有的 value（值），存入一个 Collection 集合。（因为 value 可以重复，所以不是 Set）
 
 ```java
 	Collection<Integer> c = m.values();
@@ -110,7 +110,7 @@ Map 接口定义了存储所谓的 key-value，即键值对。Key 可以看成 v
 ```
 
 ### Set<Entry<K,V>> entrySet()
-**会将当前Map中每一组 key-value封装为一个 Entry对象，并存入一个Set集合返回。**
+**会将当前 Map 中每一组 key-value 封装为一个 Entry 对象，并存入一个 Set 集合返回。**
 也就是新的 Set 集合中每个元素都是一个 Entry 对象。每一个 Entry 对象都对应一个 key-value 键值对
 
 ```java

@@ -19,7 +19,7 @@ tag:
 
 ![代理模式](http://wx4.sinaimg.cn/mw690/a6e9cb00ly1fgb9aigh6lj20ez08ft8r.jpg)
 1. RealSubject 是委托类，Proxy 是代理类；
-2. Subject是委托类和代理类的接口；
+2. Subject 是委托类和代理类的接口；
 3. request() 是委托类和代理类的共同方法。
 >代理模式的关键点是：代理对象与目标对象：代理对象是对目标对象的扩展，并会调用目标对象。
 
@@ -175,11 +175,11 @@ public void proxyTest2() throws NoSuchMethodException, IllegalAccessException, I
 上面的静态代理和 JDK 动态代理模式都要求目标对象实现一个接口，但是有时候目标对象只是一个单独的对象，并没有实现任何的接口，这个时候就可以使用以目标对象子类的方式类实现代理，这种方法就叫做：Cglib 代理
 
 Cglib 代理也叫作子类代理，它是在内存中构建一个子类对象从而实现对目标对象功能的扩展。
-- JDK 的动态代理有一个限制，就是使用动态代理的对象必须实现一个或多个接口，如果想代理没有实现接口的类，就可以使用Cglib实现。
+- JDK 的动态代理有一个限制，就是使用动态代理的对象必须实现一个或多个接口，如果想代理没有实现接口的类，就可以使用 Cglib 实现。
 - Cglib 是一个强大的高性能的代码生成包，它可以在运行期扩展 Java 类与实现 Java 接口。它广泛的被许多 AOP 的框架使用，例如 Spring AOP 和 synaop，为他们提供方法的 interception（拦截）。
 - Cglib 包的底层是通过使用一个小而快的字节码处理框架 ASM 来转换字节码并生成新的类。不鼓励直接使用 ASM，因为它要求你必须对 JVM 内部结构包括 class 文件的格式和指令集都很熟悉。
 
-**Cglib子类代理实现方法：**
+**Cglib 子类代理实现方法：**
 1. 需要引入 Cglib 的 jar 文件，但是 Spring 的核心包中已经包括了 Cglib 功能，所以直接引入 `spring-core-x.x.x.jar` 即可。
 2. 引入依赖包后,就可以在内存中动态构建子类。
 3. 代理的类不能定义为 final，否则会报错。

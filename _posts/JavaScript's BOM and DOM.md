@@ -8,8 +8,8 @@ tags:
 - JavaScript
 ---
 
-- [BOM：浏览器窗口对象](/2017/04/14/BOM和DOM/#HTML BOM 对象)
-- [DOM：文档对象](/2017/04/14/BOM和DOM/#HTML DOM 对象)
+- [BOM：浏览器窗口对象](/2017/04/14/BOM 和 DOM/#HTML BOM 对象)
+- [DOM：文档对象](/2017/04/14/BOM 和 DOM/#HTML DOM 对象)
 
 <!--more-->
 

@@ -24,7 +24,7 @@ tags:
 function rand(){
     min=$1
     max=$(($2-$min+1))
-    #增加一个10位的数再求余
+    #增加一个 10 位的数再求余
     num=$(($RANDOM+1000000000))
     echo $(($num%$max+$min))
 }
@@ -47,7 +47,7 @@ ssh username@ip
 
 ```bash
 # 将本地文件上传到服务器的目的路径
-scp -P 端口号 本地文件路径 username@服务器ip:目的路径
+scp -P 端口号 本地文件路径 username@服务器 ip:目的路径
 # 将服务器上目的路径的文件下载到本地路径
 scp -P 端口号 username@ip:路径 本地路径
 ```
