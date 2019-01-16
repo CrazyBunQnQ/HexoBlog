@@ -8,6 +8,7 @@ tags:
 ---
 
 在 IntelliJ IDEA 中有一个强大的 Mybatis 收费插件 —— MyBatis Plugin.
+这篇文章要做的就是...破解它...
 
 >经济条件允许的话推荐使用正版...
 
