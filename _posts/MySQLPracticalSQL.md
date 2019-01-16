@@ -1,5 +1,5 @@
 ---
-title: MySQL 常用 sql
+title: MySQL 常用 SQL
 date: 2018-09-22 22:22:22
 categories: 数据库
 tags:

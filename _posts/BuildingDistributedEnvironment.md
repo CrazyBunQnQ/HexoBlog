@@ -1,6 +1,6 @@
 ---
 title: VM 虚拟机(CentOS)搭建 Dubbo、Zookeeper 分布式环境
-date: 2019-01-01 11:11:11
+date: 2018-11-11 11:11:11
 categories: 
 - Java
 - 分布式
