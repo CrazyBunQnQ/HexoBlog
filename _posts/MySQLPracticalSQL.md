@@ -34,6 +34,11 @@ select microsecond('12:00:00.123456');
 ### 类型转换及字符串拼接
 
 - 类型转换：`CAST(value AS TYPE)`
+
+    ```mysql
+    # 数字转字符串
+    cast(1 as char);
+    ```
 - 字符串拼接：`CONCAT(str1, str2, str3...)`
 
 示例：两个数字拼接成分数
@@ -94,6 +99,21 @@ SET M = N - 1;
       select distinct Salary from Employee order by Salary desc limit M, 1
   );
 END
+```
+
+#### 分数排名
+
+如果两个分数相同，则两个分数排名（Rank）相同。请注意，平分后的下一个名次应该是下一个连续的整数值。换句话说，名次之间不应该有 “间隔”。
+
+```mysql
+select Score,
+       cast(case
+         when @prevRank = Score then @curRank
+         when @prevRank := Score then @curRank := @curRank + 1
+         else @curRank := @curRank + 1
+         end as signed) as Rank
+from (select Score from Scores order by Score desc) p,
+  (select @curRank :=0, @prevRank := null) r;
 ```
 
 ## 常见问题
