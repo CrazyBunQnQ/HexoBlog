@@ -74,6 +74,24 @@ SELECT CONCAT(CAST(1 AS CHAR), '/', CAST(2 AS CHAR)) AS RATIO FROM DUAL;
         select * from t group by a, b having count(a) > 1 and count(b) > 1;
         ```
 
+### 同比上升的记录
+
+从 `t` 表中查询所有与前 n 天相比，`a` 字段数据有所提高的数据。
+
+```mysql
+select t_cur.* from
+    t t_cur
+  join
+    t t_old
+  on
+    datediff(t_cur.date, t_old.date) = n
+  and t_cur.a > t_old.a;
+```
+
+>`date` 是日期
+
+[例题：给定一个 `Weather` 表，编写一个 SQL 查询，来查找与之前（昨天的）日期相比温度更高的所有日期的 Id。](https://leetcode-cn.com/problems/rising-temperature/)
+
 ## 函数
 
 ```mysql
