@@ -94,7 +94,7 @@ select t_cur.* from
 
 ## 函数
 
-```mysql
+```sql
 CREATE FUNCTION 函数名(参数 参数数据类型) RETURNS 返回数据类型
 BEGIN
 # 自定义变量
@@ -116,7 +116,7 @@ END
 
 #### 查询第 N 高的薪水
 
-```mysql
+```sql
 CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
 BEGIN
 Declare M INT;
@@ -131,7 +131,7 @@ END
 
 如果两个分数相同，则两个分数排名（Rank）相同。请注意，平分后的下一个名次应该是下一个连续的整数值。换句话说，名次之间不应该有 “间隔”。
 
-```mysql
+```sql
 select Score,
        cast(case
          when @prevRank = Score then @curRank
@@ -146,12 +146,12 @@ from (select Score from Scores order by Score desc) p,
 
 ### `limit m, n` 与 `limit m offset n` 区别
 
-```mysql
+```sql
 select * from table limit m,n;                 
 ```
 `limit m, n` 含义是跳过 m 条取出 n 条数据，limit 后面是从第 m 条开始读，读取 n 条信息，即从第 m + 1 条开始读取 n 条数据
 
-```mysql
+```sql
 select * from table limit m offset n;
 ```
 `limit m offset n` 含义是从第 n 条（不包括）数据开始取出 m 条数据，limit 后面跟的是 m 条数据，offset 后面是从第 n 条开始读取，即从 n+1 条开始读取 m 条数据
