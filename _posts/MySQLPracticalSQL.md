@@ -59,12 +59,20 @@ SELECT CONCAT(CAST(1 AS CHAR), '/', CAST(2 AS CHAR)) AS RATIO FROM DUAL;
     ```
     >必须要有 `select id from (...) as C`
 - 查找重复记录: 根据 t 表中的 a, b 字段查找 t 表中多余的重复记录(不包含 rowid 最小的记录)
+    - 方法一：子查询 (较快)
 
-    ```sql
-    select * from t
-        where (a, b) in (select a, b from t group by a, b having count(id) > 1)
-        and id not in (select min(id) from t group by a, b having count(id) > 1);
-    ```
+
+        ```mysql
+        select * from 
+          (select a, b, count(a) as numa, count(b) as numb from t group by a, b) as e
+        where numa > 1 and numb > 1;
+        ```
+    - 方法二：`group by` 和 `having` (较慢)
+
+
+        ```mysql
+        select * from t group by a, b having count(a) > 1 and count(b) > 1;
+        ```
 
 ## 函数
 
