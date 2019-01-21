@@ -90,6 +90,40 @@ select t_cur.* from
 
 [例题：给定一个 `Weather` 表，编写一个 SQL 查询，来查找与之前（昨天的）日期相比温度更高的所有日期的 Id。](https://leetcode-cn.com/problems/rising-temperature/)
 
+### 交换相邻数据
+
+- 交换 `id` 为连续整数的 `t` 表中两条相邻数据的 `id`
+    - 方法一：自定义变量
+
+
+        ```mysql
+        select @num:=case
+          when t.id%2=1 and t.id=tmp.id then t.id
+          when t.id%2=1 then (t.id+1)
+          when t.id%2=0 then (t.id-1)
+          else 0 end id, t.other
+        from t,
+           (select max(id) id from t) tmp
+        order by id;
+        ```
+    - 方法二：`union`
+
+        ```mysql
+        select ((id + 1) div 2 * 2 - mod(id + 1, 2)) id, other
+        from t
+        where ((id + 1) div 2) * 2 <= (select count(1) from t)
+        union
+        select *
+        from t
+        where ((id + 1) div 2) * 2 > (select count(1) from t)
+        order by id;
+        ```
+- 交换指定字段的数据
+
+
+    ```mysql
+    ```
+
 ## 函数
 
 ```mysql
