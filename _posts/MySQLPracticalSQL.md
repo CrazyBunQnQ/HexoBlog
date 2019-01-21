@@ -15,7 +15,7 @@ top: 7
 
 ### 查询库名
 
-```sql
+```mysql
 select database();
 ```
 ## 常用操作
@@ -24,7 +24,7 @@ select database();
 
 MySQL 中没有产生微秒的函数，now() 只能精确到秒，也没有存储带有毫秒、微秒的日期时间类型。但是却有提取微妙的函数...
 
-```sql
+```mysql
 # 显示当前时间戳(秒)
 select unix_timestamp(now());
 # 提取时间中的微秒 123456
@@ -43,7 +43,7 @@ select microsecond('12:00:00.123456');
 
 示例：两个数字拼接成分数
 
-```sql
+```mysql
 SELECT CONCAT(CAST(1 AS CHAR), '/', CAST(2 AS CHAR)) AS RATIO FROM DUAL;
 ```
 
@@ -53,7 +53,7 @@ SELECT CONCAT(CAST(1 AS CHAR), '/', CAST(2 AS CHAR)) AS RATIO FROM DUAL;
 
 - 删除重复记录: 根据 t 表中的 a, b 字段删除 t 表中多余的重复记录
 
-    ```sql
+    ```mysql
     delete from t where id not in (select id from
         (select min(id) as id from t group by a, b) as c);
     ```
@@ -80,11 +80,9 @@ SELECT CONCAT(CAST(1 AS CHAR), '/', CAST(2 AS CHAR)) AS RATIO FROM DUAL;
 
 ```mysql
 select t_cur.* from
-    t t_cur
-  join
-    t t_old
-  on
-    datediff(t_cur.date, t_old.date) = n
+    t t_cur, t t_old
+  where
+    to_days(t_cur.date) - to_days(t_old.date) = n
   and t_cur.a > t_old.a;
 ```
 
@@ -94,7 +92,7 @@ select t_cur.* from
 
 ## 函数
 
-```sql
+```mysql
 CREATE FUNCTION 函数名(参数 参数数据类型) RETURNS 返回数据类型
 BEGIN
 # 自定义变量
@@ -116,7 +114,7 @@ END
 
 #### 查询第 N 高的薪水
 
-```sql
+```mysql
 CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
 BEGIN
 Declare M INT;
@@ -131,7 +129,7 @@ END
 
 如果两个分数相同，则两个分数排名（Rank）相同。请注意，平分后的下一个名次应该是下一个连续的整数值。换句话说，名次之间不应该有 “间隔”。
 
-```sql
+```mysql
 select Score,
        cast(case
          when @prevRank = Score then @curRank
@@ -146,12 +144,12 @@ from (select Score from Scores order by Score desc) p,
 
 ### `limit m, n` 与 `limit m offset n` 区别
 
-```sql
+```mysql
 select * from table limit m,n;                 
 ```
 `limit m, n` 含义是跳过 m 条取出 n 条数据，limit 后面是从第 m 条开始读，读取 n 条信息，即从第 m + 1 条开始读取 n 条数据
 
-```sql
+```mysql
 select * from table limit m offset n;
 ```
 `limit m offset n` 含义是从第 n 条（不包括）数据开始取出 m 条数据，limit 后面跟的是 m 条数据，offset 后面是从第 n 条开始读取，即从 n+1 条开始读取 m 条数据
