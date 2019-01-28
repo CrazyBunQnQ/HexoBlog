@@ -149,3 +149,129 @@ int[] arr = {0b10, 0B101, 0b110};// 等同于 int[] arr = {2, 5, 6};
     list.add("A");
     //list.addAll(new ArrayList<>());// 这里需要添加泛型类型
     ```
+
+### 改进编译警告和错误
+
+示例 1:
+
+```java
+List l = new ArrayList<Number>();
+List<String> ls = l;// 未经检查的警告
+l.add(0, new Integer(42));// 另一个未经检查的警告
+String s = ls.get(0);// 抛出 ClassCastException 异常
+```
+
+示例 2:
+
+```java
+public static <T> void addToList (List<T> listArg, T... elements) {
+   for (T x : elements) {
+     listArg.add(x);
+   }
+}
+```
+
+在可变参数方法中传递非具体化参数，你会得到一个警告：
+
+>warning: [varargs] Possible heap pollution from parameterized vararg type.
+
+要消除警告，可以有三种方式:
+
+1. 加 annotation `@SafeVarargs`
+2. 加 annotation `@SuppressWarnings({"unchecked", "varargs"})`
+3. 使用编译器参数 `–Xlint:varargs;`
+
+### ThreadLocalRandom
+
+ThreadLocalRandom 为并发下随机数生成类，保证并发下的随机数生成的线程安全
+
+>实际上就是使用 threadlocal
+
+```java
+final int MAX = 100000;
+ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
+long start = System.nanoTime();
+for (int i = 0; i < MAX; i++) {
+    threadLocalRandom.nextDouble();
+}
+long end = System.nanoTime() - start;
+System.out.println("use time1 : " + end);
+long start2 = System.nanoTime();
+for (int i = 0; i < MAX; i++) {
+    Math.random();
+}
+long end2 = System.nanoTime() - start2;
+System.out.println("use time2 : " + end2); 
+```
+
+#### ThreadLocalRandom 类官方文档
+
+ThreadLocalRandom 继承自 Random
+
+>A random number generator isolated to the current thread. Like the global Random generator used by the Math class, a ThreadLocalRandom is initialized with an internally generated seed that may not otherwise be modified. When applicable, use of ThreadLocalRandom rather than shared Random objects in concurrent programs will typically encounter much less overhead and contention. Use of ThreadLocalRandom is particularly appropriate when multiple tasks (for example, each a ForkJoinTask) use random numbers in parallel in thread pools.
+>
+>Usages of this class should typically be of the form: ThreadLocalRandom.current().nextX(...) (where X is Int, Long, etc). When all usages are of this form, it is never possible to accidently share a ThreadLocalRandom across multiple threads.
+>
+>This class also provides additional commonly used bounded random generation methods.
+
+随机数生成器被隔离到当前线程。与 Math 类使用的全局 Random 生成器一样，ThreadLocalRandom 使用内部生成的种子进行初始化，否则可能无法修改。适用时，在并发程序中使用 ThreadLocalRandom 而不是共享 Random 对象通常会遇到更少的开销和争用。当多个任务（例如，每个 ForkJoinTask）在线程池中并行使用随机数时，使用 ThreadLocalRandom 是特别合适的。
+
+此类的用法通常应为以下形式: `ThreadLocalRandom.current().nextX(...)`（其中 X 为 Int, Long 等）。当所有用法都是这种形式时，永远不可能在多个线程中意外地共享 ThreadLocalRandom。
+
+该类还提供了其他常用的有界随机生成方法。
+
+#### 方法
+
+- current
+    - public static ThreadLocalRandom current()
+    - Returns: 当前线程的 ThreadLocalRandom
+- setSeed
+    - public void setSeed(long seed)
+    - Overrides: Random 类的 setSeed 方法
+    - Parameters: seed - 最初的种子
+    - Throws: UnsupportedOperationException - always
+- next
+    - protected int next(int bits)
+    - Description (从 Random 类中复制过来的):
+        - 生成下一个伪随机数。子类应该覆盖它，因为所有其他方法都使用它
+        - `next` 的一般约定是它返回一个 int 值，如果参数位在 1 和 32 之间(包括)，那么返回值的许多低位将是(近似)独立选择的位值，每个位值都是(大约)同样可能是 0 或 1。`next` 方法由类 `Random` 实现，通过原子方式将种子更新为 `(seed * 0x5DEECE66DL + 0xBL) & ((1L << 48) - 1)` 并返回 `(int)(seed >>> (48 - bits))`.
+            >The general contract of next is that it returns an int value and if the argument bits is between 1 and 32 (inclusive), then that many low-order bits of the returned value will be (approximately) independently chosen bit values, each of which is (approximately) equally likely to be 0 or 1.
+            >
+            >The method next is implemented by class Random by atomically updating the seed to `(seed * 0x5DEECE66DL + 0xBL) & ((1L << 48) - 1)` and returning `(int)(seed >>> (48 - bits))`.
+        - 这是[线性同余伪随机数](https://zhuanlan.zhihu.com/p/36301602)生成器，由 D.H.Lehmer 所定义并由 Donald E.Knuth 在《The Computer of Computer Programming，Volume 3：Seminumerical Algorithms，section 3.2.1》中描述。
+            >This is a linear congruential pseudorandom number generator, as defined by D. H. Lehmer and described by Donald E. Knuth in The Art of Computer Programming, Volume 3: Seminumerical Algorithms, section 3.2.1.
+    - Overrides: Random 类的 next 方法
+    - Parameters: bits - 随机位
+    - Returns: 来自此随机数生成器序列的下一个伪随机值
+- nextInt
+    - public int nextInt(int least, int bound)
+    - Parameters:
+        - least - 下限
+        - bound - 上限(不包括)
+    - Returns: 伪随机，在给定的最小值(包括)和绑定(不包括)之间均匀分布的值。
+    - Throws: IllegalArgumentException - 如果最小值大于或等于上限
+- nextLong
+    - public long nextLong(long n)
+    - Parameters: n - 要返回的随机数的界限。必须是正数。
+    - Returns: 伪随机，在 0(包括)和指定值(不包括)之间均匀分布的值。
+    - Throws: IllegalArgumentException - 如果 n 不为正数
+- nextLong
+    - public long nextLong(long least, long bound)
+    - Parameters:
+        - least - 下限
+        - bound - 上限(不包括)
+    - Returns: 伪随机，在给定的最小值(包括)和绑定(不包括)之间均匀分布的值。
+    - Throws: IllegalArgumentException - 如果最小值大于或等于上限
+- nextDouble
+    - public double nextDouble(double n)
+    - Parameters: n - 要返回的随机数的界限。必须是正数。
+    - Returns: 伪随机，在 0(包括)和指定值(不包括)之间均匀分布的值。
+    - Throws: IllegalArgumentException - 如果 n 不为正数
+- nextDouble
+    - public double nextDouble(double least, double bound)
+    - Parameters:
+        - least - 下限
+        - bound - 上限(不包括)
+    - Returns: 伪随机，在给定的最小值(包括)和绑定(不包括)之间均匀分布的值。
+    - Throws: IllegalArgumentException - 如果最小值大于或等于上限
+
