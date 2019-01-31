@@ -689,13 +689,15 @@ Files.copy(source, newdir.resolve(source.getFileName());
 
 #### Files.move
 
-Path move(): 将指定目标路径的文件转移到其他路径下，并删除源文件
+将文件移动或重命名为目标文件。
 
-Move or rename a file to a target file.
+默认情况下，此方法尝试将文件移动到目标文件，如果目标文件存在则失败，除非源文件和目标是同一文件，在这种情况下此方法实际上是无效的。如果文件是符号链接，则移动符号链接本身而不是原文件。可以调用此方法来移动空目录。在一些实现中，目录具有用于创建目录时创建的特殊文件或链接的条目。在这样的实现中，当仅存在特殊条目时，目录被认为是空的。
 
-By default, this method attempts to move the file to the target file, failing if the target file exists except if the source and target are the same file, in which case this method has no effect. If the file is a symbolic link then the symbolic link itself, not the target of the link, is moved. This method may be invoked to move an empty directory. In some implementations a directory has entries for special files or links that are created when the directory is created. In such implementations a directory is considered empty when only the special entries exist. When invoked to move a directory that is not empty then the directory is moved if it does not require moving the entries in the directory. For example, renaming a directory on the same FileStore will usually not require moving the entries in the directory. When moving a directory requires that its entries be moved then this method fails (by throwing an IOException). To move a file tree may involve copying rather than moving directories and this can be done using the copy method in conjunction with the Files.walkFileTree utility method.
+当调用移动非空目录时，如果不需要移动目录中的条目，则移动目录。例如，重命名同一 FileStore 上的目录通常不需要移动目录中的条目。
 
-The options parameter may include any of the following:
+若移动目录时需要移动其条目，则此方法失败(通过抛出 IOException)。移动文件树可能涉及复制而不是移动目录，这可以使用 [`Files.copy`](#Files-copy) 方法与 `Files.walkFileTree` 实用程序方法一起完成。
+
+options 参数可以包括以下任何一项：
 
 |      Option      | Description                                                                                                                                                                                                                                                                                                          |
 |:----------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
