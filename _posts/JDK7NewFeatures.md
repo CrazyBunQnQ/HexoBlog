@@ -763,10 +763,11 @@ Files.move(source, newdir.resolve(source.getFileName()), REPLACE_EXISTING);
 
 #### close
 
-Closes this watch service.
-If a thread is currently blocked in the take or poll methods waiting for a key to be queued then it immediately receives a ClosedWatchServiceException. Any valid keys associated with this watch service are invalidated.
+关闭此监视服务
 
-After a watch service is closed, any further attempt to invoke operations upon it will throw ClosedWatchServiceException. If this watch service is already closed then invoking this method has no effect.
+如果某个线程当前在 [`take`](#take) 或 [`poll` 方法](#poll)中被阻塞，等待一个键排队，那么它会立即收到一个 ClosedWatchServiceException。与此监视服务关联的任何有效密钥均无效。
+
+关闭监视服务后，任何进一步尝试调用它的操作都将抛出 ClosedWatchServiceException。如果此监视服务已关闭，则调用此方法无效。
 
 - void close() throws IOException
 - 参见：[`AutoCloseable.close` 和 `Closeable.close`](#try-可以自动关闭资源)

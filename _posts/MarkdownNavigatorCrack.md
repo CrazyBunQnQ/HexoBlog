@@ -41,15 +41,19 @@ tags:
 ## Mac 系统破解插件
 
 打开终端输入命令：
-```
+
+```bash
 cd ~/Library/Application\ Support
 ls
 ```
+
 根据查到的 IDEA 版本文件夹，继续输入下面的命令进入插件目录：
-```
+
+```bash
 cd IntelliJIdea2017.1/idea-multimarkdown
 open lib
 ```
+
 输入完上述指令后会弹出插件目录，将修改好的 multimarkdown.jar 文件替换进去，重启 IDEA 即可，如图：
 
 ![替换 jar 包](http://wx2.sinaimg.cn/mw690/a6e9cb00ly1fggoxvajfnj21b61hie2s.jpg)
@@ -60,7 +64,7 @@ open lib
 
 ![顶部菜单](http://wx1.sinaimg.cn/mw690/a6e9cb00ly1fgh5r3ktnrj21ec0cftc9.jpg)
 
-![破解成功](http://wx1.sinaimg.cn/large/a6e9cb00ly1fzpvwns7oej20u00uwnc2.jpg)
+![破解成功](http://wx4.sinaimg.cn/large/a6e9cb00ly1fzpwqwjxmqj20u00uwap1.jpg)
 
 >这个天数，哈哈哈，设置 `Integer.MAX_VALUE` 是不是有点高了。。。
 
@@ -97,7 +101,7 @@ cp releases/2.7.0/source/com/vladsch/idea/multimarkdown/license/LicenseAgent.jav
 
 ### 编译文件
 
-打开  文件你会发现很多报错，无法编译，是因为没有依赖包
+打开 `LicenseAgent.java` 文件你会发现很多报错，无法编译，是因为没有依赖包
 
 编译前首先需要引入 IDEA 和 multimarkdown 的依赖包
 
