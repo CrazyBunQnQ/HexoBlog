@@ -15,7 +15,7 @@ tags:
 
 ## Switch 语句允许使用 String 类型
 
-这大概是最直观的修改了，我是听常用的...
+这大概是最直观的修改了，我是挺常用的...
 
 ```java
 String test = "a";
@@ -695,7 +695,7 @@ Files.copy(source, newdir.resolve(source.getFileName());
 
 当调用移动非空目录时，如果不需要移动目录中的条目，则移动目录。例如，重命名同一 FileStore 上的目录通常不需要移动目录中的条目。
 
-若移动目录时需要移动其条目，则此方法失败(通过抛出 IOException)。移动文件树可能涉及复制而不是移动目录，这可以使用 [`Files.copy`](#Files-copy) 方法与 `Files.walkFileTree` 实用程序方法一起完成。
+若移动目录时需要移动其条目，则此方法失败(通过抛出 IOException)。移动文件树可能涉及复制而不是移动目录，这可以使用 [`Files.copy` 方法](#Files-copy)与 `Files.walkFileTree` 实用程序方法一起完成。
 
 options 参数可以包括以下任何一项：
 
@@ -738,18 +738,84 @@ Files.move(source, newdir.resolve(source.getFileName()), REPLACE_EXISTING);
     - SecurityException - 对于默认提供程序，并且安装了安全管理器，将调用 `checkWrite` 方法以检查对源文件和目标文件的写访问权。
 
 >使用 Files 类型来管理文件，相对于传统的 I/O 方式来说更加方便和简单。因为具体的操作实现将全部移交给 NIO 2.0 API，开发人员则无需关注。
+>
+>这里只介绍几个常用方法，其他 Files 接口方法请看 JDK 7 文档
 
-<!--### WatchService
+### WatchService 接口
 
-Java7 还为开发人员提供了一套全新的文件系统功能，那就是文件监测。在此或许有很多朋友并不知晓文件监测有何意义及目，那么请大家回想下调试成热发布功能后的Web容器。当项目迭代后并重新部署时，开发人员无需对其进行手动重启，因为Web容器一旦监测到文件发生改变后，便会自动去适应这些“变化”并重新进行内部装载。Web容器的热发布功能同样也是基于文件监测功能，所以不得不承认，文件监测功能的出现对于Java文件系统来说是具有重大意义的。
-文件监测是基于事件驱动的，事件触发是作为监测的先决条件。开发人员可以使用java.nio.file包下的StandardWatchEventKinds类型提供的3种字面常量来定义监测事件类型，值得注意的是监测事件需要和WatchService实例一起进行注册。
-StandardWatchEventKinds类型提供的监测事件：
+监视已注册对象的更改和事件的监视服务。例如，文件管理器可以使用监视服务来监视目录以进行更改，以便在创建或删除文件时它可以更新其文件列表的显示。
 
-ENTRY_CREATE：文件或文件夹新建事件；
-ENTRY_DELETE：文件或文件夹删除事件；
-ENTRY_MODIFY：文件或文件夹粘贴事件；
+`java.nio.file.Watchable` 对象通过调用其 `register` 方法向 watch 服务注册，返回 WatchKey 来表示注册。当检测到某个对象的事件时，就会发出密钥的信号，如果当前没有发出信号，则将其排队到 watch 服务，以便被[调用 `poll`](#poll) 或 [`take` 方法](#take)的消费者检索到并处理该事件。一旦事件被处理完毕，消费者就会调用关键字的 `reset` 方法来重置关键字，该密钥允许向密钥发出信号，并通过进一步的事件重新排队。
 
-使用WatchService类实现文件监控完整示例：
+通过调用密钥的 `cancel` 方法取消注册监视服务。取消时排队的密钥将保留在队列中，直到被检索为止。根据对象，秘钥可能会自动取消。例如，假设监视目录并且监视服务检测到它已被删除或其文件系统不再可访问。当以这种方式取消密钥时，如果当前未发出信号，则发信号通知并排队。为了确保通知消费者，`reset` 方法的返回值指示密钥是否有效。
+
+多个并发消费者可以安全地使用监视服务。要确保只有一个使用者可以随时处理特定对象的事件，那么应该注意确保仅在处理事件之后调用密钥的 `cancel` 方法。可以随时调用 `close` 方法来关闭服务，但是会导致任何等待检索键的线程抛出 ClosedWatchServiceException。
+
+文件系统可以比检索或处理事件更快地报告事件，并且该实现可以对其可能累积的事件的数量施加未指定的限制。如果该实现有意丢弃事件，那么它会安排密钥的 `pollEvents` 方法返回事件类型为 `OVERFLOW` 的元素。消费者可以将此事件用作重新检查对象状态的触发器。
+
+当报告事件以指示已监视目录中的文件已被修改时，则无法保证已修改该文件的程序(或多个程序)已完成。应注意协调与可能正在更新文件的其他程序的访问。FileChannel 类定义了锁定文件区域以防其他程序访问的方法。
+
+>平台依赖
+>
+>观察来自文件系统的事件的实现旨在直接映射到可用的本机文件事件通知工具，或者在本机工具不可用时使用原始机制(例如轮询)。因此，关于如何检测事件，及时性以及是否保留其排序的许多细节都是高度取决于实现的。例如，当修改监视目录中的文件时，它可能在某些实现中导致单个 `ENTRY_MODIFY` 事件，但在其他实现中会导致多个事件。短期文件(意味着在创建文件后很快删除的文件)可能无法被定期轮询文件系统以检测更改的原始实现检测到。
+>
+>如果监视文件不在本地存储设备上，则如果可以检测到对文件的更改，则它是取决于实现的。特别是，不需要检测对远程系统上执行的文件的更改。
+
+#### close
+
+Closes this watch service.
+If a thread is currently blocked in the take or poll methods waiting for a key to be queued then it immediately receives a ClosedWatchServiceException. Any valid keys associated with this watch service are invalidated.
+
+After a watch service is closed, any further attempt to invoke operations upon it will throw ClosedWatchServiceException. If this watch service is already closed then invoking this method has no effect.
+
+- void close() throws IOException
+- 参见：[`AutoCloseable.close` 和 `Closeable.close`](#try-可以自动关闭资源)
+- Throws: IOException - 如果发生 I/O 错误
+
+#### poll
+
+检索并删除下一个监视密钥，如果不存在，则返回 null
+
+- WatchKey poll()
+- Returns: 下一个监视键，或 null
+- Throws: ClosedWatchServiceException - 如果此监视服务已关闭
+
+#### poll
+
+检索并删除下一个监视密钥，必要时等待指定的等待时间(如果尚未存在)。
+
+- WatchKey poll(long timeout, TimeUnit unit) throws InterruptedException
+- Parameters:
+    - timeout - 放弃之前的等待时间，单位以 unit 参数为准
+    - unit - TimeUnit 设置超时参数
+- Returns: 下一个监视键，或 null
+- Throws:
+    - ClosedWatchServiceException - 如果此监视服务已关闭，或在等待下一个键时关闭
+    - InterruptedException - 如果在等待时被打断
+
+#### take
+
+检索并删除下一个监视密钥，如果还没有，则等待
+
+- WatchKey take() throws InterruptedException
+- Returns: 下一个监视秘钥
+- Throws:
+    - ClosedWatchServiceException - 如果此监视服务已关闭，或在等待下一个键时关闭
+    - InterruptedException - 如果在等待时被打断
+
+在此或许有很多朋友并不知晓文件监测有何意义及目，那么请大家回想下调试成热发布功能后的 Web 容器。当项目迭代后并重新部署时，开发人员无需对其进行手动重启，因为 Web 容器一旦监测到文件发生改变后，便会自动去适应这些“变化”并重新进行内部装载。Web 容器的热发布功能同样也是基于文件监测功能，所以不得不承认，文件监测功能的出现对于 Java 文件系统来说是具有重大意义的。
+
+文件监测是基于事件驱动的，事件触发是作为监测的先决条件。开发人员可以使用 `java.nio.file.StandardWatchEventKinds` 类提供的 3 种字面常量来定义监测事件类型，值得注意的是监测事件需要和 WatchService 实例一起进行注册。
+
+StandardWatchEventKinds 类提供的监测事件：
+
+- ENTRY_CREATE：文件或文件夹新建事件；
+- ENTRY_DELETE：文件或文件夹删除事件；
+- ENTRY_MODIFY：文件或文件夹粘贴事件；
+
+使用 WatchService 类实现文件监控示例：
+
+```java
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -795,6 +861,7 @@ public class WatchViewTest {
       testWatch();
   }
 }
-复制代码通过上述程序示例我们可以看出，使用WatchService接口进行文件监控非常简单和方便。首先我们需要定义好目标监控路径，然后调用FileSystems类型的newWatchService()方法创建WatchService对象。接下来我们还需使用Path接口的register()方法注册WatchService实例及监控事件。当这些基础作业层全部准备好后，我们再编写外围实时监测循环。最后迭代WatchKey来获取所有触发监控事件的文件即可。
-现在我终于知道，spring boot中那个所谓的dev-tools热更新的基本原理啦！原来JDK都有提供这样的API。-->
+```
 
+通过上述程序示例我们可以看出，使用 WatchService 接口进行文件监控非常简单和方便。首先我们需要定义好目标监控路径，然后调用 FileSystems 类型的 `newWatchService()` 方法创建 WatchService 对象。接下来我们还需使用 Path 接口的 `register()` 方法注册 WatchService 实例及监控事件。当这些基础作业层全部准备好后，我们再编写外围实时监测循环。最后迭代 WatchKey 来获取所有触发监控事件的文件即可。
+<!--现在我终于知道，spring boot 中那个所谓的 dev-tools 热更新的基本原理啦！原来 JDK 都有提供这样的 API。-->
