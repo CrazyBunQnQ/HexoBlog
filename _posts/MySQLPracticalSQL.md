@@ -49,6 +49,27 @@ SELECT CONCAT(CAST(1 AS CHAR), '/', CAST(2 AS CHAR)) AS RATIO FROM DUAL;
 
 结果：![](http://wx2.sinaimg.cn/large/a6e9cb00ly1fvez03wzojj204u028mxc.jpg)
 
+### 根据条件显示
+
+```mysql
+select if(condition, a, b);
+```
+
+- 如果 `condition` 为 `true` 则返回 `a`, 否则返回 `b`
+- `if()` 返回一个数字或字符串值
+
+### 判断空值
+
+- 如果 `value1` 为空则返回 `value2`, 否则返回 `value1`
+
+    ```mysql
+    select ifnull(value1,value2);
+    ```
+- 如果 `value1` 为空返回 `value2`，否则返回 `value3`
+
+    ```mysql
+    select if(isnull(value1), value2, value3);
+
 ### 重复记录
 
 - 删除重复记录: 根据 t 表中的 a, b 字段删除 t 表中多余的重复记录

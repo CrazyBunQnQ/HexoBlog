@@ -1,5 +1,5 @@
 ---
-title: 常用 Git 命令
+title: 不常用的 Git 命令
 date: 2018-04-05 22:22:22
 categories: CVS
 tag:
@@ -84,4 +84,109 @@ tag:
     >如果此时只使用 `git push origin 分支名` 则会因为本地版本落后于远程仓库版本而报错
     >远端撤销就不再截图了，感兴趣的自行尝试吧
 
-<!-- 感谢阅读，如有其它想知道的内容欢迎留言，此文会不定期更新 -->
+<br/>
+## 合并指定文件或文件夹
+
+```bash
+git checkout 分支名 目标文件夹或目标文件名
+```
+
+<br/>
+## 忽略本地文件修改
+
+```bash
+git update-index --assume-unchanged build/conf/a.conf
+```
+
+> 需要提前设置好默认编辑器
+
+想要恢复的话执行如下命令:
+
+```bash
+git update-index --no-assume-unchanged build/conf/a.conf
+```
+
+> `build/conf/a.conf` 为想要忽略改动的文件
+
+使用如下命令可以查看当前被忽略修改的本地文件列表:
+
+```bash
+git ls-files -v | grep -e "^[hsmrck]"
+```
+
+<br/>
+## 想撤销中间某次提交
+
+> 使用 `revert` 命令，而不是 `reset`
+> `git reset –hard commit_id` 虽然可以回退远程库，但是其要求 `pull` 最新代码的每个人的本地分支都要进行版本回退
+
+### 正确的步骤：
+
+```bash
+git revert commit_id
+# 如果 commit_id 是 merge 节点的话, -m 是指定具体哪个提交点
+git revert commit_id -m 1
+# 接着就是解决冲突
+git add -A
+git commit -m ".."
+git revert commit_id -m 2
+# 接着就是解决冲突
+git add -A
+git commit -m ".."
+git push
+```
+
+> 其中 `git revert commit_id -m 数字` 是针对 `merge` 提交点的操作
+
+
+<br/>
+## 修改远程默认分支
+
+远程默认分支初始是 master
+
+```bash
+# 登录到远程 git 库所在的服务器
+ssh root@192.168.1.1
+# 创建临时目录(默认你已经有其他分支了)
+mkdir tmp
+# 检出另一个分支并将该分支作为默认分支
+git --git-dir=./Project --work-tree=./tmp checkout 分支名
+# 查看分支
+git branch -a
+```
+
+<br/>
+## 删除远程 master 分支
+
+因为 master 分支是默认分支，所以直接使用 `git branch -d master` + `git push origin :master` 无法删除远程 master 分支
+
+所以想要删除远程 master 分支就要先[修改默认分支](#修改远程默认分支)
+
+然后再使用那两个命令删除 master 分支就可以了
+
+```bash
+git branch -d master
+git push origin :master
+```
+
+#### 查看分支时报错
+
+删除远程分支后再查看分支报错了: `warning: ignoring broken ref refs/remotes/origin/HEAD warning: ignoring broken ref refs/remotes/origin/HEAD`
+
+可以使用如下命令检查状态:
+
+```bash
+git symbolic-ref refs/remotes/origin/HEAD
+```
+
+用如下命令修复该问题:
+
+```bash
+git symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/分支名
+```
+
+将`分支名`替换为您希望 HEAD 指向的分支的名称
+
+---
+
+感谢阅读，如有其它想知道的内容欢迎留言，此文会不定期更新
