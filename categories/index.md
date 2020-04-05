@@ -1,4 +1,6 @@
 ---
 title: categories
-date: 2020-04-05 23:50:21
+date: 2016-10-20 17:25:30
+type: "categories"
+layout: "categories"
 ---
