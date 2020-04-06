@@ -1,14 +1,25 @@
 ---
 title: 树莓派 4B：别让我吃灰~
 date: 2020-02-29 22:22:22
+img: "/images/RaspberryPi 4B.jpg"
+top: 10
+cover: fasle
+coverImg: "/images/RaspberryPi 4B.jpg"
+password: 8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
+toc: false
+mathjax: false
 categories: 触类旁通
 tags:
-- 折腾
+  - 树莓派
+  - 工具
+  - 折腾
+keywords: 树莓派
+summary: 树莓派刚出了新版 4B，感觉配置不错，就入手了一个玩玩~然而买回来之后一直在吃灰...赶紧拿出来耍耍~
 ---
 
-树莓派刚出了新版 4B，感觉配置不错，就入手了一个玩玩~然而买回来之后一直在吃灰...赶紧拿出来耍耍~
+树莓派刚出了新版 4B，感觉配置不错，就入手了一个玩玩\~然而买回来之后一直在吃灰...赶紧拿出来耍耍\~
 
-<!-- more -->
+<!--more-->
 
 ## FRP 内网穿透
 
