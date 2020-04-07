@@ -1,8 +1,9 @@
 ---
 title: Java 的三种代理模式
 date: 2017-05-27 09:32
-categories: 设计模式
+categories: Java
 tag: 
+- 设计模式
 - Proxy
 ---
 

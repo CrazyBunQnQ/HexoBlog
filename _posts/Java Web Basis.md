@@ -1,10 +1,9 @@
 ---
 title: Java Web 基本概念
 date: 2017-04-19 22:22:22
-categories: 
-- Web 基础
-- 待完善
+categories: Web 基础
 tags: 
+- 待完善
 - Web
 - tomcat
 - http 协议

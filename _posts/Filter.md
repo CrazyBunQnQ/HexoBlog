@@ -1,8 +1,7 @@
 ---
 title: 过滤器和监听器
 date: 2017-5-2 14:20:12 
-categories: 
-- Java 基础
+categories: Java
 tags: 
 - Filter
 ---

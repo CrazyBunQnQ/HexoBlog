@@ -1,7 +1,7 @@
 ---
 title: 操作 Excel 表格（jxl）
 date: 2017-5-11 9:09:30 
-categories: 触类旁通
+categories: Java
 tags:
 - Excel
 - jxl

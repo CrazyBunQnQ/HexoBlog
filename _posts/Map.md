@@ -1,7 +1,7 @@
 ---
 title: Map 映射
 date: 2017-03-20 23:23:23
-categories: Java 基础
+categories: Java
 tags: 
 - 集合
 - Map

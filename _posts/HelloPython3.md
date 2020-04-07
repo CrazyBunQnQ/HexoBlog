@@ -1,7 +1,7 @@
 ---
 title: 初识 Python 3
 date: 2017-11-04 22:22:22
-categories: Python 3
+categories: Python
 tags: 
 - 基础
 ---

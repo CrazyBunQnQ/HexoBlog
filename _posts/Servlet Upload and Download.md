@@ -1,8 +1,7 @@
 ---
 title: Servlet 文件上传和下载
 date: 2017-4-26 11:16:30 
-categories: 
-- Java 基础
+categories: Java
 tags: 
 - Servlet
 - upload

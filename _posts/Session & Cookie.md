@@ -1,10 +1,9 @@
 ---
 title: 会话技术之 Session 和 Cookie
 date: 2017-4-25 9:46:04 
-categories: 
-- Java 基础
-- 待完善
+categories: Web 基础
 tags: 
+- 待完善
 - Session
 - Cookie
 - 域对象

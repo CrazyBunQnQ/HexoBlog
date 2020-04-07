@@ -1,9 +1,7 @@
 ---
 title: JDBC 编程
 date: 2017-04-01 22:22:22
-categories: 
-- Java 基础
-- 数据库编程
+categories: Java
 tags: 
 - JDBC
 - 数据库

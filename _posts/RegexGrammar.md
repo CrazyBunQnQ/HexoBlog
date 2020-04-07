@@ -1,7 +1,7 @@
 ---
 title: 正则表达式基础语法
 date: 2017-03-15 22:22:22
-categories: Java 基础
+categories: Java
 tags: 
 - 正则表达式
 - Regex

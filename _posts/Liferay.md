@@ -1,7 +1,7 @@
 ---
 title: Liferay 学习笔记
 date: 2018-06-26 22:22:22
-categories: 触类旁通
+categories: Java
 tags:
 - Liferay
 - Portlet

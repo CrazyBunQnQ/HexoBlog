@@ -2,7 +2,7 @@
 title: Object 和包装类
 date: 2017-03-15 23:33:33
 description: "Java 中，有一个神通广大的超类，它就是 Object，Object 位于 java.lang 包下面，所有类的父类都集成自 Object。所以 Object 类型的引用变量可以指向任何类型。"
-categories: Java 基础
+categories: Java
 tags: 
 - Object
 - 超类

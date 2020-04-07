@@ -1,7 +1,7 @@
 ---
 title: BankPatrol 项目感悟
 date: 2017-05-13 16:25:20
-categories: 小试身手
+categories: Web 基础
 tag: 
 - Web 搭建
 ---

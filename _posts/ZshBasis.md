@@ -1,7 +1,7 @@
 ---
 title: zsh 基础
 date: 2017-11-26 22:22:22
-categories: Shell
+categories: Linux
 tags:
 - bash
 - zsh

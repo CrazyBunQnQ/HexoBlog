@@ -1,7 +1,7 @@
 ---
 title: Mybatis 缓存
 date: 2017-06-14 16:20:20
-categories: 框架
+categories: Java
 tag: 
 - Mybatis
 - 缓存

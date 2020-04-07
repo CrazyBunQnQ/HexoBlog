@@ -1,11 +1,9 @@
 ---
 title: 经典 Issues 集锦
 date: 2017-03-15 15:15:15
-categories: 
-- 杀虫
-- Java
-- 待完善
+categories: Java
 tags: 
+- 待完善
 - bug
 - 调试
 - 错误

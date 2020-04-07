@@ -1,10 +1,9 @@
 ---
 title: 初识 JSP
 date: 2017-4-24 9:13:42 
-categories: 
-- Java 基础
-- 待完善
+categories: Java
 tags: 
+- 待完善
 - JSP
 ---
 

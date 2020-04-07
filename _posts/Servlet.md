@@ -1,7 +1,7 @@
 ---
 title: 初识 Servlet
 date: 2017-4-21 10:44:22
-categories: Java 基础
+categories: Java
 tags:
 - Servlet
 ---

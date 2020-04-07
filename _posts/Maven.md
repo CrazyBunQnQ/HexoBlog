@@ -1,7 +1,7 @@
 ---
 title: Maven
 date: 2017-06-26 10:45
-categories: 项目构建
+categories: 开发工具
 tags: 
 - Maven
 - 构建工具

@@ -1,10 +1,9 @@
 ---
 title: JSP 之 EL 表达式
 date: 2017-4-28 9:11:29
-categories: 
-- Java 基础
-- 未完成
+categories: Java
 tags: 
+- 待完善
 - JSP
 - EL 表达式
 ---

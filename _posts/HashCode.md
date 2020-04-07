@@ -1,7 +1,7 @@
 ---
 title: Hash Code 散列码
 date: 2017-03-18 22:22:22
-categories: Java 基础
+categories: Java
 tags: 
 - 散列码
 - hash code

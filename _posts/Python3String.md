@@ -1,7 +1,7 @@
 ---
 title: Python 3 的字符串
 date: 2017-11-12 22:22:22
-categories: Python 3
+categories: Python
 tags: 字符串
 ---
 

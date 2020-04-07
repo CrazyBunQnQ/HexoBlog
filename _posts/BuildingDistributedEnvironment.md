@@ -1,14 +1,12 @@
 ---
 title: VM 虚拟机(CentOS)搭建 Dubbo、Zookeeper 分布式环境
 date: 2018-11-11 11:11:11
-categories: 
-- Java
-- 分布式
-- 微服务
+categories: 分布式
 tags: 
+- 微服务
 - Dubbo
 - Zookeeper
-- centOS
+- CentOS
 ---
 
 本文记录了我从 VM 安装 CentOS 7 开始到完成 Dubbo 2.6.5 管控台的安装。

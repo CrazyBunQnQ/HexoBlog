@@ -1,10 +1,9 @@
 ---
 title: XML 解析
 date: 2017-04-18 22:22:22
-categories: 
-- Web 基础
-- 待完善
+categories: Web 基础
 tags: 
+- 待完善
 - XML
 ---
 

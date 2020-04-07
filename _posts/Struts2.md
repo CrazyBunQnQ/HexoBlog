@@ -1,12 +1,10 @@
 ---
 title: struts2
 date: 2017-5-18 14:19:04 
-categories: 
-- 框架
-- Java 基础
+categories: Java
 tags: 
-- struts2
 - 框架
+- struts2
 ---
 
 Struts2 前身是 weborek 框架，优点是封装、重用、代码简洁、编码速度快、准确度高。

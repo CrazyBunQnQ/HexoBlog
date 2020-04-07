@@ -1,7 +1,7 @@
 ---
 title: POI 删除表格的坑
 date: 2017-09-12 14:31:00
-categories: API
+categories: Java
 tags: 
 - Excel
 - POI

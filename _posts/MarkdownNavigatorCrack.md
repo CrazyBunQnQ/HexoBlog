@@ -1,7 +1,7 @@
 ---
 title: 破解 Markdown Navigator
 date: 2018-12-18 22:22:22
-categories: 触类旁通
+categories: Java
 tags:
 - IDEA
 - 插件

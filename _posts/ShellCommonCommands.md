@@ -1,7 +1,7 @@
 ---
 title: bash 常用命令
 date: 2018-03-13 15:49:50
-categories: Shell
+categories: Linux
 tags:
 - 补位
 - 赋值

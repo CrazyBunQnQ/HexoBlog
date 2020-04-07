@@ -1,7 +1,7 @@
 ---
 title: Python 3 的函数
 date: 2017-11-18 22:22:22
-categories: Python 3
+categories: Python
 tags: 函数
 ---
 

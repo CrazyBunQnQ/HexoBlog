@@ -1,7 +1,7 @@
 ---
 title: K2 最新版固件刷华硕老毛子
 date: 2018-03-02 22:22:22
-categories: Some Fun
+categories: 触类旁通
 tags:
 - 路由器
 - 科学上网

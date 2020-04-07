@@ -1,7 +1,7 @@
 ---
 title: 使用 IDEA 自带的 HTTP Client 来测试 API
 date: 2019-05-04 22:22:22
-categories: IDEA
+categories: 开发工具
 tag:
   - 工具
   - 效率

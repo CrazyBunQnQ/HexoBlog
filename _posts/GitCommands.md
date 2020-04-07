@@ -1,12 +1,10 @@
 ---
 title: 不常用的 Git 命令
 date: 2018-04-05 22:22:22
-categories: CVS
+categories: 开发工具
 tag:
 - Git
 - 版本控制
-- 命令行
-- Command
 ---
 
 虽然现在有很多 Git 图形化工具，但是它们都有一个共通的缺点：功能不全。

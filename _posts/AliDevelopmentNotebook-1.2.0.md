@@ -1,7 +1,7 @@
 ---
 title: 阿里巴巴 Java 开发手册
 date: 2017-06-16 16:25:25
-categories: 开发规范
+categories: Java
 tag: 
 - Java 开发规范
 ---

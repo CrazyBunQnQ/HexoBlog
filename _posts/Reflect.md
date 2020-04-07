@@ -1,8 +1,9 @@
 ---
-title: 反射、debug、Junit 和 properties（待完善）
+title: 反射、debug、Junit 和 properties
 date: 2017-03-31 22:22:22
-categories: Java 基础
+categories: Java
 tags:
+- 待完善
 - 反射
 - 调试
 - 测试类

@@ -5,7 +5,7 @@ categories: Java
 tags: 
 - JVM
 - GC
-- 未完成
+- 待完善
 ---
 
 Java 虚拟机（Java virtual machine，JVM）是运行 Java 程序必不可少的机制。JVM 实现了 Java 语言最重要的特征：即平台无关性。

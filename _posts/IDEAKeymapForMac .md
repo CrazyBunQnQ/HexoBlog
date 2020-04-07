@@ -1,10 +1,10 @@
 ---
 title: IDEA keymap for Mac
 date: 2017-06-01 16:06:06
-categories: 工具使用
+categories: 开发工具
 tags:
-- IntellJ IDEA
-- Keymap
+- IDEA
+- 快捷键
 ---
 
 刚刚从 Eclipse 转到 IDEA、从 Windows 转到 Mac 系统，马上就爱上了 IDEA 编译工具，并且打算以后主要使用 Mac 开发，所以决定不再使用 Eclipse 的快捷键了。为了方便记忆和查找，特此记录下常用快捷键。

@@ -1,8 +1,7 @@
 ---
 title: MySQL 数据库
 date: 2017-03-28 22:22:22
-categories: 
-- 数据库
+categories: 数据库
 tags: 
 - MySQL
 ---

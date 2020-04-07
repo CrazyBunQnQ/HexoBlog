@@ -1,8 +1,7 @@
 ---
 title: AJAX
 date: 2017-5-2 17:47:09 
-categories:
-- Java 基础
+categories: Web 基础
 tags: 
 - AJAX
 ---

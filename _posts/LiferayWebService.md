@@ -1,7 +1,7 @@
 ---
 title: Liferay Web Service
 date: 2018-07-08 10:40:22
-categories: 触类旁通
+categories: Java
 tags:
 - Liferay
 - WebService
