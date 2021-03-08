@@ -1,9 +1,9 @@
 ---
 title: MyBatis mapper 文件中 $ 和 # 的区别
 date: 2021-02-22 22:22:22
-img: "/images/Mybatis1.jpeg"
+img: "https://pic.downk.cc/item/5e7b64fd504f4bcb040fae8f.jpg"
 cover: fasle
-coverImg: "/images/Mybatis1.jpeg"
+coverImg: "https://pic.downk.cc/item/5e7b64fd504f4bcb040fae8f.jpg"
 password: 8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
 toc: false
 mathjax: false
