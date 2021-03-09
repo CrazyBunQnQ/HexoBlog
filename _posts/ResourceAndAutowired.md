@@ -1,5 +1,5 @@
 ---
-title: @Resource And @Autowired 注解的区别
+title: Resource And Autowired 注解的区别
 date: 2021-03-06 22:22:22
 img: "/images/Spring.png"
 cover: fasle
