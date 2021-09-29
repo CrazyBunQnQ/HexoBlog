@@ -21,7 +21,8 @@ FTX 交易所是一家排名前 5 的、非常适合做对冲交易的交易所.
 
 进入 FTX 网页版后按下面操作即可创建量化策略
 
-![](http://wx2.sinaimg.cn/large/0033vWhyly1guxk3hjjtkj60w60ku76l02.jpg)
+![创建策略](/images/FTXCreateStrategy.jpg)
+FTXCreateStrategy
 
 > [**使用我的推荐码注册 FTX 账号，可以获得 <font color="#FF6666">5%</font> 的手续费折扣**](https://ftx.com/#a=38135782)
 
