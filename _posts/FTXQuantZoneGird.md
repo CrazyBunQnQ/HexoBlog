@@ -164,6 +164,8 @@ buyCount=`get_variable(buyCount) + 1`
 
 buyCount=`get_variable(buyCount) - 1`
 
+### [**使用我的推荐码注册 FTX 账号，可以获得 <font color="#FF6666">5%</font> 的手续费折扣哟**](https://ftx.com/#a=38135782)
+
 ## 止盈策略
 
 直接全部卖出而已, 大同小异
@@ -173,7 +175,5 @@ buyCount=`get_variable(buyCount) - 1`
 #### 执行逻辑
 
 #### 设置变量
-
-## 止损策略
 
 <!-- 个人比较菜，没有止损习惯，也没有好的止损想法...纯设置的话可以参考[止盈策略](#止盈策略) -->
