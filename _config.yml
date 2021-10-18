@@ -354,8 +354,8 @@ google_site: kCIANOE7IxckvM2MVSUNNuqVGUuPrEFJI9rnGRGsJLM
 # Add baidu analytics configuration
 # 添加 baidu Analytics 配置
 baiduAnalytics:
-  enable: false
-  id:
+  enable: true
+  id: e5a793a1ef0ff251be9c023a7a8a9c70
 
 # 百度搜索资源平台提交链接
 baiduPush: true
