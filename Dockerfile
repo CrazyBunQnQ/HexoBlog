@@ -4,8 +4,8 @@ FROM crazybun/hexo-build-env:node-12 AS build-env
 WORKDIR /usr/src/hexo-blog
 # 复制当前文件夹下面的所有文件到hexo-blog中
 COPY . ./source/
-# 生成静态文件
-RUN hexo clean && hexo g
+# 更新配置文件, 并生成静态文件
+RUN mv _config.yml ../themes/matery/_config.yml && hexo clean && hexo g
 
 # nginx镜像
 FROM arm32v7/nginx:1.17.8
