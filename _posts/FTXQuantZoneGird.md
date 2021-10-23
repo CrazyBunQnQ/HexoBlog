@@ -1,5 +1,5 @@
 ---
-title: FTX 量化空间无限网格策略
+title: FTX 量化空间网格策略
 date: 2021-10-07 22:22:22
 img: "/images/FTXQuantZone.png"
 top: 10
