@@ -112,15 +112,15 @@ summary: "之前介绍了 FTX 交易所量化空间的功能和函数，这次�
 - 购买次数大于 0: `get_variable("buyCount") > 0`
 - 当前挂的买单数量大于 0: `get_variable("curCount") > 0`
 - 当前挂的买单数量小于等于网格数量: `get_variable("curCount") <= get_variable("girdCount")`
-- 当前价格低于最后一次期望购买价格的 [90%](#设置买入百分比): `price("FTT/USD") <= get_variable("endPrice") * (1 - get_variable("buyPercent")) ** get_variable("curCount")`
+- 当前价格低于最后一次期望购买价格的 [90%](#设置买入百分比): `price("FTT/USD") < get_variable("endPrice") * (1 - get_variable("buyPercent")) ** get_variable("curCount")`
   - 最后一次期望的购买价格: `get_variable("endPrice") * (1 - get_variable("buyPercent")) ** get_variable("curCount")`
 - 可用 USD 大于每次购买所需的 USD: `balance_free("USD") > get_variable("cost")`
 - 之前下的买单已完全成交: `balance_free("USD") == balance("USD")`
-- 其你认为合适的条件，用来增加抄底效果
+- 其你认为合适的条件，用来增加抄底效果，例如当前价小于日均线的 95%: `price("FTT/USD") < average_price("BTC/USD", 60 * 24) * 0.95`
 
 综上:
 
-`get_variable("endPrice") != 0 and get_variable("buyCount") > 0 and get_variable("curCount") > 0 and get_variable("curCount") <= get_variable("girdCount") and price("FTT/USD") <= get_variable("endPrice") * (1 - get_variable("buyPercent")) ** get_variable("curCount") and balance_free("USD") > get_variable("cost") and balance_free("USD") == balance("USD")`
+`get_variable("endPrice") != 0 and get_variable("buyCount") > 0 and get_variable("curCount") > 0 and get_variable("curCount") <= get_variable("girdCount") and price("FTT/USD") < get_variable("endPrice") * (1 - get_variable("buyPercent")) ** get_variable("curCount") and balance_free("USD") > get_variable("cost") and balance_free("USD") == balance("USD") and price("FTT/USD") < average_price("BTC/USD", 60 * 24) * 0.95`
 
 > 仍然可以加上其他你觉着合适的条件
 > 
@@ -132,10 +132,10 @@ summary: "之前介绍了 FTX 交易所量化空间的功能和函数，这次�
 
 #### 购买
 
-以当前价格下限价买单
-
 - 订单数量: `get_variable("cost") / price("FTT/USD")`
-- 限价: `price("FTT/USD")`
+- 限价: `get_variable("endPrice") * (1 - get_variable("buyPercent")) ** get_variable("curCount")`
+
+> 不要勾选 `Post Only`, 因为触发条件肯定低于这个价格，所以会以更低的价格购买到
 
 #### 设置变量
 
@@ -147,31 +147,34 @@ summary: "之前介绍了 FTX 交易所量化空间的功能和函数，这次�
 ### 触发条件
 
 - 网格上限价格不为 0: `get_variable("endPrice") != 0`
-- 购买次数(`buyCount`)大于 1: 最后一单留着在[止盈策略](#止盈策略)里卖
-- 当前价格高于于最后一次次购买价格的 [112%](#设置出售百分比)
-- 与此卖单对应的买单已完全成交
-    - 买单完全成交: 可用 USD == USD 总余额
+- 当前挂的买单数大于 1, 最后一单留着在[止盈策略](#止盈策略)里卖: `get_variable("curCount") > 1`
+- 当前价格高于于最后一次次购买价格的 [112%](#设置出售百分比): `price("FTT/USD") > (get_variable("endPrice") * (1 - get_variable("buyPercent")) ** (get_variable("curCount") - 1)) * (1 + get_variable("sellPercent"))`
+  - 最后一次购买价: `get_variable("endPrice") * (1 - get_variable("buyPercent")) ** (get_variable("curCount") - 1)`
 - 其他你认为合适的条件，用来增加收益
 
 综上:
 
-`get_variable("buyCount") > 1 and price("FTT/USD") >= (get_variable("endPrice") * (1 - get_variable("buyPercent")) ** get_variable("buyCount")) * get_variable("sellPercent") and balance_free("USD") == balance("USD") and balance_free("FTT") == balance("FTT")`
+`get_variable("endPrice") != 0 and get_variable("curCount") > 1 and price("FTT/USD") > (get_variable("endPrice") * (1 - get_variable("buyPercent")) ** (get_variable("curCount") - 1)) * (1 + get_variable("sellPercent"))`
 
-> `get_variable("endPrice") * (1 - get_variable("buyPercent")) ** get_variable("buyCount")` 表示通过买入次数和买入百分比计算出的最后一次的买入价格
+> 最后一次购买价通过买入次数和买入百分比计算所得
+> 
+> 因为下买单后，购买次数加 1 了, 所以要 `get_variable("curCount") - 1` 表示上一次
 
 ### 执行逻辑
 
 #### 出售
 
-以`(get_variable("endPrice") * (1 - get_variable("buyPercent")) ** get_variable("buyCount"))`下限价卖单, 卖出上次购买的数量: 即 `get_variable("cost") / (get_variable("endPrice") * (1 - get_variable("buyPercent")) ** get_variable("buyCount"))`
-
-勾选上**如果已经有一个委托存在，则保留现有订单**
+- 订单数量: `get_variable("cost") / (get_variable("endPrice") * (1 - get_variable("buyPercent")) ** (get_variable("curCount") - 1))`
+- 限价: `(get_variable("endPrice") * (1 - get_variable("buyPercent")) ** (get_variable("curCount") - 1)) * (1 + get_variable("sellPercent"))`
+ 
+勾选上**如果已经有一个委托存在，则保留现有订单**, 按照期望挂上单了，坐等交易成功就好
 
 > 买入时的价格只会比预期更低，所以能买更多的币，这里卖出时按照预期买入的币卖出，未卖出的就一直拿着吧, 行情好手动卖出或者在[止盈策略](#止盈策略)里一起卖掉
 
 #### 设置变量
 
-sellCount=`get_variable("buyCount") + 1`
+- sellCount=`get_variable("sellCount") + 1`
+- curCount=`get_variable("buyCount") - get_variable("sellCount")`
 
 ### [**使用我的推荐码注册 FTX 账号，可以获得 <font color="#FF6666">5%</font> 的手续费折扣哟**](https://ftx.com/#a=38135782)
 
