@@ -118,15 +118,13 @@ summary: "之前介绍了 FTX 交易所量化空间的功能和函数，这次�
 - 之前下的买单已完全成交: `balance_free("USD") == balance("USD")`
 - 其你认为合适的条件，用来增加抄底效果，例如当前价小于日均线的 95%: `price("FTT/USD") < average_price("BTC/USD", 60 * 24) * 0.95`
 
-综上:
-
-`get_variable("endPrice") != 0 and get_variable("buyCount") > 0 and get_variable("curCount") > 0 and get_variable("curCount") <= get_variable("girdCount") and price("FTT/USD") < get_variable("endPrice") * (1 - get_variable("buyPercent")) ** get_variable("curCount") and balance_free("USD") > get_variable("cost") and balance_free("USD") == balance("USD") and price("FTT/USD") < average_price("BTC/USD", 60 * 24) * 0.95`
-
-> 仍然可以加上其他你觉着合适的条件
-> 
 > `get_variable("endPrice") * (1 - get_variable("buyPercent")) ** get_variable("curCount")` 表示**预期的**上次购买价格，即通过买入次数和买入百分比计算出的最后一次的买入价格，并不是实际最后一次购买价格
 >
 > 例如策略触发价格设置的很低，那么就会连续低价购买很多次，也就是比网格预期的购买价格低很多，涨上去的时候根据预期网格去卖(一点一点分批卖)
+
+综上:
+
+`get_variable("endPrice") != 0 and get_variable("buyCount") > 0 and get_variable("curCount") > 0 and get_variable("curCount") <= get_variable("girdCount") and price("FTT/USD") < get_variable("endPrice") * (1 - get_variable("buyPercent")) ** get_variable("curCount") and balance_free("USD") > get_variable("cost") and balance_free("USD") == balance("USD") and price("FTT/USD") < average_price("BTC/USD", 60 * 24) * 0.95`
 
 ### 执行逻辑
 
@@ -152,13 +150,13 @@ summary: "之前介绍了 FTX 交易所量化空间的功能和函数，这次�
   - 最后一次购买价: `get_variable("endPrice") * (1 - get_variable("buyPercent")) ** (get_variable("curCount") - 1)`
 - 其他你认为合适的条件，用来增加收益
 
+> 最后一次购买价通过买入次数和买入百分比计算所得
+>
+> 因为下买单后，购买次数加 1 了, 所以要 `get_variable("curCount") - 1` 表示上一次
+
 综上:
 
 `get_variable("endPrice") != 0 and get_variable("curCount") > 1 and price("FTT/USD") > (get_variable("endPrice") * (1 - get_variable("buyPercent")) ** (get_variable("curCount") - 1)) * (1 + get_variable("sellPercent"))`
-
-> 最后一次购买价通过买入次数和买入百分比计算所得
-> 
-> 因为下买单后，购买次数加 1 了, 所以要 `get_variable("curCount") - 1` 表示上一次
 
 ### 执行逻辑
 
