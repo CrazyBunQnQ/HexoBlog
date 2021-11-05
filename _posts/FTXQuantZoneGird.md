@@ -85,7 +85,7 @@ summary: "之前介绍了 FTX 交易所量化空间的功能和函数，这次�
 - 当前价格低于[网格触发价格](#设置网格策略触发价格)
 - 其他你认为合适的触发条件，用来提高收益
 
-`get_variable("endPrice") == 0 and get_variable("buyCount") == 0 and price("FTT/USD") <= get_variable("girdStartPrice")`
+`get_variable("endPrice") != 0 and get_variable("buyCount") == 0 and price("FTT/USD") <= get_variable("girdStartPrice")`
 
 建议再加上其他你觉得合适的触发条件, 不加也可以，启动后会立即执行
 
