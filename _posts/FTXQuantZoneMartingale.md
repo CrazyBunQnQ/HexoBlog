@@ -1,6 +1,6 @@
 ---
 title: FTX 量化空间马丁格尔策略
-date: 2021-10-07 22:22:22
+date: 2021-11-05 22:22:22
 img: "/images/FTXQuantZone.png"
 top: 10
 cover: fasle
