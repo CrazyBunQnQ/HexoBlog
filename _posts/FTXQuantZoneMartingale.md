@@ -30,7 +30,7 @@ summary: "之前介绍了 FTX 交易所量化空间的功能和函数以及简�
 
 ![创建策略](/images/FTXCreateStrategy.jpg)
 
-> [**使用我的推荐码注册 FTX 账号，可以获得 <font color="#FF6666">5%</font> 的手续费折扣**](https://ftx.com/#a=56525498)
+> 使用 [**Benson Sun**](https://twitter.com/FTX_Benson) 的 [推荐码](https://ftx.com/#a=BensonTW) 注册 FTX 账号，**可以获得 <font color="#FF6666">5%</font> 的手续费折扣**
 
 <!--more-->
 
@@ -191,4 +191,4 @@ summary: "之前介绍了 FTX 交易所量化空间的功能和函数以及简�
 
 停止所有策略
 
-### [**使用我的推荐码注册 FTX 账号，可以获得 <font color="#FF6666">5%</font> 的手续费折扣哟**](https://ftx.com/#a=56525498)
+### 使用 [**Benson Sun**](https://twitter.com/FTX_Benson) 的 [推荐码](https://ftx.com/#a=BensonTW) 注册 FTX 账号，**可以获得 <font color="#FF6666">5%</font> 的手续费折扣**

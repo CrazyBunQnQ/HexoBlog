@@ -23,7 +23,7 @@ FTX 交易所是一家排名前 5 的、非常适合做对冲交易的交易所.
 
 ![创建策略](/images/FTXCreateStrategy.jpg)
 
-> [**使用我的推荐码注册 FTX 账号，可以获得 <font color="#FF6666">5%</font> 的手续费折扣**](https://ftx.com/#a=56525498)
+> 使用 [**Benson Sun**](https://twitter.com/FTX_Benson) 的 [推荐码](https://ftx.com/#a=BensonTW) 注册 FTX 账号，**可以获得 <font color="#FF6666">5%</font> 的手续费折扣**
 
 <!--more-->
 
@@ -68,7 +68,7 @@ FTX 交易所是一家排名前 5 的、非常适合做对冲交易的交易所.
 
 > <font color="#FF6666">变量可以跨策略使用！！！</font>
 
-### [**使用我的推荐码注册 FTX 账号，可以获得 <font color="#FF6666">5%</font> 的手续费折扣哟**](https://ftx.com/#a=56525498)
+### 使用 [**Benson Sun**](https://twitter.com/FTX_Benson) 的 [推荐码](https://ftx.com/#a=BensonTW) 注册 FTX 账号，**可以获得 <font color="#FF6666">5%</font> 的手续费折扣**
 
 ## 可用表达式
 
