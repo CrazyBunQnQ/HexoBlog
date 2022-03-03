@@ -120,7 +120,7 @@ plugin = https2http
 plugin_local_addr = 你的服务ip:你的服务端口
 plugin_crt_path = /etc/letsencrypt/live/你之前输入的域名/fullchain.pem
 plugin_key_path = /etc/letsencrypt/live/你之前输入的域名/privkey.pem
-plugin_host_header_rewrite = 你的服务ip
+plugin_host_header_rewrite = 你的域名
 plugin_heater_X-From-Where = frp
 ```
 
