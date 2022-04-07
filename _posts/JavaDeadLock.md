@@ -2,7 +2,7 @@
 title: Java 死锁原因及排查
 date: 2021-08-05 22:22:22
 img: "images/JavaAnnotation.jpg"
-cover: fasle
+cover: false
 coverImg: "images/JavaAnnotation.jpg"
 toc: false
 mathjax: false

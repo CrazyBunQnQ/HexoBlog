@@ -3,7 +3,7 @@ title: 使用 FRP 内网穿透支持 Docker 容器 HTTPS 访问
 date: 2022-03-10 00:22:22
 img: "/images/RaspberryPi 4B.jpg"
 top: 10
-cover: fasle
+cover: false
 coverImg: "/images/RaspberryPi 4B.jpg"
 password: 8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
 toc: false
@@ -37,7 +37,7 @@ $ sudo certbot --nginx
 这里报错了，提示没有安装 `nginx`，安装 nginx
 
 ```shell
-$ sudo apt update && sudo install nginx -y
+$ sudo apt update && sudo apt install nginx -y
 ```
 
 80 端口占用，安装 nginx 后无法启动, 关闭占用端口的应用(服务所在容器)后重试

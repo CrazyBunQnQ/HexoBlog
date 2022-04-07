@@ -3,7 +3,7 @@ title: 树莓派 4B：别让我吃灰~
 date: 2020-02-29 22:22:22
 img: "/images/RaspberryPi 4B.jpg"
 top: 10
-cover: fasle
+cover: false
 coverImg: "/images/RaspberryPi 4B.jpg"
 password: 8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
 toc: false

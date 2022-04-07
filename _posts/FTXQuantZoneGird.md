@@ -3,7 +3,7 @@ title: FTX 量化空间网格策略
 date: 2021-10-07 22:22:22
 img: "/images/FTXQuantZone.png"
 top: 10
-cover: fasle
+cover: false
 coverImg: "/images/FTXQuantZone.png"
 password: 8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
 toc: false

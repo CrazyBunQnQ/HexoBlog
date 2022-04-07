@@ -2,7 +2,7 @@
 title: 记一次树莓派被黑后紧急恢复系统和应用的经历
 date: 2020-11-28 22:22:22
 img: "/images/RaspberryPi 4B.jpg"
-cover: fasle
+cover: false
 coverImg: "/images/RaspberryPi 4B.jpg"
 toc: false
 mathjax: false

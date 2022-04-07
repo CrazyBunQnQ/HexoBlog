@@ -2,7 +2,7 @@
 title: Java 注解
 date: 2021-06-01 22:22:22
 img: "images/JavaAnnotation.jpg"
-cover: fasle
+cover: false
 coverImg: "images/JavaAnnotation.jpg"
 toc: false
 mathjax: false
