@@ -134,3 +134,184 @@ plugin_header_X-From-Where = frp
 2. 访问 http 链接时无法自动跳转到 https 链接
 
 等我研究出来之后再来优化~
+
+## 泛域名
+
+> 不用停止已启动的服务，也不需要解析好域名
+
+```shell
+certbot certonly --preferred-challenges dns -d "*.你的域名" -d 你的域名 --manual
+Saving debug log to C:\Certbot\log\letsencrypt.log
+Enter email address (used for urgent renewal and security notices)
+(Enter 'c' to cancel): baobao222222@qq.com
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Please read the Terms of Service at
+https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf. You must
+agree in order to register with the ACME server. Do you agree?
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+(Y)es/(N)o: y
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Would you be willing, once your first certificate is successfully issued, to
+share your email address with the Electronic Frontier Foundation, a founding
+partner of the Let's Encrypt project and the non-profit organization that
+develops Certbot? We'd like to send you email about our work encrypting the web,
+EFF news, campaigns, and ways to support digital freedom.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+(Y)es/(N)o: n
+Account registered.
+Requesting a certificate for *.你的域名 and 你的域名
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Please deploy a DNS TXT record under the name:
+
+_acme-challenge.你的域名.
+
+with the following value:
+
+UfoQY6rDagFen4WPPpP4APQQ_-EQwd9AcEIut9agC8E
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Press Enter to Continue
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Please deploy a DNS TXT record under the name:
+
+_acme-challenge.你的域名.
+
+with the following value:
+
+H402Q80jpUb30EEwuTWanv7Pa-cMSoe96ERqQ15_x_A
+
+(This must be set up in addition to the previous challenges; do not remove,
+replace, or undo the previous challenge tasks yet. Note that you might be
+asked to create multiple distinct TXT records with the same name. This is
+permitted by DNS standards.)
+
+Before continuing, verify the TXT record has been deployed. Depending on the DNS
+provider, this may take some time, from a few seconds to multiple minutes. You can
+check if it has finished deploying with aid of online tools, such as the Google
+Admin Toolbox: https://toolbox.googleapps.com/apps/dig/#TXT/_acme-challenge.你的域名.
+Look for one or more bolded line(s) below the line ';ANSWER'. It should show the
+value(s) you've just added.
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Press Enter to Continue
+```
+
+此时按照提示去域名提供商添加域名解析, 这里我们 `-d` 了两个域名，所以添加两个 `TXT` 记录:
+
+![_acme-challenge.png](/images/_acme-challenge.png)
+
+> 解析结果可以在 linux 命令行中执行命令查看:
+>
+> ```shell
+> nslookup -type=txt _acme-challenge.你的域名 114.114.114.114
+> Server:         114.114.114.114
+> Address:        114.114.114.114#53
+>
+> Non-authoritative answer:
+> _acme-challenge.你的域名 text = "UfoQY6rDagFen4WPPpP4APQQ_-EQwd9AcEIut9agC8E"
+> _acme-challenge.你的域名 text = "H402Q80jpUb30EEwuTWanv7Pa-cMSoe96ERqQ15_x_A"
+> ```
+
+添加完成后等待解析成功后继续在 cerbort 命令中回车进行下一步
+
+```shell
+...
+Press Enter to Continue
+
+Successfully received certificate.
+Certificate is saved at: C:\Certbot\live\你的域名\fullchain.pem
+Key is saved at:         C:\Certbot\live\你的域名\privkey.pem
+This certificate expires on 2022-06-13.
+These files will be updated when the certificate renews.
+
+NEXT STEPS:
+- This certificate will not be renewed automatically. Autorenewal of --manual certificates requires the use of an authentication hook script (--manual-auth-hook) but one was not provided. To renew this certificate, repeat this same certbot command before the certificate's expiry date.
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+If you like Certbot, please consider supporting our work by:
+ * Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
+ * Donating to EFF:                    https://eff.org/donate-le
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+```
+
+### 自动生成/更新泛域名证书
+
+因为上面的生成操作中穿插着域名解析的操作，所以想要自动生成需要设置钩子(hook), 去自动调用域名厂商的域名解析接口，这里我们用的阿里云的域名，所以使用 [certbot-dns-aliyun](https://github.com/tengattack/certbot-dns-aliyun) 插件
+
+> 需要 python
+
+```shell
+sudo snap install certbot-dns-aliyun
+sudo snap set certbot trust-plugin-with-root=ok
+sudo snap connect certbot:plugin certbot-dns-aliyun
+/snap/bin/certbot plugins
+```
+
+创建一个配置文件，设置你的阿里云 api key:
+
+```shell
+touch /path/to/credentials.ini
+chmod 600 /path/to/credentials.ini
+```
+
+```ini
+certbot_dns_aliyun:dns_aliyun_access_key = 12345678
+certbot_dns_aliyun:dns_aliyun_access_key_secret = 1234567890abcdef1234567890abcdef
+```
+
+自动生成泛域名证书:
+
+```shell
+/snap/bin/certbot certonly -a certbot-dns-aliyun:dns-aliyun --certbot-dns-aliyun:dns-aliyun-credentials /root/credentials.ini -d 你的域名 -d "*.你的域名"
+# 自动输入 y 并不输入邮箱
+echo y | /snap/bin/certbot certonly --register-unsafely-without-email -a certbot-dns-aliyun:dns-aliyun --certbot-dns-aliyun:dns-aliyun-credentials /root/credentials.ini -d 你的域名 -d "*.你的域名"
+
+# output
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Plugin legacy name certbot-dns-aliyun:dns-aliyun may be removed in a future version. Please use dns-aliyun instead.
+Requesting a certificate for 你的域名 and *.你的域名
+Unsafe permissions on credentials configuration file: /csa/.tmp/credentials.ini
+Waiting 30 seconds for DNS changes to propagate
+
+Certbot failed to authenticate some domains (authenticator: certbot-dns-aliyun:dns-aliyun). The Certificate Authority reported these problems:
+  Domain: 你的域名
+  Type:   unauthorized
+  Detail: No TXT record found at _acme-challenge.你的域名
+
+  Domain: 你的域名
+  Type:   unauthorized
+  Detail: No TXT record found at _acme-challenge.你的域名
+
+Hint: The Certificate Authority failed to verify the DNS TXT records created by --certbot-dns-aliyun:dns-aliyun. Ensure the above domains are hosted by this DNS provider, or try increasing --certbot-dns-aliyun:dns-aliyun-propagation-seconds (currently 30 seconds).
+
+Some challenges have failed.
+Ask for help or search for solutions at https://community.letsencrypt.org. See the logfile /var/log/letsencrypt/letsencrypt.log or re-run Certbot with -v for more details.
+root@csaserver:~# echo y | certbot certonly --register-unsafely-without-email -a certbot-dns-aliyun:dns-aliyun --certbot-dns-aliyun:dns-aliyun-credentials /csa/.tmp/credentials.ini -d 你的域名 -d "*.你的域名"
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Plugin legacy name certbot-dns-aliyun:dns-aliyun may be removed in a future version. Please use dns-aliyun instead.
+Requesting a certificate for 你的域名 and *.你的域名
+Unsafe permissions on credentials configuration file: /csa/.tmp/credentials.ini
+Waiting 30 seconds for DNS changes to propagate
+
+Successfully received certificate.
+Certificate is saved at: /etc/letsencrypt/live/你的域名/fullchain.pem
+Key is saved at:         /etc/letsencrypt/live/你的域名/privkey.pem
+This certificate expires on 2022-06-20.
+These files will be updated when the certificate renews.
+Certbot has set up a scheduled task to automatically renew this certificate in the background.
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+If you like Certbot, please consider supporting our work by:
+ * Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
+ * Donating to EFF:                    https://eff.org/donate-le
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+```
+
+自动更新泛域名证书:
+
+```shell
+/snap/bin/certbot renew -a certbot-dns-aliyun:dns-aliyun --certbot-dns-aliyun:dns-aliyun-credentials /root/credentials.ini
+```
