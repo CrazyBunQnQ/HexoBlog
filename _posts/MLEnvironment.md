@@ -27,13 +27,16 @@ summary: 想要搞机器学习啦，先把环境搭起来! 因为显卡还想用
 
 按照[官方系统软件要求](https://www.tensorflow.org/install/gpu#software_requirements)安装
 
-- [NVIDIA 驱动包](https://www.nvidia.com/drivers)
-- [CUDA 工具包](https://developer.nvidia.com/cuda-toolkit-archive), 添加环境变量
-- [cuDNN](https://developer.nvidia.com/rdp/cudnn-archive)
-
-> 解压 cnDNN 压缩包，将其中的文件夹复制到 CUDA 的安装目录中，与原文件夹合并(不会冲突)：
-> 
-> D:\NVIDIA\NVIDIA GPU Computing Toolkit\CUDA\v11.6
+- 安装 [NVIDIA 驱动包](https://www.nvidia.com/drivers)
+- 安装 [CUDA 工具包](https://developer.nvidia.com/cuda-toolkit-archive), 添加环境变量
+- 安装 [cuDNN](https://developer.nvidia.com/rdp/cudnn-archive)
+  > 解压 cnDNN 压缩包，将其中的文件夹复制到 CUDA 的安装目录中，与原文件夹合并(不会冲突)：
+  >
+  > `...\NVIDIA GPU Computing Toolkit\CUDA\v11.6\`
+- 安装 [zlib](https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html#install-zlib-windows), 否则不支持卷积神经网络的训练
+  > 解压后将 `zlibwapi.dll` 拷贝到 `...\NVIDIA GPU Computing Toolkit\CUDA\v11.6\bin\` 目录下
+  > 
+  > 安装 CUDA 时已设置环境变量，这里不用再配了
 
 ## 安装 Python
 
