@@ -120,12 +120,21 @@ jupyter server password
 vim C:\Users\xx\.jupyter\jupyter_server_config.py
 # c.ServerApp.allow_remote_access = True # 允许远程登录
 # c.ServerApp.ip = '*' # 允许所有 ip 登录
-# c.ServerApp.certfile = 'D:\Mega\https_cert\xxx.com\\fullchain1.pem' # 设置证书
-# c.ServerApp.client_ca = 'D:\Mega\https_cert\xxx.com\\privkey1.pem' # 设置证书私钥
+# 浏览器登录时显示的文件目录, 这个很重要, 不然就是jupyter.exe的目录, windows的路径注意双斜杠,否则无效
+# c.FileContentsManager.root_dir = 'D:\\TensorFlowNotebook'
+# c.ServerApp.certfile = 'D:\\Mega\\https_cert\\xxx.com\\fullchain1.pem' # 设置证书
+# c.ServerApp.client_ca = 'D:\\Mega\\https_cert\\xxx.com\\privkey1.pem' # 设置证书私钥
 # 运行 Jupyter Lab, 会将启动位置作为基础目录
 jupyter-lab
 ```
 
-### 设置 JupyterLab 为服务
+### 设置开机自启动
 
-> 待续...
+创建 `jupyter_start.bat` 文件:
+
+```shell
+@echo off 
+jupyter-lab --no-browser
+```
+
+创建快捷方式到启动菜单
