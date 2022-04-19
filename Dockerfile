@@ -24,3 +24,10 @@ WORKDIR /usr/share/nginx/html
 # 把上一部生成的HTML文件复制到Nginx中
 COPY --from=build-env /usr/src/hexo-blog/public /usr/share/nginx/html
 EXPOSE 80 443
+
+# docker run -itd --name blog-matery -p 8081:80 --restart always crazybun/blog-matery:69
+# docker run -itd --name blog-matery -p 80:80 -p 443:443 --restart=always \
+# -v /root/DockerData/Blog/html:/usr/share/nginx/html \
+# -v /root/DockerData/Blog/etc/letsencrypt:/etc/letsencrypt \
+# -v /root/DockerData/Blog/var/lib/letsencrypt:/var/lib/letsencrypt \
+# crazybun/blog-matery
