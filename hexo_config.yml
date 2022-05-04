@@ -105,7 +105,7 @@ theme: matery # 文档 https://github.com/blinkfox/hexo-theme-matery/blob/develo
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
 - type: git
-  repo: git@github.com:CrazyBunQnQ/CrazyBunQnQ.github.io.git
+  repo: https://github.com/CrazyBunQnQ/CrazyBunQnQ.github.io.git
   branch: master
   message: 'Auto Update Blogs'
   token: $GITHUB_TOKEN

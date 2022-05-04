@@ -3,7 +3,9 @@ FROM node:buster AS build-env
 
 # 传入构建变量
 ARG GITHUB_TOKEN
-ENV GITHUB_TOKEN=$GITHUB_TOKEN
+ARG GITHUB_EMAIL
+ARG GITHUB_NAME
+ENV GITHUB_NAME=$GITHUB_NAME
 
 # 创建 hexo-blog 文件夹且设置成工作文件夹
 WORKDIR /usr/src
@@ -24,6 +26,9 @@ WORKDIR /usr/src
 # 9.更新主题配置文件
 # 10.清理目录兵重新生成静态文件
 RUN npm install hexo-cli -g && \
+echo $GITHUB_TOKEN && \
+echo $GITHUB_EMAIL && \
+echo $GITHUB_NAME && \
 git clone https://github.com/CrazyBunQnQ/hexo-theme-matery.git matery && \
 git clone https://github.com/CrazyBunQnQ/HexoBlog.git source && \
 hexo init hexo-blog && \
@@ -33,6 +38,8 @@ cd hexo-blog && \
 npm install --save hexo-deployer-git hexo-generator-search hexo-wordcount hexo-permalink-pinyin hexo-generator-feed hexo-filter-github-emojis && \
 mv ./source/hexo_config.yml ./_config.yml && \
 mv ./source/_config.yml ./themes/matery/_config.yml && \
+git config --global user.email "$GITHUB_EMAIL" && \
+git config --global user.name "$GITHUB_NAME" && \
 hexo clean && hexo g && hexo d
 
 # nginx 镜像
