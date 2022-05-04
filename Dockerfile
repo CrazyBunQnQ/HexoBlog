@@ -2,7 +2,12 @@
 FROM node:buster AS build-env
 # 创建 hexo-blog 文件夹且设置成工作文件夹
 WORKDIR /usr/src
-# 1.安装 hexo
+# 1.安装 hexo 及所需插件
+#   - 搜索插件
+#   - 字数统计插件
+#   - 中文链接转拼音插件
+#   - RSS 订阅插件
+#   - emoji 表情插件
 # 2.下载主题
 # 3.下载文章
 # 4.初始化博客目录
@@ -13,6 +18,7 @@ WORKDIR /usr/src
 # 9.更新主题配置文件
 # 10.清理目录兵重新生成静态文件
 RUN npm install hexo-cli -g && \
+npm install --save hexo-generator-search hexo-wordcount hexo-permalink-pinyin hexo-generator-feed hexo-filter-github-emojis && \
 git clone https://github.com/CrazyBunQnQ/hexo-theme-matery.git matery && \
 git clone https://github.com/CrazyBunQnQ/HexoBlog.git source && \
 hexo init hexo-blog && \
