@@ -26,9 +26,6 @@ WORKDIR /usr/src
 # 9.更新主题配置文件
 # 10.清理目录兵重新生成静态文件
 RUN npm install hexo-cli -g && \
-echo $GITHUB_TOKEN && \
-echo $GITHUB_EMAIL && \
-echo $GITHUB_NAME && \
 git clone https://github.com/CrazyBunQnQ/hexo-theme-matery.git matery && \
 git clone https://github.com/CrazyBunQnQ/HexoBlog.git source && \
 hexo init hexo-blog && \
