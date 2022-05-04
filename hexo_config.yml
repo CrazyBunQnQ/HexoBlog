@@ -104,4 +104,50 @@ theme: matery # 文档 https://github.com/blinkfox/hexo-theme-matery/blob/develo
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+- type: ''
+
+# 代码高亮插件，需要关闭自带的代码高亮
+prism_plugin:
+  mode: 'preprocess' # realtime/preprocess
+  theme: 'tomorrow' # 其他主题 https://github.com/ele828/hexo-prism-plugin#options
+  line_number: false # default false
+  custom_css:
+
+# 搜索插件 npm install hexo-generator-search --save
+search:
+  path: search.xml
+  field: post
+
+# 字数统计插件 npm i --save hexo-wordcount
+postInfo:
+  date: true
+  update: false
+  wordCount: false # 设置文章字数统计为 true.
+  totalCount: false # 设置站点文章总字数统计为 true.
+  min2read: false # 阅读时长.
+  readCount: false # 阅读次数.
+
+# 中文链接转拼音 npm i hexo-permalink-pinyin --save
+permalink_pinyin:
+  enable: true
+  separator: '-' # default: '-'
+
+# RSS 订阅 npm install hexo-generator-feed --save
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content:
+  content_limit: 140
+  content_limit_delim: ' '
+  order_by: -date
+
+# 添加emoji表情支持 npm install hexo-filter-github-emojis --save
+# 支持 emoji表情的生成，把对应的markdown emoji语法（::,例如：:smile:）转变成会跳跃的emoji表情
+githubEmojis:
+  enable: true
+  className: github-emoji
+  inject: true
+  styles:
+  customEmojis:
