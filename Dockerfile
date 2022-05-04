@@ -1,5 +1,10 @@
 # node 环境镜像
 FROM node:buster AS build-env
+
+# 传入构建变量
+ARG GITHUB_TOKEN
+ENV GITHUB_TOKEN=$GITHUB_TOKEN
+
 # 创建 hexo-blog 文件夹且设置成工作文件夹
 WORKDIR /usr/src
 # 1.安装 hexo
@@ -25,10 +30,10 @@ hexo init hexo-blog && \
 mv matery hexo-blog/themes/ && \
 rm -r hexo-blog/source && mv source hexo-blog/ && \
 cd hexo-blog && \
-npm install --save hexo-generator-search hexo-wordcount hexo-permalink-pinyin hexo-generator-feed hexo-filter-github-emojis && \
+npm install --save hexo-deployer-git hexo-generator-search hexo-wordcount hexo-permalink-pinyin hexo-generator-feed hexo-filter-github-emojis && \
 mv ./source/hexo_config.yml ./_config.yml && \
 mv ./source/_config.yml ./themes/matery/_config.yml && \
-hexo clean && hexo g
+hexo clean && hexo g && hexo d
 
 # nginx 镜像
 FROM nginx:latest
