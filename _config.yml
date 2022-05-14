@@ -131,7 +131,7 @@ indexbtn:
 # icon/button will not show up if you leave the corresponding socialLink empty
 # 首页 banner 中的第二行个人信息配置，留空即不启用
 socialLink:
-  github: # https://github.com/CrazyBunQnQ
+  github: https://github.com/CrazyBunQnQ
   email: crazybunqnq@gmail.com
   LeetCode: https://leetcode.com/crazybunqnq/
   StackOverflow: https://stackoverflow.com/users/9399272/junjie-bao
@@ -281,6 +281,7 @@ gitalk:
     clientId: c9231258c7b39e04ae60
     clientSecret: f1cd0b20035a3eb044211feee0d034362a57f54d
   admin: CrazyBunQnQ
+  proxy: https://netnr-proxy.cloudno.de/https://github.com/login/oauth/access_token
 
 # the Gitment config，default disabled
 # Gitment 评论模块的配置，默认为不激活
