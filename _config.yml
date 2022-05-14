@@ -281,7 +281,6 @@ gitalk:
     clientId: c9231258c7b39e04ae60
     clientSecret: f1cd0b20035a3eb044211feee0d034362a57f54d
   admin: CrazyBunQnQ
-  proxy: https://shielded-brushlands-08810.herokuapp.com/https://github.com/login/oauth/access_token
 
 # the Gitment config，default disabled
 # Gitment 评论模块的配置，默认为不激活
