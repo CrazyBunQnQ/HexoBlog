@@ -32,7 +32,8 @@ cd hexo-blog && \
 #   - 中文链接转拼音插件
 #   - RSS 订阅插件
 #   - emoji 表情插件
-npm install --save hexo-deployer-git hexo-generator-search hexo-wordcount hexo-permalink-pinyin hexo-generator-feed hexo-filter-github-emojis && \
+#   - gitalk 评论插件
+npm install --save hexo-deployer-git hexo-generator-search hexo-wordcount hexo-permalink-pinyin hexo-generator-feed hexo-filter-github-emojis gitalk && \
 # 更新 hexo 配置文件
 mv ./source/hexo_config.yml ./_config.yml && \
 # 设置 hexo 配置文件的 github token
