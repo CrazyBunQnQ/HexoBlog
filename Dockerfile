@@ -66,4 +66,4 @@ COPY --from=build-env /usr/src/hexo-blog/public /usr/share/nginx/html
 EXPOSE 80 443
 
 # docker build -t crazybun/blog-matery:20220504 --build-arg GITHUB_TOKEN="github_token" --build-arg GITHUB_EMAIL="baobao222222@qq.com" --build-arg GITHUB_NAME="CrazyBunQnQ" .
-# docker run -itd --name blog-matery -p 80:80 -p 443:443 --restart=always \
+# docker run -itd --name blog-matery -p 80:80 -p 443:443 --restart always crazybun/blog-matery:20220504
