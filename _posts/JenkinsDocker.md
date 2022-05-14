@@ -1,9 +1,9 @@
 ---
 title: Jenkins 构建并运行 Docker 镜像
 date: 2022-06-06 22:22:22
-img: "/images/tensorflow.png"
+img: "/images/JenkinsAndDocker.png"
 cover: false
-coverImg: "/images/tensorflow.png"
+coverImg: "/images/JenkinsAndDocker.png"
 password: 8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
 toc: false
 mathjax: false
