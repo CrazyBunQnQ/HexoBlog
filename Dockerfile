@@ -65,7 +65,7 @@ WORKDIR /usr/share/nginx/html
 
 # 把上一部生成的 HTML 文件复制到 Nginx 中
 COPY --from=build-env /usr/src/hexo-blog/public /usr/share/nginx/html
-EXPOSE 80 443
+EXPOSE 80
 
 # docker build -t crazybun/blog-matery:20220504 --build-arg GITHUB_TOKEN="github_token" --build-arg GITHUB_EMAIL="baobao222222@qq.com" --build-arg GITHUB_NAME="CrazyBunQnQ" .
-# docker run -itd --name blog-matery -p 8081:80 -p 8443:443 --restart always crazybun/blog-matery:21
+# docker run -itd --name blog-matery -p 8081:80 --restart always crazybun/blog-matery:21
