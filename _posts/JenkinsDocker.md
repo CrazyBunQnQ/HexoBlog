@@ -29,6 +29,7 @@ Jenkins 的 Docker 插件只能通过 TCP 方式进行连接，安全起见，�
 # 创建根证书 RSA 私钥: 此处需要两次输入密码，请务必记住该密码，在后面步骤会用到
 openssl genrsa -aes256 -out docker-ca-key.pem 4096
 # 创建 CA 证书，以上一步生成的私钥创建证书，也就是自签证书，也可从第三方 CA 机构签发
+# 输入国家代码，州，市，组织名称，组织单位，你的名字，邮箱地址
 openssl req -new -x509 -days 3650 -key docker-ca-key.pem -sha256 -out docker-ca.pem
 # 创建服务端私钥:
 openssl genrsa -out server-key.pem 4096
@@ -74,7 +75,7 @@ vim /lib/systemd/system/docker.service
 将原 `ExecStart=` 行注释，添加一行:
 
 ```shell
-ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375 --tlsverify --tlscacert=/etc/docker/cert/docker-ca.pem --tlscert=/etc/docker/cert/server-cert.pem --tlskey=/etc/docker/cert/server-key.pem --containerd=/run/containerd/containerd.sock
+ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375 --tlsverify --tlscacert=/etc/docker/cert/docker-ca.pem --tlscert=/etc/docker/cert/client-cert.pem --tlskey=/etc/docker/cert/client-key.pem --containerd=/run/containerd/containerd.sock
 ```
 
 > 此处设置 docker 远程端口为 2375，可根据需要修改
@@ -91,7 +92,7 @@ systemctl daemon-reload && systemctl restart docker
 2. `Add a new cloud` 选择 Docker
 3. 点击 `Docker Cloud details...` 按钮
    1. 设置 Docker 集群名称
-   2. 设置 `Docker Host URI`: `tcp://192.168.1.38:2375`
+   2. 设置 `Docker Host URI`: `tcp://172.31.128.152:2375`
        > 此处 ip 为此 Jenkins 服务器能够连接到的 Docker 服务器 ip 地址
    3. 设置 `Server credentials`
       1. `添加` 连接 Docker 集群的凭证
