@@ -34,9 +34,9 @@ openssl req -new -x509 -days 3650 -key docker-ca-key.pem -sha256 -out docker-ca.
 # 创建服务端私钥:
 openssl genrsa -out server-key.pem 4096
 # 创建服务端签名请求证书文件: 其中的 IP 地址为自己服务器IP地址
-openssl req -subj "/CN=172.31.128.152" -sha256 -new -key server-key.pem -out server.csr
+openssl req -subj "/CN=192.168.10.38" -sha256 -new -key server-key.pem -out server.csr
 # 创建 extfile.cnf 的配置文件: 其中 IP 地址改为自己服务器IP地址
-echo subjectAltName = IP:172.31.128.152,IP:0.0.0.0 >> extfile.cnf
+echo subjectAltName = IP:192.168.10.38,IP:0.0.0.0 >> extfile.cnf
 echo extendedKeyUsage = serverAuth >> extfile.cnf
 # 创建签名生效的服务端证书文件:
 openssl x509 -req -days 3650 -sha256 -in server.csr -CA docker-ca.pem -CAkey docker-ca-key.pem -CAcreateserial -out server-cert.pem -extfile extfile.cnf
@@ -51,18 +51,18 @@ openssl x509 -req -days 3650 -sha256 -in client.csr -CA docker-ca.pem -CAkey doc
 # 删除无用文件:
 rm -v client.csr server.csr
 # 为证书文件授权:
-chmod -v 0400 docker-ca-key.pem client-key.pem server-key.pem
+chmod -v 0400 docker-ca-key.pem server-key.pem client-key.pem
 chmod -v 0444 docker-ca.pem server-cert.pem client-cert.pem
 # 查看证书有效期
 openssl x509 -in docker-ca.pem -noout -dates
 # 创建存放证书的目录，并将所需的证书文件拷进去
 mkdir /etc/docker/cert
 cp docker-ca.pem /etc/docker/cert/
-cp client-cert.pem /etc/docker/cert/
-cp client-key.pem /etc/docker/cert/
+cp server-cert.pem /etc/docker/cert/
+cp server-key.pem /etc/docker/cert/
 ```
 
-以上 `docker-ca.pem` `client-cert.pem` `client-key.pem` 这三个是我们客户端调用所需的证书文件
+以上 `docker-ca.pem` `server-cert.pem` `server-key.pem` 这三个是我们客户端调用所需的证书文件
 
 ## 配置 Docker 支持 TLS 连接
 
@@ -75,7 +75,7 @@ vim /lib/systemd/system/docker.service
 将原 `ExecStart=` 行注释，添加一行:
 
 ```shell
-ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375 --tlsverify --tlscacert=/etc/docker/cert/docker-ca.pem --tlscert=/etc/docker/cert/client-cert.pem --tlskey=/etc/docker/cert/client-key.pem --containerd=/run/containerd/containerd.sock
+ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375 --tlsverify --tlscacert=/etc/docker/cert/docker-ca.pem --tlscert=/etc/docker/cert/server-cert.pem --tlskey=/etc/docker/cert/server-key.pem --containerd=/run/containerd/containerd.sock
 ```
 
 > 此处设置 docker 远程端口为 2375，可根据需要修改
@@ -92,18 +92,17 @@ systemctl daemon-reload && systemctl restart docker
 2. `Add a new cloud` 选择 Docker
 3. 点击 `Docker Cloud details...` 按钮
    1. 设置 Docker 集群名称
-   2. 设置 `Docker Host URI`: `tcp://172.31.128.152:2375`
+   2. 设置 `Docker Host URI`: `tcp://192.168.10.38:2375`
        > 此处 ip 为此 Jenkins 服务器能够连接到的 Docker 服务器 ip 地址
    3. 设置 `Server credentials`
       1. `添加` 连接 Docker 集群的凭证
          1. 选择`全局凭证`
          2. 类型选择 `X.509 Client Certificate`
          3. 范围选择`全局`
-         4. Client Key 点击添加，将上面生成的 `client-key.pem` 文本内容粘贴进去
-         5. Client Certificate 将上面生成的 `client-cert.pem` 文本内容粘贴进去
+         4. Client Key 点击添加，将上面生成的 `server-key.pem` 文本内容粘贴进去
+         5. Client Certificate 将上面生成的 `server-cert.pem` 文本内容粘贴进去
          6. Server CA Certificate 将上面生成的 `docker-ca.pem` 文本内容粘贴进去
          7. ID 设置为容易辨认的凭证名称 `docker-38-cert`，避免混淆
-             ![添加连接 Docker 的凭证](/images/JenkinsDockerCredential.png)
       2. 选择上面添加的凭证 `docker-38-cert`
    4. 勾选 `Enabled` 选项
 
