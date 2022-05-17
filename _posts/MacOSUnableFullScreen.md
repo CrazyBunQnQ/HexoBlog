@@ -1,6 +1,6 @@
 ---
 title: MacOS 使用 Easyconnect 远程桌面无法全屏显示
-date: 2022-06-16 22:22:22
+date: 2022-06-17 22:22:22
 img: "/images/MacOSEasyconnectRemoteDesktop.png"
 cover: false
 coverImg: "/images/MacOSEasyconnectRemoteDesktop.png"
