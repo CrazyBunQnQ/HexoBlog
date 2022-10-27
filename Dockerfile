@@ -34,7 +34,7 @@ cd hexo-blog && \
 #   - emoji 表情插件
 #   - gitalk 评论插件
 #   - 代码高亮
-npm install --save hexo-deployer-git hexo-generator-search hexo-wordcount hexo-permalink-pinyin hexo-generator-feed hexo-filter-github-emojis gitalk hexo-prism-plugin && \
+npm install --save hexo-deployer-git hexo-generator-search hexo-wordcount hexo-permalink-pinyin hexo-generator-feed hexo-filter-github-emojis gitalk hexo-prism-plugin hexo-generator-sitemap && \
 # 更新 hexo 配置文件
 mv ./source/hexo_config.yml ./_config.yml && \
 # 设置 hexo 配置文件的 github token
