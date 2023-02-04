@@ -8,12 +8,14 @@ coverImg: "/images/NvidiaCUDA.png"
 password: 8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
 toc: false
 mathjax: false
-categories: 触类旁通
+categories: 机器学习
 tags:
-- 树莓派
-- 容器
-  keywords: 树莓派
-  summary: 最近在了解 Python 机器学习项目，各个项目的环境都不相同，使用的 CUDA 版本也各不相同，还互相不兼容...怎么能多个版本共存并快速切换呢？
+- Nvidia
+keywords:
+- CUDA
+- cuDNN
+- Nvidia
+summary: 最近在了解 Python 机器学习项目，各个项目的环境都不相同，使用的 CUDA 版本也各不相同，还互相不兼容...怎么能多个版本共存并快速切换呢？
 ---
 
 ## 多版本 CUDA 及 cuDNN 管理
