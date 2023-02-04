@@ -1,5 +1,5 @@
 ---
-title: 树莓派安装 Docker 与持续集成~
+title: 多版本 CUDA 及 cuDNN 管理
 date: 2022-09-22 22:22:22
 img: "/images/NvidiaCUDA.png"
 top: 10
