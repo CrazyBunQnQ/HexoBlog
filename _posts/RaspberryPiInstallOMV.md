@@ -1,10 +1,10 @@
 ---
 title: 树莓派 4B 搭建 NAS
 date: 2020-02-29 22:22:22
-img: "/images/RaspberryPi 4B.jpg"
+img: "/images/OpenMediaVault.png"
 top: 10
 cover: fasle
-coverImg: "/images/RaspberryPi 4B.jpg"
+coverImg: "/images/OpenMediaVault.png"
 password: 8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
 toc: false
 mathjax: false
