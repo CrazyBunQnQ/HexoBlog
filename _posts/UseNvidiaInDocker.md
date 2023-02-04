@@ -16,7 +16,7 @@ keywords:
 - Nvidia
 - Docker
 - Container
-summary: 树莓派刚出了新版 4B，感觉配置不错，就入手了一个玩玩~然而买回来之后一直在吃灰...赶紧拿出来耍耍~
+summary: 手里有块 N 卡，平时也没时间玩游戏，不用就浪费了，正好最近研究机器学习可以使用 GPU 训练模型，要好好利用起来！来看看 Docker 中如何使用宿主机的 GPU 吧！
 ---
 
 ## 安装 nvidia-docker
