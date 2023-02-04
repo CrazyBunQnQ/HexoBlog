@@ -1,5 +1,6 @@
 # node 环境镜像
 FROM node:buster AS build-env
+# FROM node:19.6.0-buster AS build-env
 
 # 传入构建变量, 构建时生效
 ARG GITHUB_TOKEN
@@ -12,7 +13,7 @@ ENV GITHUB_TOKEN_ENV=${GITHUB_TOKEN}
 WORKDIR /usr/src
 
 # 安装 hexo
-RUN npm install hexo-cli -g && \
+RUN node --version && npm install hexo-cli -g && \
 # 下载主题
 git clone https://github.com/CrazyBunQnQ/hexo-theme-matery.git matery && \
 # 下载文章
@@ -26,15 +27,24 @@ rm -r hexo-blog/source && mv source hexo-blog/ && \
 # 进入博客目录
 cd hexo-blog && \
 # 安装所需插件
-#   - github 部署插件
-#   - 搜索插件
-#   - 字数统计插件
-#   - 中文链接转拼音插件
-#   - RSS 订阅插件
-#   - emoji 表情插件
-#   - gitalk 评论插件
-#   - 代码高亮
-npm install --save hexo-deployer-git hexo-generator-search hexo-wordcount hexo-permalink-pinyin hexo-generator-feed hexo-filter-github-emojis gitalk hexo-prism-plugin hexo-generator-sitemap && \
+echo "安装 github 部署插件" && \
+npm install --save hexo-deployer-git && \
+echo "安装 搜索插件" && \
+npm install --save hexo-generator-search && \
+echo "安装 字数统计插件" && \
+npm install --save hexo-wordcount && \
+echo "安装 中文链接转拼音插件" && \
+npm install --save hexo-permalink-pinyin && \
+echo "安装 RSS 订阅插件" && \
+npm install --save hexo-generator-feed && \
+echo "安装 emoji 表情插件" && \
+npm install --save hexo-filter-github-emojis && \
+# echo "安装 gitalk 评论插件" && \
+# npm install --save gitalk && \
+# echo "安装 代码高亮插件" && \
+# npm install --save hexo-prism-plugin && \
+echo "安装 站点地图插件" && \
+npm install --save hexo-generator-sitemap && \
 # 更新 hexo 配置文件
 mv ./source/hexo_config.yml ./_config.yml && \
 # 设置 hexo 配置文件的 github token
@@ -50,7 +60,8 @@ hexo clean && hexo g\
  && hexo d
 
 # nginx 镜像
-FROM nginx:latest
+FROM nginx
+# FROM nginx:1.21.6
 # 维护者信息
 MAINTAINER CrazyBunQnQ "crazybunqnq@gmail.com"
 
