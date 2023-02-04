@@ -1,11 +1,27 @@
 [{
+  "avatar": "http://blinkfox.com/favicon.png",
+  "name": "闪烁之狐",
+  "introduction": "从来没有真正的绝境, 只有心灵的迷途",
+  "url": "http://blinkfox.com/",
+  "title": "前去学习"
+}, {
+  "avatar": "http://v7.res.dandyweng.com/images/me.jpg",
+  "name": "翁天信的博客",
+  "avatar": "https://quickref.me/images/favicon.png",
+  "name": "Quick Reference",
+  "introduction": "这里有一些由开源天使贡献的程序员备忘单和快速参考",
+  "url": "https://quickref.me/",
+  "title": "前去搜索"
+}, {
+  "avatar": "http://v7.res.dandyweng.com/images/me.jpg",
+  "name": "翁天信的博客",
   "avatar": "http://moxfive.xyz/resources/Mihawk.png",
   "name": "MOxFIVE",
   "introduction": "迈入新世界，为了成为独当一面的 Web 前端工程师！",
   "url": "http://moxfive.xyz/",
   "title": "前去学习"
 }, {
-  "avatar": "https://v7.res.dandyweng.com/images/me.jpg",
+  "avatar": "http://v7.res.dandyweng.com/images/me.jpg",
   "name": "翁天信的博客",
   "introduction": "我是一个 24 岁的 homeschooler，爱好旅行以及一切富有创造性的事物，尤其是摄影、设计和编程。这个世界就是我的学校。学自己之所想所爱。自由的身心定能使我成为一个一直朝前行走的行者。",
   "url": "http://blog.dandyweng.com/",
