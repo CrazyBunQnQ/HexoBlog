@@ -1,6 +1,6 @@
 ---
 title: Docker 中使用 Nvidia 显卡
-date: 2022-09-22 22:22:22
+date: 2022-10-22 22:22:22
 img: "/images/NvidiaInDocker.png"
 top: 10
 cover: false
@@ -16,7 +16,7 @@ keywords:
 - Nvidia
 - Docker
 - Container
-summary: 手里有块 N 卡，平时也没时间玩游戏，不用就浪费了，正好最近研究机器学习可以使用 GPU 训练模型，要好好利用起来！来看看 Docker 中如何使用宿主机的 GPU 吧！
+summary: 很多厉害的机器学习项目对 Windows 兼容比较差，所以就把环境跑在 Docker 里啦，怎么才能让 Docker 使用宿主机的 GPU 训练模型呢，来看看吧！
 ---
 
 ## 安装 nvidia-docker
