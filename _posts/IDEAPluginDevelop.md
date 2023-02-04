@@ -1,6 +1,6 @@
 ---
 title: IDEA 插件开发入门
-date: 2022-12-22 22:22:22
+date: 2022-07-22 22:22:22
 img: "/images/IDEALogo.png"
 cover: fasle
 coverImg: "/images/IDEALogo.png"
