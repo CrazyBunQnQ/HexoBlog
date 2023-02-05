@@ -417,7 +417,8 @@ google_site: kCIANOE7IxckvM2MVSUNNuqVGUuPrEFJI9rnGRGsJLM
 # 添加 baidu Analytics 配置
 baiduAnalytics:
   enable: true
-  id: e5a793a1ef0ff251be9c023a7a8a9c70
+  id: 864d5a7534ed5364589f82c39b9c4e07
+  baidu_verify_code: codeva-7NYmMaNfam
 
 # 百度搜索资源平台提交链接
 baiduPush: true
@@ -553,10 +554,10 @@ ribbon_dynamic:
   enable: false
 
 # sharejs文章分享模块.
-# 支持顺序，可选项目为twitter, facebook, google, qq, qzone, wechat, weibo, douban, linkedin.
+# 支持顺序，可选项目为 twitter, facebook, google, qq, qzone, wechat, weibo, douban, linkedin.
 sharejs:
   enable: true
-  sites: twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin
+  sites: weibo,wechat,qq,qzone,twitter
 
 # addthis文章分享模块.
 addthis:
