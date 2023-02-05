@@ -155,3 +155,10 @@ githubEmojis:
   inject: true
   styles:
   customEmojis:
+
+# 主动提交百度搜索 npm install hexo-baidu-url-submit --save
+baidu_url_submit:
+  count: 1               # 提交最新的多少个链接
+  host: blog.crazybunqnq.com    # 在百度站长平台中添加的域名
+  token: c4awpkEkYr6vnyO1      # 秘钥
+  path: baidu_urls.txt   # 文本文档的地址， 新链接会保存在此文本文档里
