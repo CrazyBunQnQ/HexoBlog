@@ -13,7 +13,7 @@ tags:
 - 树莓派
 - 容器
 keywords: 树莓派
-summary: 最近 AI 杀疯了啊，赶紧上车看看！先从 AI 语音开始~直接上 Docker，少折腾！
+summary: 最近 AI 杀疯了啊，赶紧上车看看！先从 AI 语音开始~直接上 Docker, 少折腾！
 ---
 
 ## PaddleSpeech
