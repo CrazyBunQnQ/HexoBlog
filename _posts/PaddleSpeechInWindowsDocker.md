@@ -1,10 +1,10 @@
 ---
-title: 树莓派安装 Docker 与持续集成~
+title: Windows Docker 中运行 PaddleSpeech
 date: 2023-01-22 22:22:22
-img: "/images/RaspberryPi 4B.jpg"
+img: "/images/PaddleSpeech.png"
 top: 10
 cover: false
-coverImg: "/images/RaspberryPi 4B.jpg"
+coverImg: "/images/PaddleSpeech.png"
 password: 8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
 toc: false
 mathjax: false
@@ -13,7 +13,7 @@ tags:
 - 树莓派
 - 容器
 keywords: 树莓派
-summary: 树莓派刚出了新版 4B，感觉配置不错，就入手了一个玩玩~然而买回来之后一直在吃灰...赶紧拿出来耍耍~
+summary: 最近 AI 杀疯了啊，赶紧上车看看！先从 AI 语音开始~
 ---
 
 ## PaddleSpeech
